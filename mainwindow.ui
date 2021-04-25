@@ -13,8 +13,58 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar"/>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>16</width>
+        <height>100</height>
+       </size>
+      </property>
+      <widget class="QWidget" name="tabCustomer">
+       <attribute name="title">
+        <string> 客户管理</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabSupplier">
+       <attribute name="title">
+        <string> 供应商管理</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabGood">
+       <attribute name="title">
+        <string> 商品管理</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabSell">
+       <attribute name="title">
+        <string> 进货管理</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabPurchase">
+       <attribute name="title">
+        <string>销货 管理</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
