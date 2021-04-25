@@ -7,6 +7,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     m_databaseMg=new databasemg();
     ui->setupUi(this);
+
+    //客户类型
+    ui->comboBox_ctype->addItem(QString::fromLocal8Bit("企业"));
+    ui->comboBox_ctype->addItem(QString::fromLocal8Bit("个人"));
 }
 
 MainWindow::~MainWindow()
