@@ -3,6 +3,7 @@
 #include <QSqlQuery>
 #include <QTextCodec>
 #include <QMessageBox>
+#include <QVariant>
 
 databasemg::databasemg()
 {
@@ -27,12 +28,25 @@ bool databasemg::createCustomerTable()
 {
     QSqlQuery query(m_db);
     //创建客户表
-    bool ret=query.exec("create table if not exists customer(id int primary key,name varchar,type varchar,telephone varchar,address varchar)");
+    bool ret=query.exec("create table if not exists customer(id integer primary key autoincrement,name varchar(250),type varchar(32),telephone varchar(32),address varchar(256))");
     if(!ret)
     {
        QMessageBox::critical(0,"Cannot open database","Unable to establish a datavase connection.",QMessageBox::Cancel);
+       return false;
     }
     return true;
+}
+
+bool databasemg::addCustomer(QString name, QString type, QString pthone, QString address)
+{
+    QSqlQuery query(m_db);
+    query.prepare("insert into customer(name,type,telepthone,address) values(?,?,?,?)");
+    query.addBindValue(name);
+    query.addBindValue(type);
+    query.addBindValue(pthone);
+    query.addBindValue(address);
+    return query.exec();
+
 }
 
 bool databasemg::creatSupplierTable()

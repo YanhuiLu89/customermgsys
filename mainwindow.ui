@@ -197,6 +197,20 @@
          <string> 客户显示</string>
         </property>
        </widget>
+       <zorder>groupBox</zorder>
+       <zorder>cname_label</zorder>
+       <zorder>ctype_label</zorder>
+       <zorder>cthone_label</zorder>
+       <zorder>address_label</zorder>
+       <zorder>lineEdit_cname</zorder>
+       <zorder>lineEdit_cpthone</zorder>
+       <zorder>textEdit_caddress</zorder>
+       <zorder>createcusBtn</zorder>
+       <zorder>searchCusBtn</zorder>
+       <zorder>inportCusBtn</zorder>
+       <zorder>comboBox_ctype</zorder>
+       <zorder>tableView</zorder>
+       <zorder>groupBox_2</zorder>
       </widget>
       <widget class="QWidget" name="tabSupplier">
        <attribute name="title">
