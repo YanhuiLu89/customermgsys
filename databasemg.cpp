@@ -4,6 +4,8 @@
 #include <QTextCodec>
 #include <QMessageBox>
 #include <QVariant>
+#include <QSqlError>
+#include <QDebug>
 
 databasemg::databasemg()
 {
@@ -40,13 +42,22 @@ bool databasemg::createCustomerTable()
 bool databasemg::addCustomer(QString name, QString type, QString pthone, QString address)
 {
     QSqlQuery query(m_db);
-    query.prepare("insert into customer(name,type,telepthone,address) values(?,?,?,?)");
+    query.prepare("insert into customer (name,type,telephone,address) values (?,?,?,?)");
     query.addBindValue(name);
     query.addBindValue(type);
     query.addBindValue(pthone);
     query.addBindValue(address);
-    return query.exec();
-
+    bool ret=query.exec();
+    if(ret)
+     {
+        QMessageBox::information(0,nullptr,QString::fromLocal8Bit("新建客户成功"));
+    }
+    else
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("新建客户失败！"));
+        qDebug()<<query.lastError();
+     }
+    return ret;
 }
 
 bool databasemg::creatSupplierTable()
@@ -70,7 +81,7 @@ bool databasemg::createSellTable()
     QSqlQuery query(m_db);
     //创建销货表
     query.exec("create table if not exists sell(id int primary key,category varchar,name varchar,spec varchar,foreign key(productno) reference product(number)),"
-               "selldate date,sellnum int,unitprice int,totalprice int,haspay int,debt int,foreign key(customer) reference product(name))");
+               "selldate date,sellnum int,unitprice int,totalprice int,haspay int,debt int,foreign key(customer) reference customer(name))");
     return true;
 }
 
@@ -88,6 +99,6 @@ void databasemg::createTables()
     createCustomerTable();
     creatSupplierTable();
     createProductTable();
-    createSellTable();
-    createPurchaseTable();
+//    createSellTable();
+//    createPurchaseTable();
 }

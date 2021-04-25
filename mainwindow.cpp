@@ -3,6 +3,7 @@
 #include <QMessageBox>
 #include <QSqlTableModel>
 #include <QSqlQuery>
+#include <QStringList>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,9 +15,6 @@ MainWindow::MainWindow(QWidget *parent)
     m_cusmodel->setEditStrategy(QSqlTableModel::OnFieldChange);
     m_cusmodel->setTable("customer");
     m_cusmodel->select();
-    int count=m_cusmodel->rowCount();
-    count=count;
-
     /*********ui布局初始化*******************/
     ui->setupUi(this);
     //客户类型
@@ -41,23 +39,17 @@ void MainWindow::on_groupBox_clicked()
 void MainWindow::on_createcusBtn_clicked()
 {
     QString name=ui->lineEdit_cname->text();
-    QSqlQuery query(m_databaseMg->database());
-    query.exec("select * from customer");
-    int id=query.value(0).toInt();
-    QString str=query.value(1).toString();
     if(name.isEmpty())
     {
         QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("客户姓名不能为空！"));
         return;
     }
-    if(m_databaseMg->addCustomer(name,ui->comboBox_ctype->currentText(),
-                              ui->lineEdit_cpthone->text(),ui->textEdit_caddress->toPlainText()))
+    if(m_databaseMg->addCustomer(name,ui->comboBox_ctype->currentText(),ui->lineEdit_cpthone->text(),ui->textEdit_caddress->toPlainText()))
     {
-        QMessageBox::information(0,nullptr,QString::fromLocal8Bit("新建客户成功"));
+        m_cusmodel->setTable("customer");
+        m_cusmodel->select();
     }
-    else
-    {
-        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("新建客户失败！"));
-    }
+
+
     return;
 }
