@@ -125,32 +125,6 @@
          <string> 新建客户</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="searchCusBtn">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>150</y>
-          <width>75</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string> 搜索</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="inportCusBtn">
-        <property name="geometry">
-         <rect>
-          <x>470</x>
-          <y>150</y>
-          <width>75</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string> 导入客户</string>
-        </property>
-       </widget>
        <widget class="QComboBox" name="comboBox_ctype">
         <property name="geometry">
          <rect>
@@ -183,6 +157,45 @@
         <property name="title">
          <string> 客户管理</string>
         </property>
+        <widget class="QPushButton" name="showCusBtn">
+         <property name="geometry">
+          <rect>
+           <x>600</x>
+           <y>140</y>
+           <width>75</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string> 显示全部</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="inportCusBtn">
+         <property name="geometry">
+          <rect>
+           <x>200</x>
+           <y>140</y>
+           <width>75</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string> 导入客户</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="searchCusBtn">
+         <property name="geometry">
+          <rect>
+           <x>490</x>
+           <y>140</y>
+           <width>75</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string> 搜索</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QGroupBox" name="groupBox_2">
         <property name="geometry">
@@ -206,8 +219,6 @@
        <zorder>lineEdit_cpthone</zorder>
        <zorder>textEdit_caddress</zorder>
        <zorder>createcusBtn</zorder>
-       <zorder>searchCusBtn</zorder>
-       <zorder>inportCusBtn</zorder>
        <zorder>comboBox_ctype</zorder>
        <zorder>tableView</zorder>
        <zorder>groupBox_2</zorder>

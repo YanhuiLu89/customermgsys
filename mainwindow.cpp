@@ -14,10 +14,17 @@ MainWindow::MainWindow(QWidget *parent)
     m_cusmodel=new QSqlTableModel(this,m_databaseMg->database());
     m_cusmodel->setEditStrategy(QSqlTableModel::OnFieldChange);
     m_cusmodel->setTable("customer");
+    m_cusmodel->setHeaderData(0,Qt::Horizontal,QString::fromLocal8Bit("序号"));
+    m_cusmodel->setHeaderData(1,Qt::Horizontal,QString::fromLocal8Bit("客户名称"));
+    m_cusmodel->setHeaderData(2,Qt::Horizontal,QString::fromLocal8Bit("客户类型"));
+    m_cusmodel->setHeaderData(3,Qt::Horizontal,QString::fromLocal8Bit("客户电话"));
+    m_cusmodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("客户地址"));
     m_cusmodel->select();
+
     /*********ui布局初始化*******************/
     ui->setupUi(this);
     //客户类型
+    ui->comboBox_ctype->addItem(QString::fromLocal8Bit(""));
     ui->comboBox_ctype->addItem(QString::fromLocal8Bit("企业"));
     ui->comboBox_ctype->addItem(QString::fromLocal8Bit("个人"));
     ui->tableView->setModel(m_cusmodel);
@@ -52,4 +59,49 @@ void MainWindow::on_createcusBtn_clicked()
 
 
     return;
+}
+
+void MainWindow::on_searchCusBtn_clicked()
+{
+    m_cusmodel->setTable("customer");
+    m_cusmodel->setHeaderData(0,Qt::Horizontal,QString::fromLocal8Bit("序号"));
+    m_cusmodel->setHeaderData(1,Qt::Horizontal,QString::fromLocal8Bit("客户名称"));
+    m_cusmodel->setHeaderData (2,Qt::Horizontal,QString::fromLocal8Bit("客户类型"));
+    m_cusmodel->setHeaderData(3,Qt::Horizontal,QString::fromLocal8Bit("客户电话"));
+    m_cusmodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("客户地址"));
+    QString filter="";
+
+    if(!ui->lineEdit_cname->text().isEmpty())
+        filter+=QString("name='%1'").arg(ui->lineEdit_cname->text());
+    if(!ui->comboBox_ctype->currentText().isEmpty())
+        if(filter.isEmpty())
+            filter+=QString("type='%1'").arg(ui->comboBox_ctype->currentText());
+        else
+            filter+=QString(" and type='%1'").arg(ui->comboBox_ctype->currentText());
+    if(!ui->lineEdit_cpthone->text().isEmpty())
+        if(filter.isEmpty())
+            filter+=QString("telephone='%1'").arg(ui->lineEdit_cpthone->text());
+        else
+            filter+=QString(" and telephone='%1'").arg(ui->lineEdit_cpthone->text());
+     if(!ui->textEdit_caddress->toPlainText().isEmpty())
+         if(filter.isEmpty())
+             filter+=QString("address='%1'").arg(ui->textEdit_caddress->toPlainText());
+         else
+             filter+=QString(" and address='%1'").arg(ui->textEdit_caddress->toPlainText());
+     if(filter.isEmpty())
+     {
+         QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("搜索条件不能为空"));
+     }
+     else
+     {
+         m_cusmodel->setTable("customer");
+         m_cusmodel->setFilter(filter);
+         m_cusmodel->select();
+     }
+}
+
+void MainWindow::on_showCusBtn_clicked()
+{
+    m_cusmodel->setTable("customer");
+    m_cusmodel->select();
 }

@@ -22,6 +22,10 @@ private slots:
 
     void on_createcusBtn_clicked();
 
+    void on_searchCusBtn_clicked();
+
+    void on_showCusBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
     databasemg* m_databaseMg;
