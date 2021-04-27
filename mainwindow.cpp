@@ -4,6 +4,8 @@
 #include <QSqlTableModel>
 #include <QSqlQuery>
 #include <QStringList>
+#include <QFileDialog>
+#include <QStandardPaths>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -104,4 +106,19 @@ void MainWindow::on_showCusBtn_clicked()
 {
     m_cusmodel->setTable("customer");
     m_cusmodel->select();
+}
+
+void MainWindow::on_inportCusBtn_clicked()
+{
+    QString file=QFileDialog::getOpenFileName(this,QString::fromLocal8Bit("打开"),QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),QString::fromLocal8Bit("表格文件(*.xls)"));
+    if(m_databaseMg->importCustomersFromExcel(file))
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("导入数据成功。"));
+        m_cusmodel->setTable("customer");
+        m_cusmodel->select();
+    }
+    else
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("导入数据失败！"));
+    }
 }

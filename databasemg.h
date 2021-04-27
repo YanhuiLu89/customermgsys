@@ -15,6 +15,12 @@ public:
     bool createSellTable();
     bool createPurchaseTable();
     void createTables();
+
+    bool importCustomersFromExcel(QString path);
+private:
+    bool getCustomersFromExcel(QString path,QList<QStringList>& data);
+    bool saveCustomers(QList<QStringList>& data);
+
 private:
     QSqlDatabase m_db;
 
