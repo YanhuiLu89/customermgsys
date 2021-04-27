@@ -29,6 +29,8 @@ private slots:
     void on_inportCusBtn_clicked();
 
 private:
+    void setCusHeaders();
+private:
     Ui::MainWindow *ui;
     databasemg* m_databaseMg;
     QSqlTableModel* m_cusmodel;
