@@ -28,11 +28,21 @@ private slots:
 
     void on_inportCusBtn_clicked();
 
+    void on_createsupBtn_clicked();
+
+    void on_searchSupBtn_clicked();
+
+    void on_showSupBtn_clicked();
+
+    void on_inportSupBtn_clicked();
+
 private:
     void setCusHeaders();
+    void setSupHeaders();
 private:
     Ui::MainWindow *ui;
     databasemg* m_databaseMg;
     QSqlTableModel* m_cusmodel;
+    QSqlTableModel* m_supmodel;
 };
 #endif // MAINWINDOW_H

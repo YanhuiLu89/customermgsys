@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -135,7 +135,7 @@
          </rect>
         </property>
        </widget>
-       <widget class="QTableView" name="tableView">
+       <widget class="QTableView" name="tableViewCus">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -220,13 +220,203 @@
        <zorder>textEdit_caddress</zorder>
        <zorder>createcusBtn</zorder>
        <zorder>comboBox_ctype</zorder>
-       <zorder>tableView</zorder>
+       <zorder>tableViewCus</zorder>
        <zorder>groupBox_2</zorder>
       </widget>
       <widget class="QWidget" name="tabSupplier">
        <attribute name="title">
         <string> 供应商管理</string>
        </attribute>
+       <widget class="QComboBox" name="comboBox_stype">
+        <property name="geometry">
+         <rect>
+          <x>75</x>
+          <y>70</y>
+          <width>200</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="textEdit_saddress">
+        <property name="geometry">
+         <rect>
+          <x>330</x>
+          <y>60</y>
+          <width>300</width>
+          <height>60</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="geometry">
+         <rect>
+          <x>-1</x>
+          <y>209</y>
+          <width>770</width>
+          <height>330</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>  供应商显示</string>
+        </property>
+        <widget class="QTableView" name="tableViewSup">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>751</width>
+           <height>301</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QLabel" name="stype_label">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>70</y>
+          <width>70</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string> 客户类型：</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="saddress_label">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>60</y>
+          <width>50</width>
+          <height>12</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string> 地址：</string>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_4">
+        <property name="geometry">
+         <rect>
+          <x>-1</x>
+          <y>9</y>
+          <width>761</width>
+          <height>181</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string> 供应商管理</string>
+        </property>
+        <widget class="QPushButton" name="showSupBtn">
+         <property name="geometry">
+          <rect>
+           <x>600</x>
+           <y>140</y>
+           <width>75</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string> 显示全部</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="inportSupBtn">
+         <property name="geometry">
+          <rect>
+           <x>200</x>
+           <y>140</y>
+           <width>75</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string> 导入 供应商</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="searchSupBtn">
+         <property name="geometry">
+          <rect>
+           <x>490</x>
+           <y>140</y>
+           <width>75</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string> 搜索</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEdit_sname">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>20</y>
+           <width>181</width>
+           <height>20</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QLabel" name="sname_label">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>70</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string> 供应商名称：</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_sphone">
+        <property name="geometry">
+         <rect>
+          <x>330</x>
+          <y>30</y>
+          <width>300</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="createsupBtn">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>150</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string> 新建供应商</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="sphone_label">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>30</y>
+          <width>50</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>电话：</string>
+        </property>
+       </widget>
+       <zorder>groupBox_4</zorder>
+       <zorder>comboBox_stype</zorder>
+       <zorder>textEdit_saddress</zorder>
+       <zorder>groupBox_3</zorder>
+       <zorder>stype_label</zorder>
+       <zorder>saddress_label</zorder>
+       <zorder>sname_label</zorder>
+       <zorder>lineEdit_sphone</zorder>
+       <zorder>createsupBtn</zorder>
+       <zorder>sphone_label</zorder>
       </widget>
       <widget class="QWidget" name="tabGood">
        <attribute name="title">
