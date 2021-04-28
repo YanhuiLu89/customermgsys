@@ -93,8 +93,38 @@ bool databasemg::createProductTable()
 {
     QSqlQuery query(m_db);
     //创建产品表
-    query.exec("create table if not exists product(id int primary key,number varchar,name varchar,spec varchar,barcode varchar,batchnum varchar,unit varcher,count int,price int,totalprice int)");
+    query.exec("create table if not exists product(number varchar[16] primary key,name varchar[32],spec varchar[32],barcode varchar[128],batchnum varchar[16],unit varcher[8],count int,price int,totalprice int,stock int,lack int)");
     return true;
+}
+
+bool databasemg::addProduct(QStringList list)
+{
+    if(list.size()<11)
+    {
+         QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("新建供产品失败，缺少字段！"));
+         return false;
+    }
+    QSqlQuery query(m_db);
+    query.prepare("insert into product (number,name,spec,barcode,batchno,unit,count,price,totalprice,stock,lack) "
+                  "values (?,?,?,?,?,?,?,?,?,?,?)");
+    for(int i=0;i<11;i++)
+    {
+        if(i<6)
+         query.addBindValue(list[i]);
+        else
+         query.addBindValue(list[i].toInt());
+    }
+    bool ret=query.exec();
+    if(ret)
+     {
+        QMessageBox::information(0,nullptr,QString::fromLocal8Bit("新建商品成功"));
+    }
+    else
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("新建商品失败！"));
+        qDebug()<<query.lastError();
+     }
+    return ret;
 }
 
 bool databasemg::createSellTable()
@@ -149,7 +179,19 @@ bool databasemg::importSuppliersFromExcel(QString path)
     {
         return false;
     }
-    return true;
+}
+
+bool databasemg::importProductsFromExcel(QString path)
+{
+    QList<QStringList> data;//所有记录
+    if(getProductsFromExcel(path,data))
+    {
+        return saveProducts(data);
+    }
+    else
+    {
+        return false;
+    }
 }
 
 
@@ -263,6 +305,76 @@ bool databasemg::saveSuppliers(QList<QStringList> &data)
         for(int i=1,n=slist.size();i<n;i++)
         {
             query.addBindValue(slist.at(i));
+        }
+        if(!query.exec()) {
+            qDebug()<<"insert slist failed!"
+                   <<"slist="
+                   <<slist;
+            return false;
+        }
+
+    }
+    return true;
+}
+
+bool databasemg::getProductsFromExcel(QString path, QList<QStringList> &data)
+{
+    QSqlDatabase dbexcel = QSqlDatabase::addDatabase("QODBC", "excelexport");
+    if(!dbexcel.isValid())
+    {
+         qDebug()<<"打开Excel失败";
+         return false;
+    }
+    QString dsn = QString("DRIVER={Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb)};DSN='';FIRSTROWHASNAMES=1;READONLY=FALSE;CREATE_DB=\"%1\";DBQ=%2").
+                  arg(path).arg(path);
+    dbexcel.setDatabaseName(dsn);
+
+    if(!dbexcel.open())
+    {
+        qDebug()<<"打开Excel失败";
+        return false;
+    }
+
+    QSqlQuery query(dbexcel);
+    QStringList tables=dbexcel.tables();
+    bool ret=query.exec("select * from [Sheet1$]");
+    qDebug()<<ret;
+
+    QStringList list;//一条记录
+    while(query.next())
+    {
+        list.clear();
+        QString number = query.value(0).toString();
+        QString name = query.value(1).toString();
+        QString spec = query.value(2).toString();
+        QString barcode = query.value(3).toString();
+        QString batchno = query.value(4).toString();
+        QString unit = query.value(5).toString();
+        QString count = query.value(6).toString();
+        QString price = query.value(7).toString();
+        QString totalprice = query.value(8).toString();
+        QString stock = query.value(9).toString();
+        QString lack = query.value(10).toString();
+        list<<number<<name<<spec<<barcode<<batchno<<unit<<count<<price<<totalprice<<stock<<lack;
+        data<<list;
+    }
+    dbexcel.close();
+    return true;
+}
+
+bool databasemg::saveProducts(QList<QStringList> &data)
+{
+    QSqlQuery query(m_db);
+    foreach(QStringList slist, data)
+    {
+        query.prepare("insert into product (number,name,spec,barcode,batchno,unit,count,price,totalprice,stock,lack) "
+                      "values (?,?,?,?,?,?,?,?,?,?,?)");
+        for(int i=0,n=slist.size();i<n;i++)
+        {
+            if(i<6)
+                query.addBindValue(slist.at(i));
+            else
+                query.addBindValue(slist.at(i).toInt());
         }
         if(!query.exec()) {
             qDebug()<<"insert slist failed!"
