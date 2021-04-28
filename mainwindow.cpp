@@ -210,7 +210,7 @@ void MainWindow::on_inportSupBtn_clicked()
     if(m_databaseMg->importSuppliersFromExcel(file))
     {
         QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("导入数据成功。"));
-        m_supmodel->setTable("customer");
+        m_supmodel->setTable("supplier");
         setSupHeaders();
         m_supmodel->select();
     }
