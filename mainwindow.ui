@@ -528,7 +528,7 @@
          <string> 货品名称：</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="pronspec_lineEdit">
+       <widget class="QLineEdit" name="prospec_lineEdit">
         <property name="geometry">
          <rect>
           <x>519</x>
@@ -564,7 +564,7 @@
          <string> 条  码：</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="pronbarcode_lineEdit">
+       <widget class="QLineEdit" name="probarcode_lineEdit">
         <property name="geometry">
          <rect>
           <x>715</x>
@@ -642,6 +642,9 @@
           <height>22</height>
          </rect>
         </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
        </widget>
        <widget class="QLabel" name="proprice_label">
         <property name="geometry">
@@ -665,6 +668,9 @@
           <height>22</height>
          </rect>
         </property>
+        <property name="maximum">
+         <number>9999</number>
+        </property>
        </widget>
        <widget class="QLabel" name="prototalprice_label">
         <property name="geometry">
@@ -679,7 +685,7 @@
          <string>金     额：</string>
         </property>
        </widget>
-       <widget class="QSpinBox" name="proprice_spinBox_2">
+       <widget class="QSpinBox" name="prostack_spinBox">
         <property name="geometry">
          <rect>
           <x>311</x>
@@ -687,6 +693,9 @@
           <width>130</width>
           <height>22</height>
          </rect>
+        </property>
+        <property name="maximum">
+         <number>10000</number>
         </property>
        </widget>
        <widget class="QSpinBox" name="prototalprice_spinBox">
@@ -697,6 +706,9 @@
           <width>130</width>
           <height>22</height>
          </rect>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
         </property>
        </widget>
        <widget class="QLabel" name="prostack_label">
@@ -721,6 +733,9 @@
           <height>22</height>
          </rect>
         </property>
+        <property name="maximum">
+         <number>1000</number>
+        </property>
        </widget>
        <widget class="QLabel" name="prolack_label">
         <property name="geometry">
@@ -732,7 +747,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>库存数量：</string>
+         <string>缺少数量：</string>
         </property>
        </widget>
        <widget class="QGroupBox" name="groupBox_5">
@@ -830,10 +845,10 @@
        <zorder>pronum_lineEdit</zorder>
        <zorder>proname_lineEdit</zorder>
        <zorder>proname_label</zorder>
-       <zorder>pronspec_lineEdit</zorder>
+       <zorder>prospec_lineEdit</zorder>
        <zorder>prospec_label</zorder>
        <zorder>probarcode_label</zorder>
-       <zorder>pronbarcode_lineEdit</zorder>
+       <zorder>probarcode_lineEdit</zorder>
        <zorder>probatno_label</zorder>
        <zorder>probatno_lineEdit</zorder>
        <zorder>prounit_label</zorder>
@@ -843,7 +858,7 @@
        <zorder>proprice_label</zorder>
        <zorder>proprice_spinBox</zorder>
        <zorder>prototalprice_label</zorder>
-       <zorder>proprice_spinBox_2</zorder>
+       <zorder>prostack_spinBox</zorder>
        <zorder>prototalprice_spinBox</zorder>
        <zorder>prostack_label</zorder>
        <zorder>prolack_spinBox</zorder>

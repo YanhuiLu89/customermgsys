@@ -40,13 +40,21 @@ private slots:
 
     void on_delSupBtn_clicked();
 
+    void on_createpro_Btn_clicked();
+
+    void on_procount_spinBox_valueChanged(int arg1);
+
+    void on_proprice_spinBox_valueChanged(int arg1);
+
 private:
     void setCusHeaders();
     void setSupHeaders();
+    void setProHeaders();
 private:
     Ui::MainWindow *ui;
     databasemg* m_databaseMg;
     QSqlTableModel* m_cusmodel;
     QSqlTableModel* m_supmodel;
+    QSqlTableModel* m_promodel;
 };
 #endif // MAINWINDOW_H

@@ -25,6 +25,13 @@ MainWindow::MainWindow(QWidget *parent)
     setSupHeaders();
     m_supmodel->select();
 
+    m_promodel=new QSqlTableModel(this,m_databaseMg->database());
+    m_promodel->setEditStrategy(QSqlTableModel::OnFieldChange);
+    m_promodel->setTable("product");
+    setProHeaders();
+    m_promodel->select();
+
+
     /*********ui布局初始化*******************/
 
     /*********1、客户管理界面*******************/
@@ -148,6 +155,21 @@ void MainWindow::setSupHeaders()
     m_supmodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("供应商地址"));
 }
 
+void MainWindow::setProHeaders()
+{
+    m_promodel->setHeaderData(0,Qt::Horizontal,QString::fromLocal8Bit("货品编号"));
+    m_promodel->setHeaderData(1,Qt::Horizontal,QString::fromLocal8Bit("货品名称"));
+    m_promodel->setHeaderData(2,Qt::Horizontal,QString::fromLocal8Bit("货品规格"));
+    m_promodel->setHeaderData(3,Qt::Horizontal,QString::fromLocal8Bit("条码"));
+    m_promodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("批号"));
+    m_promodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("单位"));
+    m_promodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("数量"));
+    m_promodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("单价"));
+    m_promodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("金额"));
+    m_promodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("库存数量"));
+    m_promodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("缺少数量"));
+}
+
 void MainWindow::on_createsupBtn_clicked()
 {
     QString name=ui->lineEdit_sname->text();
@@ -264,4 +286,43 @@ void MainWindow::on_delSupBtn_clicked()
         setSupHeaders();
         m_supmodel->select();
     }
+}
+
+void MainWindow::on_createpro_Btn_clicked()
+{
+    QString num=ui->pronum_lineEdit->text();
+    if(num.isEmpty())
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("商品编号不能为空！"));
+        return;
+    }
+    QString name=ui->proname_lineEdit->text();
+    if(name.isEmpty())
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("商品名称不能为空！"));
+        return;
+    }
+    QStringList list;
+    list<<ui->pronum_lineEdit->text()<<ui->proname_lineEdit->text()<<ui->prospec_lineEdit->text()
+        <<ui->probarcode_lineEdit->text()<<ui->probatno_lineEdit->text()<<ui->prouint_lineEdit->text()
+        <<ui->procount_spinBox->text()<<ui->proprice_spinBox->text()<<ui->prototalprice_spinBox->text()
+        <<ui->prostack_spinBox->text()<<ui->prolack_spinBox->text();
+    if(m_databaseMg->addProduct(list))
+    {
+        m_supmodel->setTable("supplier");
+        setSupHeaders();
+        m_supmodel->select();
+    }
+}
+
+void MainWindow::on_procount_spinBox_valueChanged(int arg1)
+{
+    int totalprice=ui->proprice_spinBox->value()*ui->procount_spinBox->value();
+    ui->prototalprice_spinBox->setValue(totalprice);
+}
+
+void MainWindow::on_proprice_spinBox_valueChanged(int arg1)
+{
+    int totalprice=ui->proprice_spinBox->value()*ui->procount_spinBox->value();
+    ui->prototalprice_spinBox->setValue(totalprice);
 }
