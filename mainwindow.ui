@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>899</width>
+    <height>641</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -202,14 +202,28 @@
          <rect>
           <x>9</x>
           <y>209</y>
-          <width>770</width>
+          <width>851</width>
           <height>330</height>
          </rect>
         </property>
         <property name="title">
-         <string> 客户显示</string>
+         <string> 客户显示---（温馨提示：双击单元格即可编辑）</string>
         </property>
        </widget>
+       <widget class="QPushButton" name="delCusBtn">
+        <property name="geometry">
+         <rect>
+          <x>780</x>
+          <y>280</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>删除选中行</string>
+        </property>
+       </widget>
+       <zorder>groupBox_2</zorder>
        <zorder>groupBox</zorder>
        <zorder>cname_label</zorder>
        <zorder>ctype_label</zorder>
@@ -221,7 +235,7 @@
        <zorder>createcusBtn</zorder>
        <zorder>comboBox_ctype</zorder>
        <zorder>tableViewCus</zorder>
-       <zorder>groupBox_2</zorder>
+       <zorder>delCusBtn</zorder>
       </widget>
       <widget class="QWidget" name="tabSupplier">
        <attribute name="title">
@@ -252,12 +266,12 @@
          <rect>
           <x>-1</x>
           <y>209</y>
-          <width>770</width>
+          <width>871</width>
           <height>330</height>
          </rect>
         </property>
         <property name="title">
-         <string>  供应商显示</string>
+         <string>  供应商显示---（温馨提示：双击单元格即可编辑）</string>
         </property>
         <widget class="QTableView" name="tableViewSup">
          <property name="geometry">
@@ -267,6 +281,19 @@
            <width>751</width>
            <height>301</height>
           </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="delSupBtn">
+         <property name="geometry">
+          <rect>
+           <x>780</x>
+           <y>100</y>
+           <width>75</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>删除选中行</string>
          </property>
         </widget>
        </widget>
@@ -442,7 +469,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>899</width>
      <height>22</height>
     </rect>
    </property>

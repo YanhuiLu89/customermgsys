@@ -36,6 +36,10 @@ private slots:
 
     void on_inportSupBtn_clicked();
 
+    void on_delCusBtn_clicked();
+
+    void on_delSupBtn_clicked();
+
 private:
     void setCusHeaders();
     void setSupHeaders();
