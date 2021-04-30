@@ -329,3 +329,41 @@ void MainWindow::on_proprice_spinBox_valueChanged(int arg1)
     int totalprice=ui->proprice_spinBox->value()*ui->procount_spinBox->value();
     ui->prototalprice_spinBox->setValue(totalprice);
 }
+
+void MainWindow::on_inportProBtn_clicked()
+{
+    QString file=QFileDialog::getOpenFileName(this,QString::fromLocal8Bit("打开"),QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),QString::fromLocal8Bit("表格文件(*.xls)"));
+    if(m_databaseMg->importProductsFromExcel(file))
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("导入数据成功。"));
+        m_promodel->setTable("product");
+        setProHeaders();
+        m_promodel->select();
+    }
+    else
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("导入数据失败！"));
+    }
+}
+
+void MainWindow::on_delProBtn_clicked()
+{
+    QModelIndexList indexes=ui->tableViewPro->selectionModel()->selectedIndexes();
+    QMap<int,int> rowMap;
+    foreach(QModelIndex index,indexes)
+        rowMap.insert(index.row(),index.row());
+    if(rowMap.size()<=0)
+    {
+         QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("没有行被选中！"));
+         return;
+    }
+    int ok=QMessageBox::warning(this,QString::fromLocal8Bit("删除选中行！"),QString::fromLocal8Bit("你确定删除选中行吗？"),QMessageBox::Yes,QMessageBox::No);
+    if(ok==QMessageBox::Yes)
+    {
+       for(int i=0;i<rowMap.size();i++)
+           m_promodel->removeRow(rowMap[i]);
+        m_promodel->setTable("product");
+        setProHeaders();
+        m_promodel->select();
+    }
+}

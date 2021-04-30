@@ -46,6 +46,10 @@ private slots:
 
     void on_proprice_spinBox_valueChanged(int arg1);
 
+    void on_inportProBtn_clicked();
+
+    void on_delProBtn_clicked();
+
 private:
     void setCusHeaders();
     void setSupHeaders();

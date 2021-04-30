@@ -129,11 +129,18 @@ bool databasemg::addProduct(QStringList list)
     bool ret=query.exec();
     if(ret)
      {
-        QMessageBox::information(0,nullptr,QString::fromLocal8Bit("新建商品成功"));
+        QMessageBox::information(0,nullptr,QString::fromLocal8Bit("新建货品成功"));
     }
     else
     {
-        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("新建商品失败！"));
+        if(query.lastError().text().contains("UNIQUE constraint failed: product.number"))
+        {
+             QMessageBox::information(0,nullptr,QString::fromLocal8Bit("新建货品%1失败，该编号已经存在，不允许有编号相同的货品").arg(list[0]));
+        }
+        else
+        {
+             QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("新建货品失败！"));
+        }
         qDebug()<<query.lastError();
      }
     return ret;
@@ -360,6 +367,8 @@ bool databasemg::getProductsFromExcel(QString path, QList<QStringList> &data)
         QString name = query.value(1).toString();
         QString spec = query.value(2).toString();
         QString barcode = query.value(3).toString();
+        if(barcode=="0")
+            barcode="";
         QString batchno = query.value(4).toString();
         QString unit = query.value(5).toString();
         QString count = query.value(6).toString();
@@ -392,6 +401,11 @@ bool databasemg::saveProducts(QList<QStringList> &data)
             qDebug()<<"insert slist failed!"
                    <<"slist="
                    <<slist;
+            qDebug()<<query.lastError();
+            if(query.lastError().text().contains("UNIQUE constraint failed: product.number"))
+            {
+                 QMessageBox::information(0,nullptr,QString::fromLocal8Bit("导入货品%1失败，该编号已经存在，不允许有编号相同的货品").arg(slist.at(0)));
+            }
             return false;
         }
 
