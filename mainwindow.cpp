@@ -47,6 +47,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->comboBox_stype->addItem(QString::fromLocal8Bit("企业"));
     ui->comboBox_stype->addItem(QString::fromLocal8Bit("个人"));
     ui->tableViewSup->setModel(m_supmodel);
+
+    /*********3、商品管理界面*******************/
+    ui->tableViewPro->setModel(m_promodel);
 }
 
 MainWindow::~MainWindow()
@@ -309,9 +312,9 @@ void MainWindow::on_createpro_Btn_clicked()
         <<ui->prostack_spinBox->text()<<ui->prolack_spinBox->text();
     if(m_databaseMg->addProduct(list))
     {
-        m_supmodel->setTable("supplier");
-        setSupHeaders();
-        m_supmodel->select();
+        m_promodel->setTable("product");
+        setProHeaders();
+        m_promodel->select();
     }
 }
 

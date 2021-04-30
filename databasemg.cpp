@@ -33,7 +33,8 @@ bool databasemg::createCustomerTable()
     bool ret=query.exec("create table if not exists customer(id integer primary key autoincrement,name varchar(250),type varchar(32),telephone varchar(32),address varchar(256))");
     if(!ret)
     {
-       QMessageBox::critical(0,"Cannot open database","Unable to establish a datavase connection.",QMessageBox::Cancel);
+       QMessageBox::information(0,nullptr,QString::fromLocal8Bit("创建客户表失败"));
+       qDebug()<<query.lastError();
        return false;
     }
     return true;
@@ -64,7 +65,13 @@ bool databasemg::creatSupplierTable()
 {
     QSqlQuery query(m_db);
     //创建供应商表
-    query.exec("create table if not exists supplier(id integer primary key autoincrement,name varchar(250),type varchar(32),telephone varchar(32),address varchar(256))");
+    bool ret=query.exec("create table if not exists supplier(id integer primary key autoincrement,name varchar(250),type varchar(32),telephone varchar(32),address varchar(256))");
+    if(!ret)
+    {
+       QMessageBox::information(0,nullptr,QString::fromLocal8Bit("创建供应商表失败！"));
+       qDebug()<<query.lastError();
+       return false;
+    }
     return true;
 }
 
@@ -93,7 +100,13 @@ bool databasemg::createProductTable()
 {
     QSqlQuery query(m_db);
     //创建产品表
-    query.exec("create table if not exists product(number varchar[16] primary key,name varchar[32],spec varchar[32],barcode varchar[128],batchnum varchar[16],unit varcher[8],count int,price int,totalprice int,stock int,lack int)");
+    bool ret=query.exec("create table if not exists product(number varchar[16] primary key,name varchar[32],spec varchar[32],barcode varchar[128],batchno varchar[16],unit varchar[8],count int,price int,totalprice int,stock int,lack int)");
+    if(!ret)
+    {
+       QMessageBox::information(0,nullptr,QString::fromLocal8Bit("创建货品表失败！"));
+       qDebug()<<query.lastError();
+       return false;
+    }
     return true;
 }
 
@@ -105,8 +118,7 @@ bool databasemg::addProduct(QStringList list)
          return false;
     }
     QSqlQuery query(m_db);
-    query.prepare("insert into product (number,name,spec,barcode,batchno,unit,count,price,totalprice,stock,lack) "
-                  "values (?,?,?,?,?,?,?,?,?,?,?)");
+    query.prepare("insert into product (number,name,spec,barcode,batchno,unit,count,price,totalprice,stock,lack) values (?,?,?,?,?,?,?,?,?,?,?)");
     for(int i=0;i<11;i++)
     {
         if(i<6)
