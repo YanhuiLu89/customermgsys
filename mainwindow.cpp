@@ -367,3 +367,53 @@ void MainWindow::on_delProBtn_clicked()
         m_promodel->select();
     }
 }
+
+void MainWindow::on_searchProBtn_clicked()
+{
+    QString filter="";
+    if(!ui->pronum_lineEdit->text().isEmpty())
+        filter+=QString("number like'%%1%'").arg(ui->pronum_lineEdit->text());
+    if(!ui->proname_lineEdit->text().isEmpty())
+        if(filter.isEmpty())
+            filter+=QString("name like'%%1%'").arg(ui->proname_lineEdit->text());
+        else
+            filter+=QString("and name like'%%1%'").arg(ui->proname_lineEdit->text());
+    if(!ui->prospec_lineEdit->text().isEmpty())
+        if(filter.isEmpty())
+            filter+=QString("spec='%1'").arg(ui->prospec_lineEdit->text());
+        else
+            filter+=QString(" and spec='%1'").arg(ui->prospec_lineEdit->text());
+    if(!ui->probarcode_lineEdit->text().isEmpty())
+        if(filter.isEmpty())
+            filter+=QString("barcode like '%%1%'").arg(ui->probarcode_lineEdit->text());
+        else
+            filter+=QString(" and barcode like '%%1%'").arg(ui->probarcode_lineEdit->text());
+     if(!ui->probatno_lineEdit->text().isEmpty())
+         if(filter.isEmpty())
+             filter+=QString("batchno like '%%1%'").arg(ui->probatno_lineEdit->text());
+         else
+             filter+=QString(" and batchno like '%%1%'").arg(ui->probatno_lineEdit->text());
+     if(!ui->prouint_lineEdit->text().isEmpty())
+          if(filter.isEmpty())
+              filter+=QString("uint like '%%1%'").arg(ui->prouint_lineEdit->text());
+          else
+              filter+=QString(" and uint like '%%1%'").arg(ui->prouint_lineEdit->text());
+     if(filter.isEmpty())
+     {
+         QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("搜索条件不能为空"));
+     }
+     else
+     {
+         m_promodel->setTable("product");
+         setProHeaders();
+         m_promodel->setFilter(filter);
+         m_promodel->select();
+     }
+}
+
+void MainWindow::on_showProBtn_clicked()
+{
+    m_promodel->setTable("product");
+    setProHeaders();
+    m_promodel->select();
+}

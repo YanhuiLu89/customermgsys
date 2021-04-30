@@ -50,6 +50,10 @@ private slots:
 
     void on_delProBtn_clicked();
 
+    void on_searchProBtn_clicked();
+
+    void on_showProBtn_clicked();
+
 private:
     void setCusHeaders();
     void setSupHeaders();
