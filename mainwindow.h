@@ -64,6 +64,7 @@ private:
     void setCusHeaders();
     void setSupHeaders();
     void setProHeaders();
+    void updateSellCusComBox();
 private:
     Ui::MainWindow *ui;
     databasemg* m_databaseMg;

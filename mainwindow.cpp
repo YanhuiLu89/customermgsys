@@ -7,6 +7,7 @@
 #include <QFileDialog>
 #include <QStandardPaths>
 #include "searchprodialog.h"
+#include <QSqlRecord>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -54,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     /*********4、销货管理界面*******************/
     m_sellSelectedNum.clear();
+    updateSellCusComBox();
 }
 
 MainWindow::~MainWindow()
@@ -82,6 +84,7 @@ void MainWindow::on_createcusBtn_clicked()
         m_cusmodel->setTable("customer");
         setCusHeaders();
         m_cusmodel->select();
+        ui->sell_customer_comboBox->addItem(name);
     }
 
 
@@ -137,6 +140,7 @@ void MainWindow::on_inportCusBtn_clicked()
         m_cusmodel->setTable("customer");
         setCusHeaders();
         m_cusmodel->select();
+        updateSellCusComBox();
     }
     else
     {
@@ -176,6 +180,17 @@ void MainWindow::setProHeaders()
     m_promodel->setHeaderData(9,Qt::Horizontal,QString::fromLocal8Bit("金额"));
     m_promodel->setHeaderData(10,Qt::Horizontal,QString::fromLocal8Bit("库存数量"));
     m_promodel->setHeaderData(11,Qt::Horizontal,QString::fromLocal8Bit("缺少数量"));
+}
+
+void MainWindow::updateSellCusComBox()
+{
+    ui->sell_customer_comboBox->addItem(QString::fromLocal8Bit(""));
+    m_cusmodel->select();
+    for(int i=0;i<m_cusmodel->rowCount();i++)
+    {
+        QSqlRecord rec=m_cusmodel->record(i);
+        ui->sell_customer_comboBox->addItem(rec.value(1).toString());
+    }
 }
 
 void MainWindow::on_createsupBtn_clicked()

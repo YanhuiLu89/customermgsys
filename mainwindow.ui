@@ -196,17 +196,6 @@
           <string> 新建客户</string>
          </property>
         </widget>
-        <widget class="QWidget" name="layoutWidget">
-         <property name="geometry">
-          <rect>
-           <x>200</x>
-           <y>140</y>
-           <width>239</width>
-           <height>25</height>
-          </rect>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_3"/>
-        </widget>
        </widget>
        <widget class="QGroupBox" name="groupBox_2">
         <property name="geometry">
@@ -234,8 +223,8 @@
          <string>删除选中行</string>
         </property>
        </widget>
-       <zorder>groupBox_2</zorder>
        <zorder>groupBox</zorder>
+       <zorder>groupBox_2</zorder>
        <zorder>cname_label</zorder>
        <zorder>ctype_label</zorder>
        <zorder>cthone_label</zorder>
@@ -1018,8 +1007,11 @@
            <height>22</height>
           </rect>
          </property>
+         <property name="maximum">
+          <double>9999999999.989999771118164</double>
+         </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="sell_sellprice_doubleSpinBox">
+        <widget class="QDoubleSpinBox" name="sell_price_doubleSpinBox">
          <property name="geometry">
           <rect>
            <x>430</x>
@@ -1027,6 +1019,9 @@
            <width>71</width>
            <height>22</height>
           </rect>
+         </property>
+         <property name="maximum">
+          <double>99999.990000000005239</double>
          </property>
         </widget>
         <widget class="QLabel" name="sell_sellprice_label">
@@ -1042,7 +1037,7 @@
           <string>销售单价</string>
          </property>
         </widget>
-        <widget class="QSpinBox" name="sell_sellcnt_spinBox">
+        <widget class="QSpinBox" name="sell_cnt_spinBox">
          <property name="geometry">
           <rect>
            <x>430</x>
@@ -1050,6 +1045,9 @@
            <width>71</width>
            <height>22</height>
           </rect>
+         </property>
+         <property name="maximum">
+          <number>99999</number>
          </property>
         </widget>
         <widget class="QLabel" name="sell_sellcnt_label">
@@ -1073,6 +1071,9 @@
            <width>71</width>
            <height>22</height>
           </rect>
+         </property>
+         <property name="maximum">
+          <double>9999999999.989999771118164</double>
          </property>
         </widget>
         <widget class="QLabel" name="sell_payed_label">
@@ -1114,7 +1115,7 @@
           <string>合    计</string>
          </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="sell_selltotalprice_doubleSpinBox">
+        <widget class="QDoubleSpinBox" name="sell_totalprice_doubleSpinBox">
          <property name="geometry">
           <rect>
            <x>430</x>
@@ -1122,6 +1123,9 @@
            <width>71</width>
            <height>22</height>
           </rect>
+         </property>
+         <property name="maximum">
+          <double>9999999999.989999771118164</double>
          </property>
         </widget>
         <widget class="QLabel" name="sell_prono_label">
@@ -1227,13 +1231,13 @@
           <string>客    户</string>
          </property>
         </widget>
-        <widget class="QLineEdit" name="sell_customer_lineEdit">
+        <widget class="QComboBox" name="sell_customer_comboBox">
          <property name="geometry">
           <rect>
            <x>640</x>
            <y>30</y>
-           <width>113</width>
-           <height>20</height>
+           <width>121</width>
+           <height>22</height>
           </rect>
          </property>
         </widget>
