@@ -161,16 +161,17 @@ void MainWindow::setSupHeaders()
 void MainWindow::setProHeaders()
 {
     m_promodel->setHeaderData(0,Qt::Horizontal,QString::fromLocal8Bit("货品编号"));
-    m_promodel->setHeaderData(1,Qt::Horizontal,QString::fromLocal8Bit("货品名称"));
-    m_promodel->setHeaderData(2,Qt::Horizontal,QString::fromLocal8Bit("货品规格"));
-    m_promodel->setHeaderData(3,Qt::Horizontal,QString::fromLocal8Bit("条码"));
-    m_promodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("批号"));
-    m_promodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("单位"));
-    m_promodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("数量"));
-    m_promodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("单价"));
-    m_promodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("金额"));
-    m_promodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("库存数量"));
-    m_promodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("缺少数量"));
+    m_promodel->setHeaderData(1,Qt::Horizontal,QString::fromLocal8Bit("货品大类"));
+    m_promodel->setHeaderData(2,Qt::Horizontal,QString::fromLocal8Bit("货品名称"));
+    m_promodel->setHeaderData(3,Qt::Horizontal,QString::fromLocal8Bit("货品规格"));
+    m_promodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("条码"));
+    m_promodel->setHeaderData(5,Qt::Horizontal,QString::fromLocal8Bit("批号"));
+    m_promodel->setHeaderData(6,Qt::Horizontal,QString::fromLocal8Bit("单位"));
+    m_promodel->setHeaderData(7,Qt::Horizontal,QString::fromLocal8Bit("数量"));
+    m_promodel->setHeaderData(8,Qt::Horizontal,QString::fromLocal8Bit("单价"));
+    m_promodel->setHeaderData(9,Qt::Horizontal,QString::fromLocal8Bit("金额"));
+    m_promodel->setHeaderData(10,Qt::Horizontal,QString::fromLocal8Bit("库存数量"));
+    m_promodel->setHeaderData(11,Qt::Horizontal,QString::fromLocal8Bit("缺少数量"));
 }
 
 void MainWindow::on_createsupBtn_clicked()
@@ -306,7 +307,7 @@ void MainWindow::on_createpro_Btn_clicked()
         return;
     }
     QStringList list;
-    list<<ui->pronum_lineEdit->text()<<ui->proname_lineEdit->text()<<ui->prospec_lineEdit->text()
+    list<<ui->pronum_lineEdit->text()<<ui->procategory_lineEdit->text()<<ui->proname_lineEdit->text()<<ui->prospec_lineEdit->text()
         <<ui->probarcode_lineEdit->text()<<ui->probatno_lineEdit->text()<<ui->prouint_lineEdit->text()
         <<ui->procount_spinBox->text()<<ui->proprice_spinBox->text()<<ui->prototalprice_spinBox->text()
         <<ui->prostack_spinBox->text()<<ui->prolack_spinBox->text();

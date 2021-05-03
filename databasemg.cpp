@@ -100,7 +100,7 @@ bool databasemg::createProductTable()
 {
     QSqlQuery query(m_db);
     //创建产品表
-    bool ret=query.exec("create table if not exists product(number varchar[16] primary key,name varchar[32],spec varchar[32],barcode varchar[128],batchno varchar[16],unit varchar[8],count int,price int,totalprice int,stock int,lack int)");
+    bool ret=query.exec("create table if not exists product(number varchar[16] primary key,category varchar[32],name varchar[32],spec varchar[32],barcode varchar[128],batchno varchar[16],unit varchar[8],count int,price int,totalprice int,stock int,lack int)");
     if(!ret)
     {
        QMessageBox::information(0,nullptr,QString::fromLocal8Bit("创建货品表失败！"));
@@ -112,16 +112,16 @@ bool databasemg::createProductTable()
 
 bool databasemg::addProduct(QStringList list)
 {
-    if(list.size()<11)
+    if(list.size()<12)
     {
          QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("新建供产品失败，缺少字段！"));
          return false;
     }
     QSqlQuery query(m_db);
-    query.prepare("insert into product (number,name,spec,barcode,batchno,unit,count,price,totalprice,stock,lack) values (?,?,?,?,?,?,?,?,?,?,?)");
-    for(int i=0;i<11;i++)
+    query.prepare("insert into product (number,category,name,spec,barcode,batchno,unit,count,price,totalprice,stock,lack) values (?,?,?,?,?,?,?,?,?,?,?,?)");
+    for(int i=0;i<12;i++)
     {
-        if(i<6)
+        if(i<7)
          query.addBindValue(list[i]);
         else
          query.addBindValue(list[i].toInt());
@@ -364,19 +364,20 @@ bool databasemg::getProductsFromExcel(QString path, QList<QStringList> &data)
     {
         list.clear();
         QString number = query.value(0).toString();
-        QString name = query.value(1).toString();
-        QString spec = query.value(2).toString();
-        QString barcode = query.value(3).toString();
+        QString category = query.value(1).toString();
+        QString name = query.value(2).toString();
+        QString spec = query.value(3).toString();
+        QString barcode = query.value(4).toString();
         if(barcode=="0")
             barcode="";
-        QString batchno = query.value(4).toString();
-        QString unit = query.value(5).toString();
-        QString count = query.value(6).toString();
-        QString price = query.value(7).toString();
-        QString totalprice = query.value(8).toString();
-        QString stock = query.value(9).toString();
-        QString lack = query.value(10).toString();
-        list<<number<<name<<spec<<barcode<<batchno<<unit<<count<<price<<totalprice<<stock<<lack;
+        QString batchno = query.value(5).toString();
+        QString unit = query.value(6).toString();
+        QString count = query.value(7).toString();
+        QString price = query.value(8).toString();
+        QString totalprice = query.value(9).toString();
+        QString stock = query.value(10).toString();
+        QString lack = query.value(11).toString();
+        list<<number<<category<<name<<spec<<barcode<<batchno<<unit<<count<<price<<totalprice<<stock<<lack;
         data<<list;
     }
     dbexcel.close();
@@ -388,11 +389,11 @@ bool databasemg::saveProducts(QList<QStringList> &data)
     QSqlQuery query(m_db);
     foreach(QStringList slist, data)
     {
-        query.prepare("insert into product (number,name,spec,barcode,batchno,unit,count,price,totalprice,stock,lack) "
-                      "values (?,?,?,?,?,?,?,?,?,?,?)");
+        query.prepare("insert into product (number,category,name,spec,barcode,batchno,unit,count,price,totalprice,stock,lack) "
+                      "values (?,?,?,?,?,?,?,?,?,?,?,?)");
         for(int i=0,n=slist.size();i<n;i++)
         {
-            if(i<6)
+            if(i<7)
                 query.addBindValue(slist.at(i));
             else
                 query.addBindValue(slist.at(i).toInt());
