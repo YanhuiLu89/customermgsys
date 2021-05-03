@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <property name="iconSize">
        <size>
@@ -948,7 +948,7 @@
          <bool>true</bool>
         </property>
        </widget>
-       <widget class="QLabel" name="sell_prosbatch_label">
+       <widget class="QLabel" name="sell_prostock_label">
         <property name="geometry">
          <rect>
           <x>40</x>
@@ -961,7 +961,7 @@
          <string>库存数量</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="sell_prosbatch_lineEdit">
+       <widget class="QLineEdit" name="sell_prostock_lineEdit">
         <property name="geometry">
          <rect>
           <x>100</x>
@@ -1171,42 +1171,42 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="sell_addBtn">
             <property name="text">
              <string>增加</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="sell_searchBtn">
             <property name="text">
              <string>查询</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_4">
+           <widget class="QPushButton" name="sell_showallBtn">
             <property name="text">
              <string>全部记录</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_5">
+           <widget class="QPushButton" name="sell_importBtn">
             <property name="text">
              <string>导入</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_6">
+           <widget class="QPushButton" name="sell_exportBtn">
             <property name="text">
              <string>导出 </string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_7">
+           <widget class="QPushButton" name="sell_printBtn">
             <property name="text">
              <string>打印</string>
             </property>
@@ -1250,7 +1250,7 @@
         <property name="title">
          <string>货品显示---（温馨提示：双击单元格即可编辑）</string>
         </property>
-        <widget class="QListView" name="listView">
+        <widget class="QListView" name="sellListView">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1260,7 +1260,7 @@
           </rect>
          </property>
         </widget>
-        <widget class="QPushButton" name="delProBtn_2">
+        <widget class="QPushButton" name="sell_delBtn">
          <property name="geometry">
           <rect>
            <x>770</x>
@@ -1282,8 +1282,8 @@
        <zorder>sell_procat_lineEdit</zorder>
        <zorder>sell_proname_lineEdit</zorder>
        <zorder>sell_prospec_lineEdit</zorder>
-       <zorder>sell_prosbatch_label</zorder>
-       <zorder>sell_prosbatch_lineEdit</zorder>
+       <zorder>sell_prostock_label</zorder>
+       <zorder>sell_prostock_lineEdit</zorder>
       </widget>
       <widget class="QWidget" name="tabSell">
        <attribute name="title">

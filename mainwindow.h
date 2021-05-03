@@ -54,6 +54,10 @@ private slots:
 
     void on_showProBtn_clicked();
 
+    void on_sell_prono_lineEdit_textChanged(const QString &arg1);
+
+    void on_pushButton_clicked();
+
 private:
     void setCusHeaders();
     void setSupHeaders();

@@ -418,3 +418,23 @@ void MainWindow::on_showProBtn_clicked()
     setProHeaders();
     m_promodel->select();
 }
+
+void MainWindow::on_sell_prono_lineEdit_textChanged(const QString &arg1)
+{
+   QSqlQuery query(m_databaseMg->database());
+   if(query.exec(QString("select * from product where number is '%1'").arg(arg1)))
+   {
+       query.next();
+       ui->sell_procat_lineEdit->setText(query.value(1).toString());
+       ui->sell_proname_lineEdit->setText(query.value(2).toString());
+       ui->sell_prospec_lineEdit->setText(query.value(3).toString());
+       ui->sell_prostock_lineEdit->setText(query.value(10).toString());
+   }
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    QDialog* dlg=new QDialog(this);
+    dlg->show();
+
+}
