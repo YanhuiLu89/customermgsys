@@ -6,6 +6,7 @@
 #include <QStringList>
 #include <QFileDialog>
 #include <QStandardPaths>
+#include "searchprodialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -374,6 +375,11 @@ void MainWindow::on_searchProBtn_clicked()
     QString filter="";
     if(!ui->pronum_lineEdit->text().isEmpty())
         filter+=QString("number like'%%1%'").arg(ui->pronum_lineEdit->text());
+    if(!ui->procategory_lineEdit->text().isEmpty())
+        if(filter.isEmpty())
+            filter+=QString("category like'%%1%'").arg(ui->procategory_lineEdit->text());
+        else
+            filter+=QString("and category like'%%1%'").arg(ui->procategory_lineEdit->text());
     if(!ui->proname_lineEdit->text().isEmpty())
         if(filter.isEmpty())
             filter+=QString("name like'%%1%'").arg(ui->proname_lineEdit->text());
@@ -381,9 +387,9 @@ void MainWindow::on_searchProBtn_clicked()
             filter+=QString("and name like'%%1%'").arg(ui->proname_lineEdit->text());
     if(!ui->prospec_lineEdit->text().isEmpty())
         if(filter.isEmpty())
-            filter+=QString("spec='%1'").arg(ui->prospec_lineEdit->text());
+            filter+=QString("spec like '%%1%'").arg(ui->prospec_lineEdit->text());
         else
-            filter+=QString(" and spec='%1'").arg(ui->prospec_lineEdit->text());
+            filter+=QString(" and spec like '%%1%'").arg(ui->prospec_lineEdit->text());
     if(!ui->probarcode_lineEdit->text().isEmpty())
         if(filter.isEmpty())
             filter+=QString("barcode like '%%1%'").arg(ui->probarcode_lineEdit->text());
@@ -434,7 +440,7 @@ void MainWindow::on_sell_prono_lineEdit_textChanged(const QString &arg1)
 
 void MainWindow::on_pushButton_clicked()
 {
-    QDialog* dlg=new QDialog(this);
+    SearchProDialog* dlg=new SearchProDialog(this);
+    dlg->setModal(true);
     dlg->show();
-
 }

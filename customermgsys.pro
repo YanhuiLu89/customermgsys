@@ -18,14 +18,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     databasemg.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    searchprodialog.cpp
 
 HEADERS += \
     databasemg.h \
-    mainwindow.h
+    mainwindow.h \
+    searchprodialog.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    searchprodialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
