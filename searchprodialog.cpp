@@ -2,6 +2,8 @@
 #include "ui_searchprodialog.h"
 #include <QSqlTableModel>
 #include <QMessageBox>
+#include "mainwindow.h"
+#include <QSqlRecord>
 
 SearchProDialog::SearchProDialog(QWidget *parent) :
     QDialog(parent),
@@ -63,6 +65,27 @@ void SearchProDialog::on_searchProBtn_2_clicked()
          m_promodel->setFilter(filter);
          m_promodel->select();
      }
+}
+
+void SearchProDialog::accept()
+{
+    QModelIndexList indexes=ui->searchTableViewPro->selectionModel()->selectedIndexes();
+    QMap<int,int> rowMap;
+    foreach(QModelIndex index,indexes)
+        rowMap.insert(index.row(),index.row());
+    if(rowMap.size()<=0)
+    {
+         QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("没有行被选中！"));
+         return;
+    }
+    else if(rowMap.size()>1)
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("只能选中一条！"));
+        return;
+    }
+     QSqlRecord selected=m_promodel->record(rowMap.first());
+    ((MainWindow*)parent())->setSellSelectedNum(selected.value(0).toString());
+    return QDialog::accept();
 }
 
 void SearchProDialog::setProHeaders()

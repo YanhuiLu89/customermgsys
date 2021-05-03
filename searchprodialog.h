@@ -18,6 +18,7 @@ public:
 
 private slots:
     void on_searchProBtn_2_clicked();
+    virtual void accept();
 private:
     void setProHeaders();
 private:

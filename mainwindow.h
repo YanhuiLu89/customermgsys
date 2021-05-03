@@ -16,6 +16,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+   void setSellSelectedNum(QString num){m_sellSelectedNum=num;}
+   QString sellSelectedRow(){return m_sellSelectedNum;}
 
 private slots:
     void on_groupBox_clicked();
@@ -68,5 +70,6 @@ private:
     QSqlTableModel* m_cusmodel;
     QSqlTableModel* m_supmodel;
     QSqlTableModel* m_promodel;
+    QString m_sellSelectedNum;
 };
 #endif // MAINWINDOW_H

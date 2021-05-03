@@ -51,6 +51,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     /*********3、商品管理界面*******************/
     ui->tableViewPro->setModel(m_promodel);
+
+    /*********4、销货管理界面*******************/
+    m_sellSelectedNum.clear();
 }
 
 MainWindow::~MainWindow()
@@ -362,8 +365,9 @@ void MainWindow::on_delProBtn_clicked()
     int ok=QMessageBox::warning(this,QString::fromLocal8Bit("删除选中行！"),QString::fromLocal8Bit("你确定删除选中行吗？"),QMessageBox::Yes,QMessageBox::No);
     if(ok==QMessageBox::Yes)
     {
-       for(int i=0;i<rowMap.size();i++)
-           m_promodel->removeRow(rowMap[i]);
+       QMap<int, int>::const_iterator i;
+       for (i = rowMap.constBegin(); i != rowMap.constEnd(); ++i)
+          m_promodel->removeRow(i.value());
         m_promodel->setTable("product");
         setProHeaders();
         m_promodel->select();
@@ -442,5 +446,9 @@ void MainWindow::on_pushButton_clicked()
 {
     SearchProDialog* dlg=new SearchProDialog(this);
     dlg->setModal(true);
-    dlg->show();
+    if(dlg->exec()==QDialog::Accepted)
+    {
+        if(!m_sellSelectedNum.isEmpty())
+           ui->sell_prono_lineEdit->setText(m_sellSelectedNum);
+    }
 }
