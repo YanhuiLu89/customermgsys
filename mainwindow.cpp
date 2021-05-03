@@ -467,3 +467,28 @@ void MainWindow::on_pushButton_clicked()
            ui->sell_prono_lineEdit->setText(m_sellSelectedNum);
     }
 }
+
+void MainWindow::on_sell_cnt_spinBox_valueChanged(int arg1)
+{
+    ui->sell_totalprice_doubleSpinBox->setValue(arg1*ui->sell_price_doubleSpinBox->value());
+}
+
+void MainWindow::on_sell_price_doubleSpinBox_valueChanged(double arg1)
+{
+    ui->sell_totalprice_doubleSpinBox->setValue(ui->sell_cnt_spinBox->value()*arg1);
+}
+
+void MainWindow::on_sell_totalprice_doubleSpinBox_valueChanged(double arg1)
+{
+    ui->sell_owed_doubleSpinBox->setValue(arg1-ui->sell_payed_doubleSpinBox->value());
+}
+
+void MainWindow::on_sell_payed_doubleSpinBox_valueChanged(double arg1)
+{
+    ui->sell_owed_doubleSpinBox->setValue(ui->sell_totalprice_doubleSpinBox->value()-arg1);
+}
+
+void MainWindow::on_sell_addBtn_clicked()
+{
+
+}

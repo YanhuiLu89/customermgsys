@@ -60,6 +60,16 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_sell_cnt_spinBox_valueChanged(int arg1);
+
+    void on_sell_price_doubleSpinBox_valueChanged(double arg1);
+
+    void on_sell_totalprice_doubleSpinBox_valueChanged(double arg1);
+
+    void on_sell_payed_doubleSpinBox_valueChanged(double arg1);
+
+    void on_sell_addBtn_clicked();
+
 private:
     void setCusHeaders();
     void setSupHeaders();
