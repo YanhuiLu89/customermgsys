@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>899</width>
-    <height>641</height>
+    <width>954</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <property name="iconSize">
        <size>
@@ -866,14 +866,428 @@
        <zorder>label</zorder>
        <zorder>groupBox_6</zorder>
       </widget>
+      <widget class="QWidget" name="tabPurchase">
+       <attribute name="title">
+        <string>销货管理</string>
+       </attribute>
+       <widget class="QLabel" name="sell_proncat_label">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>70</y>
+          <width>54</width>
+          <height>12</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>商品大类</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="sell_proname_label">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>100</y>
+          <width>54</width>
+          <height>12</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>商品名称</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="sell_prospec_label">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>130</y>
+          <width>54</width>
+          <height>12</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>商品规格</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="sell_procat_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>70</y>
+          <width>191</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="sell_proname_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>100</y>
+          <width>191</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="sell_prospec_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>130</y>
+          <width>191</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="sell_prosbatch_label">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>160</y>
+          <width>54</width>
+          <height>12</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>库存数量</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="sell_prosbatch_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>160</y>
+          <width>191</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_7">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>851</width>
+          <height>231</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>销货管理</string>
+        </property>
+        <widget class="QDateEdit" name="sell_date_dateEdit">
+         <property name="geometry">
+          <rect>
+           <x>640</x>
+           <y>70</y>
+           <width>126</width>
+           <height>22</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sell_date_label">
+         <property name="geometry">
+          <rect>
+           <x>580</x>
+           <y>70</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>出货日期</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="sell_owed_doubleSpinBox">
+         <property name="geometry">
+          <rect>
+           <x>430</x>
+           <y>150</y>
+           <width>71</width>
+           <height>22</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="sell_sellprice_doubleSpinBox">
+         <property name="geometry">
+          <rect>
+           <x>430</x>
+           <y>60</y>
+           <width>71</width>
+           <height>22</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sell_sellprice_label">
+         <property name="geometry">
+          <rect>
+           <x>370</x>
+           <y>60</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>销售单价</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="sell_sellcnt_spinBox">
+         <property name="geometry">
+          <rect>
+           <x>430</x>
+           <y>30</y>
+           <width>71</width>
+           <height>22</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sell_sellcnt_label">
+         <property name="geometry">
+          <rect>
+           <x>370</x>
+           <y>30</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>出货数量</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="sell_payed_doubleSpinBox">
+         <property name="geometry">
+          <rect>
+           <x>430</x>
+           <y>120</y>
+           <width>71</width>
+           <height>22</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sell_payed_label">
+         <property name="geometry">
+          <rect>
+           <x>370</x>
+           <y>120</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>已付金额</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sell_owed_label">
+         <property name="geometry">
+          <rect>
+           <x>370</x>
+           <y>150</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>欠款金额</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sell_selltotalprice_label">
+         <property name="geometry">
+          <rect>
+           <x>370</x>
+           <y>90</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>合    计</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="sell_selltotalprice_doubleSpinBox">
+         <property name="geometry">
+          <rect>
+           <x>430</x>
+           <y>90</y>
+           <width>71</width>
+           <height>22</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sell_prono_label">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>30</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>商品编码</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="sell_prono_lineEdit">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>30</y>
+           <width>113</width>
+           <height>20</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>30</y>
+           <width>75</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>查找商品</string>
+         </property>
+        </widget>
+        <widget class="QWidget" name="">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>190</y>
+           <width>482</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="text">
+             <string>增加</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_3">
+            <property name="text">
+             <string>查询</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_4">
+            <property name="text">
+             <string>全部记录</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_5">
+            <property name="text">
+             <string>导入</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_6">
+            <property name="text">
+             <string>导出 </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_7">
+            <property name="text">
+             <string>打印</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QLabel" name="sell_customer_label">
+         <property name="geometry">
+          <rect>
+           <x>580</x>
+           <y>30</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>客    户</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="sell_customer_lineEdit">
+         <property name="geometry">
+          <rect>
+           <x>640</x>
+           <y>30</y>
+           <width>113</width>
+           <height>20</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_8">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>250</y>
+          <width>861</width>
+          <height>351</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>货品显示---（温馨提示：双击单元格即可编辑）</string>
+        </property>
+        <widget class="QListView" name="listView">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>751</width>
+           <height>311</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="delProBtn_2">
+         <property name="geometry">
+          <rect>
+           <x>770</x>
+           <y>130</y>
+           <width>75</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>删除选中行</string>
+         </property>
+        </widget>
+       </widget>
+       <zorder>groupBox_8</zorder>
+       <zorder>groupBox_7</zorder>
+       <zorder>sell_proncat_label</zorder>
+       <zorder>sell_proname_label</zorder>
+       <zorder>sell_prospec_label</zorder>
+       <zorder>sell_procat_lineEdit</zorder>
+       <zorder>sell_proname_lineEdit</zorder>
+       <zorder>sell_prospec_lineEdit</zorder>
+       <zorder>sell_prosbatch_label</zorder>
+       <zorder>sell_prosbatch_lineEdit</zorder>
+      </widget>
       <widget class="QWidget" name="tabSell">
        <attribute name="title">
         <string> 进货管理</string>
-       </attribute>
-      </widget>
-      <widget class="QWidget" name="tabPurchase">
-       <attribute name="title">
-        <string>销货 管理</string>
        </attribute>
       </widget>
      </widget>
@@ -885,7 +1299,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>899</width>
+     <width>954</width>
      <height>22</height>
     </rect>
    </property>
