@@ -19,7 +19,7 @@ public:
     bool addProduct(QStringList list);
 
     bool createSellTable();
-    bool addSellRecord(QString pronum,int cnt,double price,double totalprice,double payed,double owned,QString cusName,QDate date);
+    bool addSellRecord(QString pronum,int cnt,double price,double totalprice,double payed,double owned,int customerId,QDate date);
 
     bool createPurchaseTable();
     void createTables();
@@ -27,6 +27,7 @@ public:
     bool importCustomersFromExcel(QString path);
     bool importSuppliersFromExcel(QString path);
     bool importProductsFromExcel(QString path);
+    bool importSellRecsFromExcel(QString path);
 private:
     bool getCustomersFromExcel(QString path,QList<QStringList>& data);
     bool saveCustomers(QList<QStringList>& data);
@@ -36,6 +37,9 @@ private:
 
     bool getProductsFromExcel(QString path,QList<QStringList>& data);
     bool saveProducts(QList<QStringList>& data);
+
+    bool getSellRecsFromExcel(QString path,QList<QStringList>& data);
+    bool saveSellRecs(QList<QStringList>& data);
 
 private:
     QSqlDatabase m_db;

@@ -153,8 +153,8 @@ bool databasemg::createSellTable()
 
     bool ret= query.exec("create table if not exists sell("
                          "id integer primary key autoincrement,category varchar(32),name varchar(32),spec varchar(32),productno varchar(16),"
-                         "selldate date,cnt int,price double,totalprice double,payed double,owned double,customer varchar(250),"
-                         "foreign key(customer) references customer(name),foreign key(productno) references product(number)"
+                         "selldate date,cnt int,price double,totalprice double,payed double,owned double,customer integer,"
+                         "foreign key(customer) references customer(id),foreign key(productno) references product(number)"
                          ")");
     if(!ret)
     {
@@ -165,7 +165,7 @@ bool databasemg::createSellTable()
     return true;
 }
 
-bool databasemg::addSellRecord(QString pronum, int cnt, double price, double totalprice, double payed, double owned, QString cusName, QDate date)
+bool databasemg::addSellRecord(QString pronum, int cnt, double price, double totalprice, double payed, double owned, int customerId, QDate date)
 {
     QSqlQuery queryPro(m_db);
     if(queryPro.exec(QString("select * from product where number is '%1'").arg(pronum)))
@@ -186,15 +186,11 @@ bool databasemg::addSellRecord(QString pronum, int cnt, double price, double tot
         query.addBindValue(totalprice);
         query.addBindValue(payed);
         query.addBindValue(owned);
-        query.addBindValue(cusName);
+        query.addBindValue(customerId);
         bool ret=query.exec();
         if(ret)
          {
             QMessageBox::information(0,nullptr,QString::fromLocal8Bit("新建销货记录成功"));
-            query.exec("select * from sell");
-            query.next();
-            qDebug()<<query.value(0)<<","<<query.value(1)<<","<<query.value(1)
-                     <<","<<query.value(3)<<query.value(4)<<","<<query.value(5);
             return true;
         }
         else
@@ -264,6 +260,19 @@ bool databasemg::importProductsFromExcel(QString path)
     if(getProductsFromExcel(path,data))
     {
         return saveProducts(data);
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool databasemg::importSellRecsFromExcel(QString path)
+{
+    QList<QStringList> data;//所有记录
+    if(getSellRecsFromExcel(path,data))
+    {
+        return saveSellRecs(data);
     }
     else
     {
@@ -414,8 +423,7 @@ bool databasemg::getProductsFromExcel(QString path, QList<QStringList> &data)
 
     QSqlQuery query(dbexcel);
     QStringList tables=dbexcel.tables();
-    bool ret=query.exec("select * from [Sheet1$]");
-    qDebug()<<ret;
+    query.exec("select * from [Sheet1$]");
 
     QStringList list;//一条记录
     while(query.next())
@@ -465,6 +473,86 @@ bool databasemg::saveProducts(QList<QStringList> &data)
             {
                  QMessageBox::information(0,nullptr,QString::fromLocal8Bit("导入货品%1失败，该编号已经存在，不允许有编号相同的货品").arg(slist.at(0)));
             }
+            return false;
+        }
+
+    }
+    return true;
+}
+
+bool databasemg::getSellRecsFromExcel(QString path, QList<QStringList> &data)
+{
+    QSqlDatabase dbexcel = QSqlDatabase::addDatabase("QODBC", "excelexport");
+    if(!dbexcel.isValid())
+    {
+         qDebug()<<"打开Excel失败";
+         return false;
+    }
+    QString dsn = QString("DRIVER={Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb)};DSN='';FIRSTROWHASNAMES=1;READONLY=FALSE;CREATE_DB=\"%1\";DBQ=%2").
+                  arg(path).arg(path);
+    dbexcel.setDatabaseName(dsn);
+
+    if(!dbexcel.open())
+    {
+        qDebug()<<"打开Excel失败";
+        return false;
+    }
+
+    QSqlQuery query(dbexcel);
+    QStringList tables=dbexcel.tables();
+    query.exec("select * from [Sheet1$]");
+
+    QStringList list;//一条记录
+    while(query.next())
+    {
+        list.clear();
+        QString category = query.value(1).toString();
+        QString name = query.value(2).toString();
+        QString spec = query.value(3).toString();
+        QString productno = query.value(4).toString();
+        QString selldate = query.value(5).toString();
+        QString cnt = query.value(6).toString();
+        QString price = query.value(7).toString();
+        QString totalprice = query.value(8).toString();
+        QString payed = query.value(9).toString();
+        QString owned = query.value(10).toString();
+        QString customer = query.value(11).toString();
+        list<<category<<name<<spec<<productno<<selldate<<cnt<<price<<totalprice<<payed<<owned<<customer;
+        data<<list;
+    }
+    dbexcel.close();
+    return true;
+}
+
+bool databasemg::saveSellRecs(QList<QStringList> &data)
+{
+    QSqlQuery query(m_db);
+    foreach(QStringList slist, data)
+    {
+        query.prepare("insert into sell (category,name,spec,productno,selldate,cnt,price,totalprice,payed,owned,customer) values (?,?,?,?,?,?,?,?,?,?,?)");
+        for(int i=0,n=slist.size();i<n;i++)
+        {
+            if(i<4)
+                query.addBindValue(slist.at(i));
+            else if(i==4)
+            {
+               QString str=slist.at(i).mid(0,10);
+               QDate date=QDate::fromString(str,"yyyy-MM-dd");
+               query.addBindValue(date);
+            }
+            else if(i==5)
+                query.addBindValue(slist.at(i).toInt());
+            else if(i<10)
+                query.addBindValue(slist.at(i).toDouble());
+            else if(i==10)
+                query.addBindValue(slist.at(i).toInt());
+        }
+        if(!query.exec()) {
+            qDebug()<<"insert slist failed!"
+                   <<"slist="
+                   <<slist;
+            qDebug()<<query.lastError();
+            QMessageBox::information(0,nullptr,QString::fromLocal8Bit("导入销货表失败"));
             return false;
         }
 

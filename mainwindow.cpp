@@ -34,16 +34,14 @@ MainWindow::MainWindow(QWidget *parent)
     m_promodel->setTable("product");
     setProHeaders();
     m_promodel->select();
-    int row=m_promodel->rowCount();
 
     m_sellmodel=new QSqlRelationalTableModel(this,m_databaseMg->database());
     m_sellmodel->setEditStrategy(QSqlTableModel::OnFieldChange);
     m_sellmodel->setTable("sell");
-//    m_sellmodel->setRelation(4,QSqlRelation("product","number","productno"));
-//    m_sellmodel->setRelation(11,QSqlRelation("customer","name","customer"));
+    m_sellmodel->setRelation(4,QSqlRelation("product","number","number"));
+    m_sellmodel->setRelation(11,QSqlRelation("customer","id","name"));
     setSellHeaders();
     m_sellmodel->select();
-    row=m_sellmodel->rowCount();
 
     /*********ui布局初始化*******************/
 
@@ -212,6 +210,7 @@ void MainWindow::setSellHeaders()
 
 void MainWindow::updateSellCusComBox()
 {
+    ui->sell_customer_comboBox->clear();
     ui->sell_customer_comboBox->addItem(QString::fromLocal8Bit(""));
     m_cusmodel->select();
     for(int i=0;i<m_cusmodel->rowCount();i++)
@@ -533,12 +532,31 @@ void MainWindow::on_sell_addBtn_clicked()
     }
     if(m_databaseMg->addSellRecord(num,ui->sell_cnt_spinBox->value(),ui->sell_price_doubleSpinBox->value(),
                                    ui->sell_totalprice_doubleSpinBox->value(),ui->sell_payed_doubleSpinBox->value(),
-                                   ui->sell_owed_doubleSpinBox->value(),ui->sell_customer_comboBox->currentText(),ui->sell_date_dateEdit->date()))
+                                   ui->sell_owed_doubleSpinBox->value(),cus_index,ui->sell_date_dateEdit->date()))
     {
         m_sellmodel->setTable("sell");
+        m_sellmodel->setRelation(4,QSqlRelation("product","number","number"));
+        m_sellmodel->setRelation(11,QSqlRelation("customer","id","name"));
         setSellHeaders();
         m_sellmodel->select();
-        row=m_sellmodel->rowCount();
     }
     return;
+}
+
+void MainWindow::on_sell_importBtn_clicked()
+{
+    QString file=QFileDialog::getOpenFileName(this,QString::fromLocal8Bit("打开"),QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),QString::fromLocal8Bit("表格文件(*.xls)"));
+    if(m_databaseMg->importSellRecsFromExcel(file))
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("导入数据成功。"));
+        m_sellmodel->setTable("sell");
+        m_sellmodel->setRelation(4,QSqlRelation("product","number","number"));
+        m_sellmodel->setRelation(11,QSqlRelation("customer","id","name"));
+        setSellHeaders();
+        m_sellmodel->select();
+    }
+    else
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("导入数据失败！"));
+    }
 }

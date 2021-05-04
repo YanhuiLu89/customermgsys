@@ -71,6 +71,8 @@ private slots:
 
     void on_sell_addBtn_clicked();
 
+    void on_sell_importBtn_clicked();
+
 private:
     void setCusHeaders();
     void setSupHeaders();
