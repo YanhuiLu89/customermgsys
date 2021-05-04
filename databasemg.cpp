@@ -150,8 +150,48 @@ bool databasemg::createSellTable()
 {
     QSqlQuery query(m_db);
     //创建销货表
-    query.exec("create table if not exists sell(id int primary key,category varchar,name varchar,spec varchar,foreign key(productno) reference product(number)),"
-               "selldate date,sellnum int,unitprice int,totalprice int,haspay int,debt int,foreign key(customer) reference customer(name))");
+    bool ret= query.exec("create table if not exists sell("
+                         "id int primary key,category varchar(32),name varchar(32),spec varchar(32),productno varchar(16),"
+                         "selldate date,cnt int,price double,totalprice double,payed double,owned double,customer varchar(250),"
+                         "foreign key(customer) references customer(name),foreign key(productno) references product(number)"
+                         ")");
+    if(!ret)
+    {
+       QMessageBox::information(0,nullptr,QString::fromLocal8Bit("创建销货表失败！"));
+       qDebug()<<query.lastError();
+        return false;
+    }
+    return true;
+}
+
+bool databasemg::addSellRecord(QString pronum, int cnt, double price, double totalprice, double payed, double owned, int cusindex, QDate date)
+{
+    QSqlQuery query(m_db);
+    query.prepare("insert into sell (category,name,spec,prono,date,cnt,price,totalprice,payed,owned,customer) values (?,?,?,?,?,?,?,?,?,?,?)");
+//    for(int i=0;i<12;i++)
+//    {
+//        if(i<7)
+//         query.addBindValue(list[i]);
+//        else
+//         query.addBindValue(list[i].toInt());
+//    }
+//    bool ret=query.exec();
+//    if(ret)
+//     {
+//        QMessageBox::information(0,nullptr,QString::fromLocal8Bit("新建货品成功"));
+//    }
+//    else
+//    {
+//        if(query.lastError().text().contains("UNIQUE constraint failed: product.number"))
+//        {
+//             QMessageBox::information(0,nullptr,QString::fromLocal8Bit("新建货品%1失败，该编号已经存在，不允许有编号相同的货品").arg(list[0]));
+//        }
+//        else
+//        {
+//             QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("新建货品失败！"));
+//        }
+//        qDebug()<<query.lastError();
+//     }
     return true;
 }
 
@@ -169,7 +209,7 @@ void databasemg::createTables()
     createCustomerTable();
     creatSupplierTable();
     createProductTable();
-//    createSellTable();
+    createSellTable();
     //    createPurchaseTable();
 }
 

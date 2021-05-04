@@ -1,6 +1,7 @@
 ﻿#ifndef DATABASEMG_H
 #define DATABASEMG_H
 #include <QSqlDatabase>
+#include <QDate>
 
 class databasemg
 {
@@ -10,11 +11,16 @@ public:
     bool createConnection();
     bool createCustomerTable();
     bool addCustomer(QString name,QString type,QString pthone,QString address);
+
     bool creatSupplierTable();
     bool addSupplier(QString name,QString type,QString pthone,QString address);
+
     bool createProductTable();
     bool addProduct(QStringList list);
+
     bool createSellTable();
+    bool addSellRecord(QString pronum,int cnt,double price,double totalprice,double payed,double owned,int cusindex,QDate date);
+
     bool createPurchaseTable();
     void createTables();
 

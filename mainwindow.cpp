@@ -86,8 +86,6 @@ void MainWindow::on_createcusBtn_clicked()
         m_cusmodel->select();
         ui->sell_customer_comboBox->addItem(name);
     }
-
-
     return;
 }
 
@@ -490,5 +488,24 @@ void MainWindow::on_sell_payed_doubleSpinBox_valueChanged(double arg1)
 
 void MainWindow::on_sell_addBtn_clicked()
 {
-
+    QString num=ui->sell_prono_lineEdit->text();
+    if(num.isEmpty())
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("商品编号不能为空！"));
+        return;
+    }
+    int cus_index=ui->sell_customer_comboBox->currentIndex();
+    if(cus_index<1)
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("客户不能为无效值！"));
+        return;
+    }
+    if(m_databaseMg->addSellRecord(num,ui->sell_cnt_spinBox->value(),ui->sell_price_doubleSpinBox->value(),
+                                   ui->sell_totalprice_doubleSpinBox->value(),ui->sell_payed_doubleSpinBox->value(),
+                                   ui->sell_owed_doubleSpinBox->value(),cus_index,ui->sell_date_dateEdit->date()))
+    {
+        int i=0;
+        i++;
+    }
+    return;
 }
