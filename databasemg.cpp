@@ -150,8 +150,9 @@ bool databasemg::createSellTable()
 {
     QSqlQuery query(m_db);
     //创建销货表
+
     bool ret= query.exec("create table if not exists sell("
-                         "id int primary key,category varchar(32),name varchar(32),spec varchar(32),productno varchar(16),"
+                         "id integer primary key autoincrement,category varchar(32),name varchar(32),spec varchar(32),productno varchar(16),"
                          "selldate date,cnt int,price double,totalprice double,payed double,owned double,customer varchar(250),"
                          "foreign key(customer) references customer(name),foreign key(productno) references product(number)"
                          ")");
@@ -164,35 +165,52 @@ bool databasemg::createSellTable()
     return true;
 }
 
-bool databasemg::addSellRecord(QString pronum, int cnt, double price, double totalprice, double payed, double owned, int cusindex, QDate date)
+bool databasemg::addSellRecord(QString pronum, int cnt, double price, double totalprice, double payed, double owned, QString cusName, QDate date)
 {
-    QSqlQuery query(m_db);
-    query.prepare("insert into sell (category,name,spec,prono,date,cnt,price,totalprice,payed,owned,customer) values (?,?,?,?,?,?,?,?,?,?,?)");
-//    for(int i=0;i<12;i++)
-//    {
-//        if(i<7)
-//         query.addBindValue(list[i]);
-//        else
-//         query.addBindValue(list[i].toInt());
-//    }
-//    bool ret=query.exec();
-//    if(ret)
-//     {
-//        QMessageBox::information(0,nullptr,QString::fromLocal8Bit("新建货品成功"));
-//    }
-//    else
-//    {
-//        if(query.lastError().text().contains("UNIQUE constraint failed: product.number"))
-//        {
-//             QMessageBox::information(0,nullptr,QString::fromLocal8Bit("新建货品%1失败，该编号已经存在，不允许有编号相同的货品").arg(list[0]));
-//        }
-//        else
-//        {
-//             QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("新建货品失败！"));
-//        }
-//        qDebug()<<query.lastError();
-//     }
-    return true;
+    QSqlQuery queryPro(m_db);
+    if(queryPro.exec(QString("select * from product where number is '%1'").arg(pronum)))
+    {
+        queryPro.next();
+        QString category=queryPro.value(1).toString();
+        QString name=queryPro.value(2).toString();
+        QString spec=queryPro.value(3).toString();
+        QSqlQuery query(m_db);
+        query.prepare("insert into sell (category,name,spec,productno,selldate,cnt,price,totalprice,payed,owned,customer) values (?,?,?,?,?,?,?,?,?,?,?)");
+        query.addBindValue(category);
+        query.addBindValue(name);
+        query.addBindValue(spec);
+        query.addBindValue(pronum);
+        query.addBindValue(date);
+        query.addBindValue(cnt);
+        query.addBindValue(price);
+        query.addBindValue(totalprice);
+        query.addBindValue(payed);
+        query.addBindValue(owned);
+        query.addBindValue(cusName);
+        bool ret=query.exec();
+        if(ret)
+         {
+            QMessageBox::information(0,nullptr,QString::fromLocal8Bit("新建销货记录成功"));
+            query.exec("select * from sell");
+            query.next();
+            qDebug()<<query.value(0)<<","<<query.value(1)<<","<<query.value(1)
+                     <<","<<query.value(3)<<query.value(4)<<","<<query.value(5);
+            return true;
+        }
+        else
+        {
+            QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("新建销货记录失败！"));
+            qDebug()<<query.lastError();
+            return false;
+         }
+    }
+    else
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("新建销货记录失败！"));
+        qDebug()<<queryPro.lastError();
+        return false;
+    }
+
 }
 
 bool databasemg::createPurchaseTable()

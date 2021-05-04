@@ -8,6 +8,8 @@
 #include <QStandardPaths>
 #include "searchprodialog.h"
 #include <QSqlRecord>
+#include <QSqlRelationalTableModel>
+#include <QSqlRelationalDelegate>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -32,7 +34,16 @@ MainWindow::MainWindow(QWidget *parent)
     m_promodel->setTable("product");
     setProHeaders();
     m_promodel->select();
+    int row=m_promodel->rowCount();
 
+    m_sellmodel=new QSqlRelationalTableModel(this,m_databaseMg->database());
+    m_sellmodel->setEditStrategy(QSqlTableModel::OnFieldChange);
+    m_sellmodel->setTable("sell");
+//    m_sellmodel->setRelation(4,QSqlRelation("product","number","productno"));
+//    m_sellmodel->setRelation(11,QSqlRelation("customer","name","customer"));
+    setSellHeaders();
+    m_sellmodel->select();
+    row=m_sellmodel->rowCount();
 
     /*********ui布局初始化*******************/
 
@@ -57,6 +68,8 @@ MainWindow::MainWindow(QWidget *parent)
     m_sellSelectedNum.clear();
     ui->sell_date_dateEdit->setDate(QDate::currentDate());
     updateSellCusComBox();
+    ui->tableViewSell->setModel(m_sellmodel);
+    ui->tableViewSell->setItemDelegate(new QSqlRelationalDelegate(ui->tableViewSell));
 }
 
 MainWindow::~MainWindow()
@@ -179,6 +192,22 @@ void MainWindow::setProHeaders()
     m_promodel->setHeaderData(9,Qt::Horizontal,QString::fromLocal8Bit("金额"));
     m_promodel->setHeaderData(10,Qt::Horizontal,QString::fromLocal8Bit("库存数量"));
     m_promodel->setHeaderData(11,Qt::Horizontal,QString::fromLocal8Bit("缺少数量"));
+}
+
+void MainWindow::setSellHeaders()
+{
+    m_sellmodel->setHeaderData(0,Qt::Horizontal,QString::fromLocal8Bit("序号"));
+    m_sellmodel->setHeaderData(1,Qt::Horizontal,QString::fromLocal8Bit("货品大类"));
+    m_sellmodel->setHeaderData(2,Qt::Horizontal,QString::fromLocal8Bit("货品名称"));
+    m_sellmodel->setHeaderData(3,Qt::Horizontal,QString::fromLocal8Bit("货品规格"));
+    m_sellmodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("商品编码"));
+    m_sellmodel->setHeaderData(5,Qt::Horizontal,QString::fromLocal8Bit("出货日期"));
+    m_sellmodel->setHeaderData(6,Qt::Horizontal,QString::fromLocal8Bit("出货数量"));
+    m_sellmodel->setHeaderData(7,Qt::Horizontal,QString::fromLocal8Bit("出货单价"));
+    m_sellmodel->setHeaderData(8,Qt::Horizontal,QString::fromLocal8Bit("合计"));
+    m_sellmodel->setHeaderData(9,Qt::Horizontal,QString::fromLocal8Bit("已付金额"));
+    m_sellmodel->setHeaderData(10,Qt::Horizontal,QString::fromLocal8Bit("欠款"));
+    m_sellmodel->setHeaderData(11,Qt::Horizontal,QString::fromLocal8Bit("客户"));
 }
 
 void MainWindow::updateSellCusComBox()
@@ -489,6 +518,7 @@ void MainWindow::on_sell_payed_doubleSpinBox_valueChanged(double arg1)
 
 void MainWindow::on_sell_addBtn_clicked()
 {
+    int row=0;
     QString num=ui->sell_prono_lineEdit->text();
     if(num.isEmpty())
     {
@@ -503,10 +533,12 @@ void MainWindow::on_sell_addBtn_clicked()
     }
     if(m_databaseMg->addSellRecord(num,ui->sell_cnt_spinBox->value(),ui->sell_price_doubleSpinBox->value(),
                                    ui->sell_totalprice_doubleSpinBox->value(),ui->sell_payed_doubleSpinBox->value(),
-                                   ui->sell_owed_doubleSpinBox->value(),cus_index,ui->sell_date_dateEdit->date()))
+                                   ui->sell_owed_doubleSpinBox->value(),ui->sell_customer_comboBox->currentText(),ui->sell_date_dateEdit->date()))
     {
-        int i=0;
-        i++;
+        m_sellmodel->setTable("sell");
+        setSellHeaders();
+        m_sellmodel->select();
+        row=m_sellmodel->rowCount();
     }
     return;
 }

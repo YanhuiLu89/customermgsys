@@ -9,6 +9,7 @@ namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
 class QSqlTableModel;
+class QSqlRelationalTableModel;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -74,6 +75,7 @@ private:
     void setCusHeaders();
     void setSupHeaders();
     void setProHeaders();
+    void setSellHeaders();
     void updateSellCusComBox();
 private:
     Ui::MainWindow *ui;
@@ -82,5 +84,6 @@ private:
     QSqlTableModel* m_supmodel;
     QSqlTableModel* m_promodel;
     QString m_sellSelectedNum;
+    QSqlRelationalTableModel* m_sellmodel;
 };
 #endif // MAINWINDOW_H

@@ -1254,16 +1254,6 @@
         <property name="title">
          <string>货品显示---（温馨提示：双击单元格即可编辑）</string>
         </property>
-        <widget class="QListView" name="sellListView">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>30</y>
-           <width>751</width>
-           <height>311</height>
-          </rect>
-         </property>
-        </widget>
         <widget class="QPushButton" name="sell_delBtn">
          <property name="geometry">
           <rect>
@@ -1275,6 +1265,16 @@
          </property>
          <property name="text">
           <string>删除选中行</string>
+         </property>
+        </widget>
+        <widget class="QTableView" name="tableViewSell">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>751</width>
+           <height>301</height>
+          </rect>
          </property>
         </widget>
        </widget>
