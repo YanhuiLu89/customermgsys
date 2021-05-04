@@ -55,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     /*********4、销货管理界面*******************/
     m_sellSelectedNum.clear();
+    ui->sell_date_dateEdit->setDate(QDate::currentDate());
     updateSellCusComBox();
 }
 

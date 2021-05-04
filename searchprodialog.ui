@@ -69,18 +69,18 @@
      <rect>
       <x>440</x>
       <y>50</y>
-      <width>66</width>
-      <height>12</height>
+      <width>51</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>库大于：</string>
+     <string>库存大于：</string>
     </property>
    </widget>
    <widget class="QSpinBox" name="search_prostack_spinBox">
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>500</x>
       <y>50</y>
       <width>130</width>
       <height>22</height>
@@ -139,7 +139,7 @@
    <widget class="QLineEdit" name="search_proname_lineEdit">
     <property name="geometry">
      <rect>
-      <x>492</x>
+      <x>500</x>
       <y>20</y>
       <width>130</width>
       <height>20</height>
