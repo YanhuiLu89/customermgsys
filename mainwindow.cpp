@@ -65,6 +65,8 @@ MainWindow::MainWindow(QWidget *parent)
     /*********4、销货管理界面*******************/
     m_sellSelectedNum.clear();
     ui->sell_date_dateEdit->setDate(QDate::currentDate());
+    ui->sell_date_dateEdit->setDisplayFormat("yyyy-MM-dd");
+    ui->sell_date_dateEdit->setCalendarPopup(true);
     updateSellCusComBox();
     ui->tableViewSell->setModel(m_sellmodel);
     ui->tableViewSell->setItemDelegate(new QSqlRelationalDelegate(ui->tableViewSell));
@@ -477,10 +479,10 @@ void MainWindow::on_sell_prono_lineEdit_textChanged(const QString &arg1)
    if(query.exec(QString("select * from product where number is '%1'").arg(arg1)))
    {
        query.next();
-       ui->sell_procat_lineEdit->setText(query.value(1).toString());
-       ui->sell_proname_lineEdit->setText(query.value(2).toString());
-       ui->sell_prospec_lineEdit->setText(query.value(3).toString());
-       ui->sell_prostock_lineEdit->setText(query.value(10).toString());
+       ui->sell_procat_showlabel->setText(query.value(1).toString());
+       ui->sell_proname_showlabel->setText(query.value(2).toString());
+       ui->sell_prospec_showlabel->setText(query.value(3).toString());
+       ui->sell_prostock_showlabel->setText(query.value(10).toString());
    }
 }
 
@@ -559,4 +561,68 @@ void MainWindow::on_sell_importBtn_clicked()
     {
         QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("导入数据失败！"));
     }
+}
+
+void MainWindow::on_sell_searchBtn_clicked()
+{
+    QString filter="";
+    if(!ui->sell_prono_lineEdit->text().isEmpty())
+        filter+=QString("productno like'%%1%'").arg(ui->sell_prono_lineEdit->text());
+    if(ui->sell_date_checkBox->checkState()==Qt::Unchecked)
+        if(filter.isEmpty())
+            filter+=QString("selldate is'%1'").arg(ui->sell_date_dateEdit->text());
+        else
+            filter+=QString("and selldate is'%1'").arg(ui->sell_date_dateEdit->text());
+    if(ui->sell_price_doubleSpinBox->value()>0)
+        if(filter.isEmpty())
+            filter+=QString("price is '%1'").arg(ui->sell_price_doubleSpinBox->value());
+        else
+            filter+=QString("and price is '%1'").arg(ui->sell_price_doubleSpinBox->value());
+    if(ui->sell_cnt_spinBox->value()>0)
+        if(filter.isEmpty())
+            filter+=QString("cnt is '%1'").arg(ui->sell_cnt_spinBox->value());
+        else
+            filter+=QString(" and cnt is '%1'").arg(ui->sell_cnt_spinBox->value());
+    if(ui->sell_totalprice_doubleSpinBox->value()>0)
+        if(filter.isEmpty())
+            filter+=QString("totalprice is '%1'").arg(ui->sell_totalprice_doubleSpinBox->value());
+        else
+            filter+=QString(" and totalprice is '%1'").arg(ui->sell_totalprice_doubleSpinBox->value());
+     if(ui->sell_payed_doubleSpinBox->value()>0)
+         if(filter.isEmpty())
+             filter+=QString("payed is '%1'").arg(ui->sell_payed_doubleSpinBox->value());
+         else
+             filter+=QString(" and payed is '%1'").arg(ui->sell_payed_doubleSpinBox->value());
+     if(ui->sell_owed_doubleSpinBox->value()>0)
+          if(filter.isEmpty())
+              filter+=QString("owned is '%1'").arg(ui->sell_owed_doubleSpinBox->value());
+          else
+              filter+=QString(" and owned like '%1'").arg(ui->sell_owed_doubleSpinBox->value());
+     if(ui->sell_customer_comboBox->currentIndex()>1)
+          if(filter.isEmpty())
+              filter+=QString("customer is '%1'").arg(ui->sell_customer_comboBox->currentIndex());
+          else
+              filter+=QString(" and customer like '%1'").arg(ui->sell_customer_comboBox->currentIndex());
+     if(filter.isEmpty())
+     {
+         QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("搜索条件不能为空"));
+     }
+     else
+     {
+         m_sellmodel->setTable("sell");
+         m_sellmodel->setFilter(filter);
+         setSellHeaders();
+         m_sellmodel->setRelation(4,QSqlRelation("product","number","number"));
+         m_sellmodel->setRelation(11,QSqlRelation("customer","id","name"));
+         m_sellmodel->select();
+     }
+}
+
+void MainWindow::on_sell_showallBtn_clicked()
+{
+    m_sellmodel->setTable("sell");
+    setSellHeaders();
+    m_sellmodel->setRelation(4,QSqlRelation("product","number","number"));
+    m_sellmodel->setRelation(11,QSqlRelation("customer","id","name"));
+    m_sellmodel->select();
 }

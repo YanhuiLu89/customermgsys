@@ -898,45 +898,6 @@
          <string>商品规格</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="sell_procat_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>100</x>
-          <y>70</y>
-          <width>191</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="sell_proname_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>100</x>
-          <y>100</y>
-          <width>191</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="sell_prospec_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>100</x>
-          <y>130</y>
-          <width>191</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
        <widget class="QLabel" name="sell_prostock_label">
         <property name="geometry">
          <rect>
@@ -948,19 +909,6 @@
         </property>
         <property name="text">
          <string>库存数量</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="sell_prostock_lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>100</x>
-          <y>160</y>
-          <width>191</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
         </property>
        </widget>
        <widget class="QGroupBox" name="groupBox_7">
@@ -1186,6 +1134,9 @@
             <property name="text">
              <string>查询</string>
             </property>
+            <property name="default">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
@@ -1241,6 +1192,89 @@
           </rect>
          </property>
         </widget>
+        <widget class="QCheckBox" name="sell_date_checkBox">
+         <property name="geometry">
+          <rect>
+           <x>640</x>
+           <y>100</y>
+           <width>111</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string> 查找时忽略日期</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sell_procat_showlabel">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>60</y>
+           <width>191</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Plain</enum>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sell_proname_showlabel">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>90</y>
+           <width>191</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sell_prospec_showlabel">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>120</y>
+           <width>191</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sell_prostock_showlabel">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>150</y>
+           <width>191</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
        </widget>
        <widget class="QGroupBox" name="groupBox_8">
         <property name="geometry">
@@ -1283,11 +1317,7 @@
        <zorder>sell_proncat_label</zorder>
        <zorder>sell_proname_label</zorder>
        <zorder>sell_prospec_label</zorder>
-       <zorder>sell_procat_lineEdit</zorder>
-       <zorder>sell_proname_lineEdit</zorder>
-       <zorder>sell_prospec_lineEdit</zorder>
        <zorder>sell_prostock_label</zorder>
-       <zorder>sell_prostock_lineEdit</zorder>
       </widget>
       <widget class="QWidget" name="tabSell">
        <attribute name="title">

@@ -73,6 +73,10 @@ private slots:
 
     void on_sell_importBtn_clicked();
 
+    void on_sell_searchBtn_clicked();
+
+    void on_sell_showallBtn_clicked();
+
 private:
     void setCusHeaders();
     void setSupHeaders();
