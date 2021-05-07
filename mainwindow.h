@@ -77,12 +77,17 @@ private slots:
 
     void on_sell_showallBtn_clicked();
 
+    void on_sell_exportBtn_clicked();
+
+    void on_sell_printBtn_clicked();
+
 private:
     void setCusHeaders();
     void setSupHeaders();
     void setProHeaders();
     void setSellHeaders();
     void updateSellCusComBox();
+    void exportSellTable(const QString &path);
 private:
     Ui::MainWindow *ui;
     databasemg* m_databaseMg;
