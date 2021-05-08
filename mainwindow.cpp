@@ -810,3 +810,17 @@ void MainWindow::on_sell_delBtn_clicked()
         m_sellmodel->select();
     }
 }
+
+void MainWindow::on_tableViewSell_clicked(const QModelIndex &index)
+{
+    int column=index.column();
+    if(column==4)//点击商品编号外键
+    {
+        ui->tabWidget->setCurrentIndex(2);
+
+    }
+    else if(column==11)//点击客户外键
+    {
+        ui->tabWidget->setCurrentIndex(0);
+    }
+}

@@ -83,6 +83,8 @@ private slots:
 
     void on_sell_delBtn_clicked();
 
+    void on_tableViewSell_clicked(const QModelIndex &index);
+
 private:
     void setCusHeaders();
     void setSupHeaders();
