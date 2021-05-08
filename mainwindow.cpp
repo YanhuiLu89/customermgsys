@@ -805,6 +805,8 @@ void MainWindow::on_sell_delBtn_clicked()
           m_sellmodel->removeRow(i.value());
         m_sellmodel->setTable("sell");
         setSellHeaders();
+        m_sellmodel->setRelation(4,QSqlRelation("product","number","number"));
+        m_sellmodel->setRelation(11,QSqlRelation("customer","id","name"));
         m_sellmodel->select();
     }
 }
