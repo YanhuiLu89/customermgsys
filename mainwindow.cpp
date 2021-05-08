@@ -717,14 +717,29 @@ void MainWindow::doPrint(QString path)
         printer.setPageSizeMM(s);
         printer.setOutputFormat(QPrinter::NativeFormat);
 
-        QStringList vList;
-        QFile file(path);
-        QTextStream out(&file);
+        int rowCount = m_sellmodel->rowCount();
+        if(rowCount<1)
+            return;
+        int columnCount = m_sellmodel->record(0).count();
+        QStringList html;
+        html.append("<table border='0.5' cellspacing='0' cellpadding='3'>");
         //组织表头
-        vList.append(QString::fromLocal8Bit("序号\t货品大类\t货品名称\t货品规格\t商品编码\t出货日期\t出货数量\t出货单价\t合计\t已付金额\t欠款\t客户")+"\n");
+        QStringList heads;
+        heads<<QString::fromLocal8Bit("序号")<<QString::fromLocal8Bit("货品大类")<<QString::fromLocal8Bit("货品名称")
+              <<QString::fromLocal8Bit("货品规格")<<QString::fromLocal8Bit("商品编码")<<QString::fromLocal8Bit("出货日期")
+              <<QString::fromLocal8Bit("出货数量")<<QString::fromLocal8Bit("出货单价")
+            <<QString::fromLocal8Bit("合计")<<QString::fromLocal8Bit("已付金额")
+            <<QString::fromLocal8Bit("欠款")<<QString::fromLocal8Bit("客户");
+        for (int i = 0; i < columnCount; i++)
+        {
+            html.append(QString("<td width='20' align='center' style='vertical-align:middle;'>"));
+            html.append(heads.at(i));
+            html.append("</td>");
+        }
         //组织内容
         for(int row=0;row<m_sellmodel->rowCount();row++)
         {
+           html.append("</tr>");
            QSqlRecord record=m_sellmodel->record(row);
            QString suffix=""; // 记录属性值
            // 遍历属性字段
@@ -734,28 +749,29 @@ void MainWindow::doPrint(QString path)
                switch(field.type())
                {
                    case QVariant::String:
-                       suffix+=record.value(i).toString();
+                       suffix=record.value(i).toString();
                        break;
                    case QVariant::Int:
-                       suffix+=QString("%1").arg(record.value(i).toInt());
+                       suffix=QString("%1").arg(record.value(i).toInt());
                        break;
                    case QVariant::Double:
-                       suffix+=QString("%1").arg(record.value(i).toDouble());
+                       suffix=QString("%1").arg(record.value(i).toDouble());
                        break;
                    case QVariant::Date:
-                       suffix+=record.value(i).toString();
+                       suffix=record.value(i).toString();
                        break;
                  }
-                 if(i!=record.count()-1)
-                 {
-                     suffix+="\t";
-                 }
-            }
-           suffix+="\n";
-           vList.append(suffix);
-        }
+                 html.append(QString("<td width='20' align='center' style='vertical-align:middle;'>"));
+                 html.append(suffix);
+                 html.append("</td>");
 
-       doc.setHtml(vList.join(""));
+            }
+           html.append("</tr>");
+        }
+        html.append("</table>");
+       QFile file(path);
+       QTextStream out(&file);
+       doc.setHtml(html.join(""));
        doc.print(&printer);
     }
 
