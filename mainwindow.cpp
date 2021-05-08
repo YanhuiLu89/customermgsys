@@ -252,7 +252,7 @@ void MainWindow::exportSellTable(const QString &path)
             }
             if(i!=record.count()-1)
             {
-                suffix+=",";
+                suffix+="\t";
             }
         }
           // 组装语句
@@ -269,7 +269,7 @@ void MainWindow::exportSellTable(const QString &path)
       // 写入文件
       QTextStream out(&file);
       //写表头
-      out<<QString::fromLocal8Bit("序号,货品大类,货品名称,货品规格,商品编码,出货日期,出货数量,出货单价,合计,已付金额,欠款,客户")+"\n";
+      out<<QString::fromLocal8Bit("序号\t货品大类\t货品名称\t货品规格\t商品编码\t出货日期\t出货数量\t出货单价\t合计\t已付金额\t欠款\t客户")+"\n";
       //写内容
       foreach(QString line,vList)
       {
@@ -687,8 +687,8 @@ void MainWindow::on_sell_showallBtn_clicked()
 void MainWindow::on_sell_exportBtn_clicked()
 {
     QTime time =QTime::currentTime();
-    QString file=QFileDialog::getSaveFileName(this,QString::fromLocal8Bit("选择导出文件路径"),QString::fromLocal8Bit("sell_%1-%2-%3-%4.csv")
-                                              .arg(QDate::currentDate().toString()).arg(time.hour()).arg(time.minute()).arg(time.second()),QString::fromLocal8Bit("表格文件(*.csv)"));
+    QString file=QFileDialog::getSaveFileName(this,QString::fromLocal8Bit("选择导出文件路径"),QString::fromLocal8Bit("sell_%1-%2-%3-%4.xls")
+                                              .arg(QDate::currentDate().toString()).arg(time.hour()).arg(time.minute()).arg(time.second()),QString::fromLocal8Bit("表格文件(*.xls)"));
     if(!file.isEmpty())
         exportSellTable(file);
 }
