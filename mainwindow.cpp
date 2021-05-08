@@ -12,6 +12,9 @@
 #include <QSqlRelationalDelegate>
 #include <QSqlField>
 #include <QTextStream>
+#include <QtPrintSupport/QPrinter>
+#include <QtPrintSupport/QPrintDialog>
+#include <QtPrintSupport/QPrintPreviewDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -275,7 +278,6 @@ void MainWindow::exportSellTable(const QString &path)
       {
         out<<line+"\n";
       }
-      //将.csv文件重名为.xls文件
 
 }
 
@@ -693,7 +695,77 @@ void MainWindow::on_sell_exportBtn_clicked()
         exportSellTable(file);
 }
 
+void MainWindow::doPrint(QString path)
+{
+    // 创建打印机对象
+    QPrinter printer;
+    // 创建打印对话框
+    QString printerName = printer.printerName();
+    if( printerName.size() == 0)
+        return;
+    QPrintDialog dlg(&printer, this);
+    if (dlg.exec() == QDialog::Accepted)
+    {
+        QTextDocument doc;
+        doc.setBaseUrl(QUrl(path));
+        QFont font = doc.defaultFont();
+        font.setPointSize(3);
+        doc.setDefaultFont(font);
+        //打印尺寸
+        QSizeF s = QSizeF(printer.logicalDpiX() * (58 / 25.4), printer.logicalDpiY() * (297 / 25.4));
+        doc.setPageSize(s);
+        printer.setPageSizeMM(s);
+        printer.setOutputFormat(QPrinter::NativeFormat);
+
+        QStringList vList;
+        QFile file(path);
+        QTextStream out(&file);
+        //组织表头
+        vList.append(QString::fromLocal8Bit("序号\t货品大类\t货品名称\t货品规格\t商品编码\t出货日期\t出货数量\t出货单价\t合计\t已付金额\t欠款\t客户")+"\n");
+        //组织内容
+        for(int row=0;row<m_sellmodel->rowCount();row++)
+        {
+           QSqlRecord record=m_sellmodel->record(row);
+           QString suffix=""; // 记录属性值
+           // 遍历属性字段
+           for(int i=0;i<record.count();i++)
+           {
+               QSqlField field=record.field(i);
+               switch(field.type())
+               {
+                   case QVariant::String:
+                       suffix+=record.value(i).toString();
+                       break;
+                   case QVariant::Int:
+                       suffix+=QString("%1").arg(record.value(i).toInt());
+                       break;
+                   case QVariant::Double:
+                       suffix+=QString("%1").arg(record.value(i).toDouble());
+                       break;
+                   case QVariant::Date:
+                       suffix+=record.value(i).toString();
+                       break;
+                 }
+                 if(i!=record.count()-1)
+                 {
+                     suffix+="\t";
+                 }
+            }
+           suffix+="\n";
+           vList.append(suffix);
+        }
+
+       doc.setHtml(vList.join(""));
+       doc.print(&printer);
+    }
+
+}
+
 void MainWindow::on_sell_printBtn_clicked()
 {
-
+   QTime time =QTime::currentTime();
+   QString path=QString::fromLocal8Bit("sell_%1-%2-%3-%4.xls")
+           .arg(QDate::currentDate().toString()).arg(time.hour()).arg(time.minute()).arg(time.second());
+   exportSellTable(path);
+   doPrint(path);
 }

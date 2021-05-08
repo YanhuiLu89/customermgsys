@@ -88,6 +88,7 @@ private:
     void setSellHeaders();
     void updateSellCusComBox();
     void exportSellTable(const QString &path);
+    void doPrint(QString path);
 private:
     Ui::MainWindow *ui;
     databasemg* m_databaseMg;
