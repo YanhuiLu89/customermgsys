@@ -785,3 +785,26 @@ void MainWindow::on_sell_printBtn_clicked()
    exportSellTable(path);
    doPrint(path);
 }
+
+void MainWindow::on_sell_delBtn_clicked()
+{
+    QModelIndexList indexes=ui->tableViewSell->selectionModel()->selectedIndexes();
+    QMap<int,int> rowMap;
+    foreach(QModelIndex index,indexes)
+        rowMap.insert(index.row(),index.row());
+    if(rowMap.size()<=0)
+    {
+         QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("没有行被选中！"));
+         return;
+    }
+    int ok=QMessageBox::warning(this,QString::fromLocal8Bit("删除选中行！"),QString::fromLocal8Bit("你确定删除选中行吗？"),QMessageBox::Yes,QMessageBox::No);
+    if(ok==QMessageBox::Yes)
+    {
+       QMap<int, int>::const_iterator i;
+       for (i = rowMap.constBegin(); i != rowMap.constEnd(); ++i)
+          m_sellmodel->removeRow(i.value());
+        m_sellmodel->setTable("sell");
+        setSellHeaders();
+        m_sellmodel->select();
+    }
+}

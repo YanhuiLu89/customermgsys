@@ -81,6 +81,8 @@ private slots:
 
     void on_sell_printBtn_clicked();
 
+    void on_sell_delBtn_clicked();
+
 private:
     void setCusHeaders();
     void setSupHeaders();
