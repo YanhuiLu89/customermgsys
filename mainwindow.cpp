@@ -230,51 +230,33 @@ void MainWindow::exportSellTable(const QString &path)
    for(int row=0;row<m_sellmodel->rowCount();row++)
    {
           QSqlRecord record=m_sellmodel->record(row);
-          QString prefix=QString("insert into sell "); // 记录属性字段名
-          QString suffix="values("; // 记录属性值
+          QString suffix=""; // 记录属性值
           // 遍历属性字段
           for(int i=0;i<record.count();i++)
           {
               QSqlField field=record.field(i);
-              QString fieldName=field.name();
               switch(field.type())
               {
               case QVariant::String:
-                  prefix+=fieldName;
-                  suffix+=QString("'%1'").arg(record.value(i).toString());
+                  suffix+=record.value(i).toString();
                   break;
               case QVariant::Int:
-                  prefix+=fieldName;
-                  suffix+=QString("'%1'").arg(record.value(i).toInt());
+                  suffix+=QString("%1").arg(record.value(i).toInt());
                   break;
               case QVariant::Double:
-                  prefix+=fieldName;
-                  suffix+=QString("'%1'").arg(record.value(i).toDouble());
+                  suffix+=QString("%1").arg(record.value(i).toDouble());
                   break;
               case QVariant::Date:
-                  prefix+=fieldName;
-                  suffix+=QString("'%1'").arg(record.value(i).toString());
+                  suffix+=record.value(i).toString();
                   break;
             }
-            if(record.count()==1)
+            if(i!=record.count()-1)
             {
-                prefix+=")";
-                suffix+=")";
-            }
-            else if(i!=record.count()-1)
-            {
-                prefix+=",";
                 suffix+=",";
             }
-            else if(i==record.count()-1)
-            {
-                prefix+=")";
-                suffix+=")";
-            }
         }
-      // 组装sql语句
-      QString iSql=QString("%1 %2;").arg(prefix).arg(suffix);
-      vList.append(iSql);
+          // 组装语句
+          vList.append(suffix);
       }
 
 
@@ -284,12 +266,17 @@ void MainWindow::exportSellTable(const QString &path)
           QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("导出文件失败！"));
           return;
       }
-      // 将sql语句写入文件
+      // 写入文件
       QTextStream out(&file);
+      //写表头
+      out<<QString::fromLocal8Bit("序号,货品大类,货品名称,货品规格,商品编码,出货日期,出货数量,出货单价,合计,已付金额,欠款,客户")+"\n";
+      //写内容
       foreach(QString line,vList)
       {
-      out<<line+"\n";
+        out<<line+"\n";
       }
+      //将.csv文件重名为.xls文件
+
 }
 
 void MainWindow::on_createsupBtn_clicked()
@@ -700,9 +687,10 @@ void MainWindow::on_sell_showallBtn_clicked()
 void MainWindow::on_sell_exportBtn_clicked()
 {
     QTime time =QTime::currentTime();
-    QString file=QFileDialog::getSaveFileName(this,QString::fromLocal8Bit("选择导出文件路径"),QString::fromLocal8Bit("sell_%1-%2-%3-%4.xls)")
-                                              .arg(QDate::currentDate().toString()).arg(time.hour()).arg(time.minute()).arg(time.second()));
-    exportSellTable(file);
+    QString file=QFileDialog::getSaveFileName(this,QString::fromLocal8Bit("选择导出文件路径"),QString::fromLocal8Bit("sell_%1-%2-%3-%4.csv")
+                                              .arg(QDate::currentDate().toString()).arg(time.hour()).arg(time.minute()).arg(time.second()),QString::fromLocal8Bit("表格文件(*.csv)"));
+    if(!file.isEmpty())
+        exportSellTable(file);
 }
 
 void MainWindow::on_sell_printBtn_clicked()
