@@ -44,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_sellmodel->setEditStrategy(QSqlTableModel::OnFieldChange);
     m_sellmodel->setTable("sell");
     m_sellmodel->setRelation(4,QSqlRelation("product","number","number"));
-    m_sellmodel->setRelation(11,QSqlRelation("customer","id","name"));
+    m_sellmodel->setRelation(11,QSqlRelation("customer","name","name"));
     setSellHeaders();
     m_sellmodel->select();
 
@@ -588,19 +588,19 @@ void MainWindow::on_sell_addBtn_clicked()
         QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("商品编号不能为空！"));
         return;
     }
-    int cus_index=ui->sell_customer_comboBox->currentIndex();
-    if(cus_index<1)
+    QString cusName=ui->sell_customer_comboBox->currentText();
+    if(cusName.isEmpty())
     {
         QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("客户不能为无效值！"));
         return;
     }
     if(m_databaseMg->addSellRecord(num,ui->sell_cnt_spinBox->value(),ui->sell_price_doubleSpinBox->value(),
                                    ui->sell_totalprice_doubleSpinBox->value(),ui->sell_payed_doubleSpinBox->value(),
-                                   ui->sell_owed_doubleSpinBox->value(),cus_index,ui->sell_date_dateEdit->date()))
+                                   ui->sell_owed_doubleSpinBox->value(),cusName,ui->sell_date_dateEdit->date()))
     {
         m_sellmodel->setTable("sell");
         m_sellmodel->setRelation(4,QSqlRelation("product","number","number"));
-        m_sellmodel->setRelation(11,QSqlRelation("customer","id","name"));
+        m_sellmodel->setRelation(11,QSqlRelation("customer","name","name"));
         setSellHeaders();
         m_sellmodel->select();
     }
@@ -615,7 +615,7 @@ void MainWindow::on_sell_importBtn_clicked()
         QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("导入数据成功。"));
         m_sellmodel->setTable("sell");
         m_sellmodel->setRelation(4,QSqlRelation("product","number","number"));
-        m_sellmodel->setRelation(11,QSqlRelation("customer","id","name"));
+        m_sellmodel->setRelation(11,QSqlRelation("customer","name","name"));
         setSellHeaders();
         m_sellmodel->select();
     }
@@ -675,7 +675,7 @@ void MainWindow::on_sell_searchBtn_clicked()
          m_sellmodel->setFilter(filter);
          setSellHeaders();
          m_sellmodel->setRelation(4,QSqlRelation("product","number","number"));
-         m_sellmodel->setRelation(11,QSqlRelation("customer","id","name"));
+         m_sellmodel->setRelation(11,QSqlRelation("customer","name","name"));
          m_sellmodel->select();
      }
 }
@@ -685,7 +685,7 @@ void MainWindow::on_sell_showallBtn_clicked()
     m_sellmodel->setTable("sell");
     setSellHeaders();
     m_sellmodel->setRelation(4,QSqlRelation("product","number","number"));
-    m_sellmodel->setRelation(11,QSqlRelation("customer","id","name"));
+    m_sellmodel->setRelation(11,QSqlRelation("customer","name","name"));
     m_sellmodel->select();
 }
 
@@ -809,7 +809,7 @@ void MainWindow::on_sell_delBtn_clicked()
         m_sellmodel->setTable("sell");
         setSellHeaders();
         m_sellmodel->setRelation(4,QSqlRelation("product","number","number"));
-        m_sellmodel->setRelation(11,QSqlRelation("customer","id","name"));
+        m_sellmodel->setRelation(11,QSqlRelation("customer","name","name"));
         m_sellmodel->select();
     }
 }
@@ -819,11 +819,35 @@ void MainWindow::on_tableViewSell_clicked(const QModelIndex &index)
     int column=index.column();
     if(column==4)//点击商品编号外键
     {
+        QSqlRecord rec=m_sellmodel->record(index.row());
+        QString pronumber=rec.value(4).toString();
         ui->tabWidget->setCurrentIndex(2);
+        selectProduct(pronumber);
 
     }
     else if(column==11)//点击客户外键
     {
+        QSqlRecord rec=m_sellmodel->record(index.row());
+        QString name=rec.value(11).toString();
         ui->tabWidget->setCurrentIndex(0);
+        selectCustomer(name);
     }
+}
+
+bool MainWindow::selectProduct(QString pronum)
+{
+    m_promodel->setTable("product");
+    setProHeaders();
+    m_promodel->setFilter(QString("number is '%1'").arg(pronum));
+    m_promodel->select();
+    return true;
+}
+
+bool MainWindow::selectCustomer(QString name)
+{
+    m_cusmodel->setTable("customer");
+    setCusHeaders();
+    m_cusmodel->setFilter(QString("name is '%1'").arg(name));
+    m_cusmodel->select();
+    return true;
 }

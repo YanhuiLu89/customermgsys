@@ -153,8 +153,8 @@ bool databasemg::createSellTable()
 
     bool ret= query.exec("create table if not exists sell("
                          "id integer primary key autoincrement,category varchar(32),name varchar(32),spec varchar(32),productno varchar(16),"
-                         "selldate date,cnt int,price double,totalprice double,payed double,owned double,customer integer,"
-                         "foreign key(customer) references customer(id),foreign key(productno) references product(number)"
+                         "selldate date,cnt int,price double,totalprice double,payed double,owned double,customer varchar(250),"
+                         "foreign key(customer) references customer(name),foreign key(productno) references product(number)"
                          ")");
     if(!ret)
     {
@@ -165,7 +165,7 @@ bool databasemg::createSellTable()
     return true;
 }
 
-bool databasemg::addSellRecord(QString pronum, int cnt, double price, double totalprice, double payed, double owned, int customerId, QDate date)
+bool databasemg::addSellRecord(QString pronum, int cnt, double price, double totalprice, double payed, double owned, QString customerName, QDate date)
 {
     QSqlQuery queryPro(m_db);
     if(queryPro.exec(QString("select * from product where number is '%1'").arg(pronum)))
@@ -186,7 +186,7 @@ bool databasemg::addSellRecord(QString pronum, int cnt, double price, double tot
         query.addBindValue(totalprice);
         query.addBindValue(payed);
         query.addBindValue(owned);
-        query.addBindValue(customerId);
+        query.addBindValue(customerName);
         bool ret=query.exec();
         if(ret)
          {
@@ -545,7 +545,7 @@ bool databasemg::saveSellRecs(QList<QStringList> &data)
             else if(i<10)
                 query.addBindValue(slist.at(i).toDouble());
             else if(i==10)
-                query.addBindValue(slist.at(i).toInt());
+                query.addBindValue(slist.at(i));
         }
         if(!query.exec()) {
             qDebug()<<"insert slist failed!"
