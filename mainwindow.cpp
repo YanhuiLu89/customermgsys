@@ -73,6 +73,14 @@ MainWindow::MainWindow(QWidget *parent)
     ui->sell_date_dateEdit->setDate(QDate::currentDate());
     ui->sell_date_dateEdit->setDisplayFormat("yyyy-MM-dd");
     ui->sell_date_dateEdit->setCalendarPopup(true);
+    QButtonGroup* gropRadionA=new QButtonGroup;
+    gropRadionA->addButton(ui->tax_radioButton_yes,0);
+    gropRadionA->addButton(ui->tax_radioButton_no,1);
+    gropRadionA->setExclusive(true);
+    QButtonGroup* gropRadionB=new QButtonGroup;
+    gropRadionB->addButton(ui->invoice_radioButton_yes,0);
+    gropRadionB->addButton(ui->invoice_radioButton_no,1);
+    gropRadionB->setExclusive(true);
     updateSellCusComBox();
     ui->tableViewSell->setModel(m_sellmodel);
     ui->tableViewSell->setItemDelegate(new QSqlRelationalDelegate(ui->tableViewSell));
@@ -217,6 +225,8 @@ void MainWindow::setSellHeaders()
     m_sellmodel->setHeaderData(9,Qt::Horizontal,QString::fromLocal8Bit("已付金额"));
     m_sellmodel->setHeaderData(10,Qt::Horizontal,QString::fromLocal8Bit("欠款"));
     m_sellmodel->setHeaderData(11,Qt::Horizontal,QString::fromLocal8Bit("客户"));
+    m_sellmodel->setHeaderData(12,Qt::Horizontal,QString::fromLocal8Bit("是否含税"));
+    m_sellmodel->setHeaderData(13,Qt::Horizontal,QString::fromLocal8Bit("是否欠发票"));
 }
 
 void MainWindow::updateSellCusComBox()
@@ -276,7 +286,7 @@ void MainWindow::exportSellTable(const QString &path)
       // 写入文件
       QTextStream out(&file);
       //写表头
-      out<<QString::fromLocal8Bit("序号\t货品大类\t货品名称\t货品规格\t商品编码\t出货日期\t出货数量\t出货单价\t合计\t已付金额\t欠款\t客户")+"\n";
+      out<<QString::fromLocal8Bit("序号\t货品大类\t货品名称\t货品规格\t商品编码\t出货日期\t出货数量\t出货单价\t合计\t已付金额\t欠款\t客户\t是否含税\t是否欠发票")+"\n";
       //写内容
       foreach(QString line,vList)
       {
@@ -597,7 +607,7 @@ void MainWindow::on_sell_addBtn_clicked()
     }
     if(m_databaseMg->addSellRecord(num,ui->sell_cnt_spinBox->value(),ui->sell_price_doubleSpinBox->value(),
                                    ui->sell_totalprice_doubleSpinBox->value(),ui->sell_payed_doubleSpinBox->value(),
-                                   ui->sell_owed_doubleSpinBox->value(),cusName,ui->sell_date_dateEdit->date()))
+                                   ui->sell_owed_doubleSpinBox->value(),cusName,ui->sell_date_dateEdit->date(),ui->tax_radioButton_yes->isChecked(),ui->invoice_radioButton_yes->isChecked()))
     {
         m_sellmodel->setTable("sell");
         m_sellmodel->setRelation(4,QSqlRelation("product","number","number"));
@@ -661,11 +671,29 @@ void MainWindow::on_sell_searchBtn_clicked()
               filter+=QString("owned is '%1'").arg(ui->sell_owed_doubleSpinBox->value());
           else
               filter+=QString(" and owned like '%1'").arg(ui->sell_owed_doubleSpinBox->value());
-     if(ui->sell_customer_comboBox->currentIndex()>1)
+     if(!ui->sell_customer_comboBox->currentText().isEmpty())
           if(filter.isEmpty())
-              filter+=QString("customer is '%1'").arg(ui->sell_customer_comboBox->currentIndex());
+              filter+=QString("customer is '%1'").arg(ui->sell_customer_comboBox->currentText());
           else
-              filter+=QString(" and customer like '%1'").arg(ui->sell_customer_comboBox->currentIndex());
+              filter+=QString(" and customer like '%1'").arg(ui->sell_customer_comboBox->currentText());
+     if(ui->tax_checkBox->checkState()==Qt::Unchecked)
+     {
+         QString tax=ui->tax_radioButton_yes->isChecked()?
+                     QString::fromLocal8Bit("是"):QString::fromLocal8Bit("否");
+         if(filter.isEmpty())
+             filter+=QString("tax is'%1'").arg(tax);
+         else
+             filter+=QString("and tax is'%1'").arg(tax);
+     }
+     if(ui->invoice_checkBox->checkState()==Qt::Unchecked)
+     {
+         QString invoice=ui->invoice_radioButton_yes->isChecked()?
+                     QString::fromLocal8Bit("是"):QString::fromLocal8Bit("否");
+         if(filter.isEmpty())
+             filter+=QString("invoice is'%1'").arg(invoice);
+         else
+             filter+=QString("and invoice is'%1'").arg(invoice);
+     }
      if(filter.isEmpty())
      {
          QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("搜索条件不能为空"));
@@ -693,92 +721,10 @@ void MainWindow::on_sell_showallBtn_clicked()
 void MainWindow::on_sell_exportBtn_clicked()
 {
     QTime time =QTime::currentTime();
-    QString file=QFileDialog::getSaveFileName(this,QString::fromLocal8Bit("选择导出文件路径"),QString::fromLocal8Bit("sell_%1-%2-%3-%4.xls")
+    QString file=QFileDialog::getSaveFileName(this,QString::fromLocal8Bit("选择导出文件路径"),QString::fromLocal8Bit("sell_%1 %2-%3-%4.xls")
                                               .arg(QDate::currentDate().toString()).arg(time.hour()).arg(time.minute()).arg(time.second()),QString::fromLocal8Bit("表格文件(*.xls)"));
     if(!file.isEmpty())
         exportSellTable(file);
-}
-
-void MainWindow::doPrint(QString path)
-{
-    // 创建打印机对象
-    QPrinter printer;
-    // 创建打印对话框
-    QString printerName = printer.printerName();
-    if( printerName.size() == 0)
-        return;
-    QPrintDialog dlg(&printer, this);
-    if (dlg.exec() == QDialog::Accepted)
-    {
-        QTextDocument doc;
-        doc.setBaseUrl(QUrl(path));
-        QFont font = doc.defaultFont();
-        font.setPointSize(3);
-        doc.setDefaultFont(font);
-        //打印尺寸
-        QSizeF s = QSizeF(printer.logicalDpiX() * (58 / 25.4), printer.logicalDpiY() * (297 / 25.4));
-        doc.setPageSize(s);
-        printer.setPageSizeMM(s);
-        printer.setOutputFormat(QPrinter::NativeFormat);
-
-        int rowCount = m_sellmodel->rowCount();
-        if(rowCount<1)
-            return;
-        int columnCount = m_sellmodel->record(0).count();
-        QStringList html;
-        html.append("<table border='0.5' cellspacing='0' cellpadding='3'>");
-        //组织表头
-        QStringList heads;
-        heads<<QString::fromLocal8Bit("序号")<<QString::fromLocal8Bit("货品大类")<<QString::fromLocal8Bit("货品名称")
-              <<QString::fromLocal8Bit("货品规格")<<QString::fromLocal8Bit("商品编码")<<QString::fromLocal8Bit("出货日期")
-              <<QString::fromLocal8Bit("出货数量")<<QString::fromLocal8Bit("出货单价")
-            <<QString::fromLocal8Bit("合计")<<QString::fromLocal8Bit("已付金额")
-            <<QString::fromLocal8Bit("欠款")<<QString::fromLocal8Bit("客户");
-        for (int i = 0; i < columnCount; i++)
-        {
-            html.append(QString("<td width='20' align='center' style='vertical-align:middle;'>"));
-            html.append(heads.at(i));
-            html.append("</td>");
-        }
-        //组织内容
-        for(int row=0;row<m_sellmodel->rowCount();row++)
-        {
-           html.append("</tr>");
-           QSqlRecord record=m_sellmodel->record(row);
-           QString suffix=""; // 记录属性值
-           // 遍历属性字段
-           for(int i=0;i<record.count();i++)
-           {
-               QSqlField field=record.field(i);
-               switch(field.type())
-               {
-                   case QVariant::String:
-                       suffix=record.value(i).toString();
-                       break;
-                   case QVariant::Int:
-                       suffix=QString("%1").arg(record.value(i).toInt());
-                       break;
-                   case QVariant::Double:
-                       suffix=QString("%1").arg(record.value(i).toDouble());
-                       break;
-                   case QVariant::Date:
-                       suffix=record.value(i).toString();
-                       break;
-                 }
-                 html.append(QString("<td width='20' align='center' style='vertical-align:middle;'>"));
-                 html.append(suffix);
-                 html.append("</td>");
-
-            }
-           html.append("</tr>");
-        }
-        html.append("</table>");
-       QFile file(path);
-       QTextStream out(&file);
-       doc.setHtml(html.join(""));
-       doc.print(&printer);
-    }
-
 }
 
 void MainWindow::on_sell_printBtn_clicked()
@@ -790,12 +736,13 @@ void MainWindow::on_sell_printBtn_clicked()
    columnList<<QString::fromLocal8Bit("序号")<<QString::fromLocal8Bit("货品大类")<<QString::fromLocal8Bit("货品名称")
             <<QString::fromLocal8Bit("货品规格")<<QString::fromLocal8Bit("商品编码")<<QString::fromLocal8Bit("出货日期")
             <<QString::fromLocal8Bit("出货数量")<<QString::fromLocal8Bit("出货单价")<<QString::fromLocal8Bit("合计")
-            <<QString::fromLocal8Bit("已付金额")<<QString::fromLocal8Bit("欠款")<<QString::fromLocal8Bit("客户");
+            <<QString::fromLocal8Bit("已付金额")<<QString::fromLocal8Bit("欠款")<<QString::fromLocal8Bit("客户")
+            <<QString::fromLocal8Bit("是否含税")<<QString::fromLocal8Bit("是否欠发票");
 
    for(int i=0;i<rowNum;i++)
    {
        QStringList data;
-       for(int j=0;j<12;j++)
+       for(int j=0;j<14;j++)
        {
            data<<m_sellmodel->record(i).value(j).toString();
        }

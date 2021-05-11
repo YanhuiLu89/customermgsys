@@ -92,7 +92,6 @@ private:
     void setSellHeaders();
     void updateSellCusComBox();
     void exportSellTable(const QString &path);
-    void doPrint(QString path);
     bool selectProduct(QString pronum);
     bool selectCustomer(QString name);
 

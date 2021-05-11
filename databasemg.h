@@ -19,7 +19,7 @@ public:
     bool addProduct(QStringList list);
 
     bool createSellTable();
-    bool addSellRecord(QString pronum,int cnt,double price,double totalprice,double payed,double owned,QString customerName,QDate date);
+    bool addSellRecord(QString pronum,int cnt,double price,double totalprice,double payed,double owned,QString customerName,QDate date,bool tax,bool invoice);
 
     bool createPurchaseTable();
     void createTables();

@@ -153,7 +153,7 @@ bool databasemg::createSellTable()
 
     bool ret= query.exec("create table if not exists sell("
                          "id integer primary key autoincrement,category varchar(32),name varchar(32),spec varchar(32),productno varchar(16),"
-                         "selldate date,cnt int,price double,totalprice double,payed double,owned double,customer varchar(250),"
+                         "selldate date,cnt int,price double,totalprice double,payed double,owned double,customer varchar(250),tax varchar(4),invoice varchar(4),"
                          "foreign key(customer) references customer(name),foreign key(productno) references product(number)"
                          ")");
     if(!ret)
@@ -165,7 +165,7 @@ bool databasemg::createSellTable()
     return true;
 }
 
-bool databasemg::addSellRecord(QString pronum, int cnt, double price, double totalprice, double payed, double owned, QString customerName, QDate date)
+bool databasemg::addSellRecord(QString pronum, int cnt, double price, double totalprice, double payed, double owned, QString customerName, QDate date,bool tax,bool invoice)
 {
     QSqlQuery queryPro(m_db);
     if(queryPro.exec(QString("select * from product where number is '%1'").arg(pronum)))
@@ -175,7 +175,7 @@ bool databasemg::addSellRecord(QString pronum, int cnt, double price, double tot
         QString name=queryPro.value(2).toString();
         QString spec=queryPro.value(3).toString();
         QSqlQuery query(m_db);
-        query.prepare("insert into sell (category,name,spec,productno,selldate,cnt,price,totalprice,payed,owned,customer) values (?,?,?,?,?,?,?,?,?,?,?)");
+        query.prepare("insert into sell (category,name,spec,productno,selldate,cnt,price,totalprice,payed,owned,customer,tax,invoice) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
         query.addBindValue(category);
         query.addBindValue(name);
         query.addBindValue(spec);
@@ -187,6 +187,14 @@ bool databasemg::addSellRecord(QString pronum, int cnt, double price, double tot
         query.addBindValue(payed);
         query.addBindValue(owned);
         query.addBindValue(customerName);
+        if(tax)
+            query.addBindValue(QString::fromLocal8Bit("是"));
+        else
+            query.addBindValue(QString::fromLocal8Bit("否"));
+        if(invoice)
+            query.addBindValue(QString::fromLocal8Bit("是"));
+        else
+            query.addBindValue(QString::fromLocal8Bit("否"));
         bool ret=query.exec();
         if(ret)
          {
@@ -517,7 +525,10 @@ bool databasemg::getSellRecsFromExcel(QString path, QList<QStringList> &data)
         QString payed = query.value(9).toString();
         QString owned = query.value(10).toString();
         QString customer = query.value(11).toString();
-        list<<category<<name<<spec<<productno<<selldate<<cnt<<price<<totalprice<<payed<<owned<<customer;
+        QString tax=query.value(12).toString();
+        QString invoice=query.value(13).toString();
+        list<<category<<name<<spec<<productno<<selldate<<cnt<<price<<totalprice
+           <<payed<<owned<<customer<<tax<<invoice;
         data<<list;
     }
     dbexcel.close();
@@ -529,7 +540,7 @@ bool databasemg::saveSellRecs(QList<QStringList> &data)
     QSqlQuery query(m_db);
     foreach(QStringList slist, data)
     {
-        query.prepare("insert into sell (category,name,spec,productno,selldate,cnt,price,totalprice,payed,owned,customer) values (?,?,?,?,?,?,?,?,?,?,?)");
+        query.prepare("insert into sell (category,name,spec,productno,selldate,cnt,price,totalprice,payed,owned,customer,tax,invoice) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
         for(int i=0,n=slist.size();i<n;i++)
         {
             if(i<4)
@@ -544,7 +555,7 @@ bool databasemg::saveSellRecs(QList<QStringList> &data)
                 query.addBindValue(slist.at(i).toInt());
             else if(i<10)
                 query.addBindValue(slist.at(i).toDouble());
-            else if(i==10)
+            else
                 query.addBindValue(slist.at(i));
         }
         if(!query.exec()) {
