@@ -81,6 +81,9 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete m_cusmodel;
+    delete m_supmodel;
+    delete m_promodel;
+    delete m_sellmodel;
     delete m_databaseMg;
 }
 
