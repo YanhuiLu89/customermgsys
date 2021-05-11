@@ -9,7 +9,7 @@ namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
 class QSqlTableModel;
-class QSqlRelationalTableModel;
+class MySqlRelationTableModel;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -100,6 +100,6 @@ private:
     QSqlTableModel* m_supmodel;
     QSqlTableModel* m_promodel;
     QString m_sellSelectedNum;
-    QSqlRelationalTableModel* m_sellmodel;
+    MySqlRelationTableModel* m_sellmodel;
 };
 #endif // MAINWINDOW_H

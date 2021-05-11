@@ -8,7 +8,7 @@
 #include <QStandardPaths>
 #include "searchprodialog.h"
 #include <QSqlRecord>
-#include <QSqlRelationalTableModel>
+#include "mysqlrelationtablemodel.h"
 #include <QSqlRelationalDelegate>
 #include <QSqlField>
 #include <QTextStream>
@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     setProHeaders();
     m_promodel->select();
 
-    m_sellmodel=new QSqlRelationalTableModel(this,m_databaseMg->database());
+    m_sellmodel=new MySqlRelationTableModel(this,m_databaseMg->database());
     m_sellmodel->setEditStrategy(QSqlTableModel::OnFieldChange);
     m_sellmodel->setTable("sell");
     m_sellmodel->setRelation(4,QSqlRelation("product","number","number"));
