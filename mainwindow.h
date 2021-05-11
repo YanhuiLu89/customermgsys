@@ -95,6 +95,9 @@ private:
     void doPrint(QString path);
     bool selectProduct(QString pronum);
     bool selectCustomer(QString name);
+
+    //print相关
+
 private:
     Ui::MainWindow *ui;
     databasemg* m_databaseMg;

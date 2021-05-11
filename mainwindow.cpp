@@ -15,6 +15,7 @@
 #include <QtPrintSupport/QPrinter>
 #include <QtPrintSupport/QPrintDialog>
 #include <QtPrintSupport/QPrintPreviewDialog>
+#include "myprint.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -782,11 +783,35 @@ void MainWindow::doPrint(QString path)
 
 void MainWindow::on_sell_printBtn_clicked()
 {
-   QTime time =QTime::currentTime();
-   QString path=QString::fromLocal8Bit("sell_%1-%2-%3-%4.xls")
-           .arg(QDate::currentDate().toString()).arg(time.hour()).arg(time.minute()).arg(time.second());
-   exportSellTable(path);
-   doPrint(path);
+   int rowNum=m_sellmodel->rowCount();
+   QString title1=QString("Student Information");//打印表格的标题
+   QStringList columnList;//columnList为各列名
+   std::vector<QStringList> dataLists;//dataLists为各行数据
+   columnList<<QString::fromLocal8Bit("序号")<<QString::fromLocal8Bit("货品大类")<<QString::fromLocal8Bit("货品名称")
+            <<QString::fromLocal8Bit("货品规格")<<QString::fromLocal8Bit("商品编码")<<QString::fromLocal8Bit("出货日期")
+            <<QString::fromLocal8Bit("出货数量")<<QString::fromLocal8Bit("出货单价")<<QString::fromLocal8Bit("合计")
+            <<QString::fromLocal8Bit("已付金额")<<QString::fromLocal8Bit("欠款")<<QString::fromLocal8Bit("客户");
+
+   for(int i=0;i<rowNum;i++)
+   {
+       QStringList data;
+       for(int j=0;j<12;j++)
+       {
+           data<<m_sellmodel->record(i).value(j).toString();
+       }
+       dataLists.push_back(data);
+   }
+   MyPrint myprint;
+   myprint.dataBegin();
+   myprint.tableBegin(columnList);
+   for(int row=0;row<rowNum;row++)
+   {
+       myprint.insert2TableRow(dataLists[row]);
+   }
+
+   myprint.tableEnd();
+   myprint.dataEnd();
+   myprint.printWithPreview();
 }
 
 void MainWindow::on_sell_delBtn_clicked()

@@ -20,12 +20,14 @@ SOURCES += \
     databasemg.cpp \
     main.cpp \
     mainwindow.cpp \
+    myprint.cpp \
     mysqlrelationtablemodel.cpp \
     searchprodialog.cpp
 
 HEADERS += \
     databasemg.h \
     mainwindow.h \
+    myprint.h \
     mysqlrelationtablemodel.h \
     searchprodialog.h
 
