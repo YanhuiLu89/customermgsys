@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1556,7 +1556,7 @@
          </rect>
         </property>
         <property name="title">
-         <string>销货管理</string>
+         <string>进货管理</string>
         </property>
         <widget class="QDateEdit" name="sell_date_dateEdit_3">
          <property name="geometry">
@@ -1607,7 +1607,7 @@
           <double>99999.990000000005239</double>
          </property>
         </widget>
-        <widget class="QLabel" name="sell_sellprice_label_3">
+        <widget class="QLabel" name="stock_sellprice_label">
          <property name="geometry">
           <rect>
            <x>370</x>
@@ -1633,7 +1633,7 @@
           <number>99999</number>
          </property>
         </widget>
-        <widget class="QLabel" name="sell_sellcnt_label_3">
+        <widget class="QLabel" name="stock_sellcnt_label">
          <property name="geometry">
           <rect>
            <x>370</x>
@@ -1711,7 +1711,7 @@
           <double>9999999999.989999771118164</double>
          </property>
         </widget>
-        <widget class="QLabel" name="sell_prono_label_3">
+        <widget class="QLabel" name="stock_prono_label">
          <property name="geometry">
           <rect>
            <x>30</x>
@@ -1724,7 +1724,7 @@
           <string>商品编码</string>
          </property>
         </widget>
-        <widget class="QLineEdit" name="sell_prono_lineEdit_3">
+        <widget class="QLineEdit" name="stock_prono_lineEdit">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -1734,7 +1734,7 @@
           </rect>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="stock_pushButton">
          <property name="geometry">
           <rect>
            <x>210</x>
@@ -1843,7 +1843,7 @@
           <bool>true</bool>
          </property>
         </widget>
-        <widget class="QLabel" name="sell_procat_showlabel_3">
+        <widget class="QLabel" name="stock_procat_showlabel">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -1862,7 +1862,7 @@
           <string/>
          </property>
         </widget>
-        <widget class="QLabel" name="sell_proname_showlabel_3">
+        <widget class="QLabel" name="stock_proname_showlabel">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -1878,7 +1878,7 @@
           <string/>
          </property>
         </widget>
-        <widget class="QLabel" name="sell_prospec_showlabel_3">
+        <widget class="QLabel" name="stock_prospec_showlabel">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -1894,7 +1894,7 @@
           <string/>
          </property>
         </widget>
-        <widget class="QLabel" name="sell_prostock_showlabel_3">
+        <widget class="QLabel" name="stock_prostock_showlabel">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -1915,7 +1915,7 @@
           <rect>
            <x>640</x>
            <y>130</y>
-           <width>81</width>
+           <width>41</width>
            <height>16</height>
           </rect>
          </property>
@@ -1933,10 +1933,10 @@
           </rect>
          </property>
          <property name="text">
-          <string>开发票？</string>
+          <string>是否开票</string>
          </property>
         </widget>
-        <widget class="QLabel" name="sell_prostock_label_2">
+        <widget class="QLabel" name="stock_prostock_label">
          <property name="geometry">
           <rect>
            <x>30</x>
@@ -1949,7 +1949,7 @@
           <string>库存数量</string>
          </property>
         </widget>
-        <widget class="QLabel" name="sell_prospec_label_2">
+        <widget class="QLabel" name="stock_prospec_label">
          <property name="geometry">
           <rect>
            <x>30</x>
@@ -1962,7 +1962,7 @@
           <string>商品规格</string>
          </property>
         </widget>
-        <widget class="QLabel" name="sell_proname_label_2">
+        <widget class="QLabel" name="stock_proname_label">
          <property name="geometry">
           <rect>
            <x>30</x>
@@ -1975,7 +1975,7 @@
           <string>商品名称</string>
          </property>
         </widget>
-        <widget class="QLabel" name="sell_proncat_label_2">
+        <widget class="QLabel" name="stock_proncat_label">
          <property name="geometry">
           <rect>
            <x>30</x>
@@ -1986,6 +1986,35 @@
          </property>
          <property name="text">
           <string>商品大类</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_2">
+         <property name="geometry">
+          <rect>
+           <x>680</x>
+           <y>130</y>
+           <width>31</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>否</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="invoice_checkBox_2">
+         <property name="geometry">
+          <rect>
+           <x>730</x>
+           <y>130</y>
+           <width>111</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>查找时忽略开票</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
          </property>
         </widget>
        </widget>
