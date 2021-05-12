@@ -49,6 +49,14 @@ MainWindow::MainWindow(QWidget *parent)
     setSellHeaders();
     m_sellmodel->select();
 
+    m_stockmodel=new MySqlRelationTableModel(this,m_databaseMg->database());
+    m_stockmodel->setEditStrategy(QSqlTableModel::OnFieldChange);
+    m_stockmodel->setTable("stock");
+    m_stockmodel->setRelation(4,QSqlRelation("product","number","number"));
+    m_stockmodel->setRelation(11,QSqlRelation("supplier","name","name"));
+    setStockHeaders();
+    m_stockmodel->select();
+
     /*********ui布局初始化*******************/
 
     /*********1、客户管理界面*******************/
@@ -84,6 +92,15 @@ MainWindow::MainWindow(QWidget *parent)
     updateSellCusComBox();
     ui->tableViewSell->setModel(m_sellmodel);
     ui->tableViewSell->setItemDelegate(new QSqlRelationalDelegate(ui->tableViewSell));
+
+    /*********5、进货管理界面*******************/
+    m_srchProSelectedNum.clear();
+    ui->stock_date_dateEdit->setDate(QDate::currentDate());
+    ui->stock_date_dateEdit->setDisplayFormat("yyyy-MM-dd");
+    ui->stock_date_dateEdit->setCalendarPopup(true);
+    updateStockSupComBox();
+    ui->tableViewStock->setModel(m_stockmodel);
+    ui->tableViewStock->setItemDelegate(new QSqlRelationalDelegate(ui->tableViewSell));
 }
 
 MainWindow::~MainWindow()
@@ -229,6 +246,23 @@ void MainWindow::setSellHeaders()
     m_sellmodel->setHeaderData(13,Qt::Horizontal,QString::fromLocal8Bit("是否欠发票"));
 }
 
+void MainWindow::setStockHeaders()
+{
+    m_stockmodel->setHeaderData(0,Qt::Horizontal,QString::fromLocal8Bit("序号"));
+    m_stockmodel->setHeaderData(1,Qt::Horizontal,QString::fromLocal8Bit("货品大类"));
+    m_stockmodel->setHeaderData(2,Qt::Horizontal,QString::fromLocal8Bit("货品名称"));
+    m_stockmodel->setHeaderData(3,Qt::Horizontal,QString::fromLocal8Bit("货品规格"));
+    m_stockmodel->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("商品编码"));
+    m_stockmodel->setHeaderData(5,Qt::Horizontal,QString::fromLocal8Bit("进货日期"));
+    m_stockmodel->setHeaderData(6,Qt::Horizontal,QString::fromLocal8Bit("进货数量"));
+    m_stockmodel->setHeaderData(7,Qt::Horizontal,QString::fromLocal8Bit("进货单价"));
+    m_stockmodel->setHeaderData(8,Qt::Horizontal,QString::fromLocal8Bit("合计"));
+    m_stockmodel->setHeaderData(9,Qt::Horizontal,QString::fromLocal8Bit("已付金额"));
+    m_stockmodel->setHeaderData(10,Qt::Horizontal,QString::fromLocal8Bit("欠款"));
+    m_stockmodel->setHeaderData(11,Qt::Horizontal,QString::fromLocal8Bit("供应商"));
+    m_stockmodel->setHeaderData(12,Qt::Horizontal,QString::fromLocal8Bit("是否开票"));
+}
+
 void MainWindow::updateSellCusComBox()
 {
     ui->sell_customer_comboBox->clear();
@@ -238,6 +272,18 @@ void MainWindow::updateSellCusComBox()
     {
         QSqlRecord rec=m_cusmodel->record(i);
         ui->sell_customer_comboBox->addItem(rec.value(1).toString());
+    }
+}
+
+void MainWindow::updateStockSupComBox()
+{
+    ui->stock_supplier_comboBox->clear();
+    ui->stock_supplier_comboBox->addItem(QString::fromLocal8Bit(""));
+    m_supmodel->select();
+    for(int i=0;i<m_supmodel->rowCount();i++)
+    {
+        QSqlRecord rec=m_supmodel->record(i);
+        ui->stock_supplier_comboBox->addItem(rec.value(1).toString());
     }
 }
 
@@ -308,6 +354,7 @@ void MainWindow::on_createsupBtn_clicked()
         m_supmodel->setTable("supplier");
         setSupHeaders();
         m_supmodel->select();
+        updateStockSupComBox();
     }
 }
 
@@ -360,6 +407,7 @@ void MainWindow::on_inportSupBtn_clicked()
         m_supmodel->setTable("supplier");
         setSupHeaders();
         m_supmodel->select();
+        updateStockSupComBox();
     }
     else
     {
@@ -386,6 +434,7 @@ void MainWindow::on_delCusBtn_clicked()
         m_cusmodel->setTable("customer");
         setCusHeaders();
         m_cusmodel->select();
+        updateSellCusComBox();
     }
 }
 
@@ -410,6 +459,7 @@ void MainWindow::on_delSupBtn_clicked()
         m_supmodel->setTable("supplier");
         setSupHeaders();
         m_supmodel->select();
+        updateStockSupComBox();
     }
 }
 
@@ -848,4 +898,52 @@ void MainWindow::on_stock_pushButton_clicked()
         if(!m_srchProSelectedNum.isEmpty())
            ui->stock_prono_lineEdit->setText(m_srchProSelectedNum);
     }
+}
+
+void MainWindow::on_stock_cnt_spinBox_valueChanged(int arg1)
+{
+    ui->stock_totalprice_doubleSpinBox->setValue(arg1*ui->stock_price_doubleSpinBox->value());
+}
+
+void MainWindow::on_stock_price_doubleSpinBox_valueChanged(double arg1)
+{
+    ui->stock_totalprice_doubleSpinBox->setValue(ui->stock_cnt_spinBox->value()*arg1);
+}
+
+void MainWindow::on_stock_totalprice_doubleSpinBox_valueChanged(double arg1)
+{
+    ui->stock_owed_doubleSpinBox->setValue(arg1-ui->stock_payed_doubleSpinBox->value());
+}
+
+void MainWindow::on_stock_payed_doubleSpinBox_valueChanged(double arg1)
+{
+    ui->stock_owed_doubleSpinBox->setValue(ui->stock_totalprice_doubleSpinBox->value()-arg1);
+}
+
+void MainWindow::on_stock_addBtn_clicked()
+{
+    int row=0;
+    QString num=ui->stock_prono_lineEdit->text();
+    if(num.isEmpty())
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("商品编号不能为空！"));
+        return;
+    }
+    QString supplierName=ui->stock_supplier_comboBox->currentText();
+    if(supplierName.isEmpty())
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("供应商不能为无效值！"));
+        return;
+    }
+    if(m_databaseMg->addStockRecord(num,ui->stock_cnt_spinBox->value(),ui->stock_price_doubleSpinBox->value(),
+                                   ui->stock_totalprice_doubleSpinBox->value(),ui->stock_payed_doubleSpinBox->value(),
+                                   ui->stock_owed_doubleSpinBox->value(),supplierName,ui->stock_date_dateEdit->date(),ui->stock_invoice_radioButton_yes->isChecked()))
+    {
+        m_stockmodel->setTable("stock");
+        m_stockmodel->setRelation(4,QSqlRelation("product","number","number"));
+        m_stockmodel->setRelation(11,QSqlRelation("supplier","name","name"));
+        setStockHeaders();
+        m_stockmodel->select();
+    }
+    return;
 }

@@ -21,7 +21,9 @@ public:
     bool createSellTable();
     bool addSellRecord(QString pronum,int cnt,double price,double totalprice,double payed,double owned,QString customerName,QDate date,bool tax,bool invoice);
 
-    bool createPurchaseTable();
+    bool createStockTable();
+    bool addStockRecord(QString pronum,int cnt,double price,double totalprice,double payed,double owned,QString supplierName,QDate date,bool invoice);
+
     void createTables();
 
     bool importCustomersFromExcel(QString path);

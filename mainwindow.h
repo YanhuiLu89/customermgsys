@@ -89,12 +89,24 @@ private slots:
 
     void on_stock_pushButton_clicked();
 
+    void on_stock_cnt_spinBox_valueChanged(int arg1);
+
+    void on_stock_price_doubleSpinBox_valueChanged(double arg1);
+
+    void on_stock_totalprice_doubleSpinBox_valueChanged(double arg1);
+
+    void on_stock_payed_doubleSpinBox_valueChanged(double arg1);
+
+    void on_stock_addBtn_clicked();
+
 private:
     void setCusHeaders();
     void setSupHeaders();
     void setProHeaders();
     void setSellHeaders();
+    void setStockHeaders();
     void updateSellCusComBox();
+    void updateStockSupComBox();
     void exportSellTable(const QString &path);
     bool selectProduct(QString pronum);
     bool selectCustomer(QString name);
@@ -109,5 +121,6 @@ private:
     QSqlTableModel* m_promodel;
     QString m_srchProSelectedNum;
     MySqlRelationTableModel* m_sellmodel;
+    MySqlRelationTableModel* m_stockmodel;
 };
 #endif // MAINWINDOW_H

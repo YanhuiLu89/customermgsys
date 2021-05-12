@@ -217,13 +217,71 @@ bool databasemg::addSellRecord(QString pronum, int cnt, double price, double tot
 
 }
 
-bool databasemg::createPurchaseTable()
+bool databasemg::createStockTable()
 {
+
     QSqlQuery query(m_db);
     //创建进货表
-    query.exec("create table if not exists purchase(id int primary key,category varchar,name varchar,spec varchar,foreign key(productno) reference product(number)),"
-               "purchase date,purchasenum int,unitprice int,totalprice int,haspay int,debt int,foreign key(supplier) reference product(name)),invoice char(1)");
-    return true;
+
+    bool ret= query.exec("create table if not exists stock("
+                         "id integer primary key autoincrement,category varchar(32),name varchar(32),spec varchar(32),productno varchar(16),"
+                         "stockdate date,cnt int,price double,totalprice double,payed double,owned double,supplier varchar(250),invoice varchar(4),"
+                         "foreign key(supplier) references supplier(name),foreign key(productno) references product(number)"
+                         ")");
+    if(!ret)
+    {
+       QMessageBox::information(0,nullptr,QString::fromLocal8Bit("创建进货表失败！"));
+       qDebug()<<query.lastError();
+        return false;
+    }
+}
+
+bool databasemg::addStockRecord(QString pronum, int cnt, double price, double totalprice, double payed, double owned, QString supplierName, QDate date, bool invoice)
+{
+    QSqlQuery queryPro(m_db);
+    if(queryPro.exec(QString("select * from product where number is '%1'").arg(pronum)))
+    {
+        queryPro.next();
+        QString category=queryPro.value(1).toString();
+        QString name=queryPro.value(2).toString();
+        QString spec=queryPro.value(3).toString();
+        QSqlQuery query(m_db);
+        query.prepare("insert into stock (category,name,spec,productno,stockdate,cnt,price,totalprice,payed,owned,supplier,invoice) values (?,?,?,?,?,?,?,?,?,?,?,?)");
+        query.addBindValue(category);
+        query.addBindValue(name);
+        query.addBindValue(spec);
+        query.addBindValue(pronum);
+        query.addBindValue(date);
+        query.addBindValue(cnt);
+        query.addBindValue(price);
+        query.addBindValue(totalprice);
+        query.addBindValue(payed);
+        query.addBindValue(owned);
+        query.addBindValue(supplierName);
+        if(invoice)
+            query.addBindValue(QString::fromLocal8Bit("是"));
+        else
+            query.addBindValue(QString::fromLocal8Bit("否"));
+        bool ret=query.exec();
+        if(ret)
+         {
+            QMessageBox::information(0,nullptr,QString::fromLocal8Bit("新建销货记录成功"));
+            return true;
+        }
+        else
+        {
+            QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("新建销货记录失败！"));
+            qDebug()<<query.lastError();
+            return false;
+         }
+    }
+    else
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("新建销货记录失败！"));
+        qDebug()<<queryPro.lastError();
+        return false;
+    }
+
 }
 
 void databasemg::createTables()
@@ -232,7 +290,7 @@ void databasemg::createTables()
     creatSupplierTable();
     createProductTable();
     createSellTable();
-    //    createPurchaseTable();
+    createStockTable();
 }
 
 
