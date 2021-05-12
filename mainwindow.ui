@@ -1522,7 +1522,7 @@
         <property name="title">
          <string>货品显示---（温馨提示：双击单元格即可编辑）</string>
         </property>
-        <widget class="QPushButton" name="sell_delBtn_5">
+        <widget class="QPushButton" name="stock_delBtn">
          <property name="geometry">
           <rect>
            <x>770</x>
@@ -1535,7 +1535,7 @@
           <string>删除选中行</string>
          </property>
         </widget>
-        <widget class="QTableView" name="tableViewSell_5">
+        <widget class="QTableView" name="tableViewStock">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1558,7 +1558,7 @@
         <property name="title">
          <string>进货管理</string>
         </property>
-        <widget class="QDateEdit" name="sell_date_dateEdit_3">
+        <widget class="QDateEdit" name="stock_date_dateEdit">
          <property name="geometry">
           <rect>
            <x>640</x>
@@ -1568,7 +1568,7 @@
           </rect>
          </property>
         </widget>
-        <widget class="QLabel" name="sell_date_label_3">
+        <widget class="QLabel" name="stock_date_label">
          <property name="geometry">
           <rect>
            <x>580</x>
@@ -1581,7 +1581,7 @@
           <string>进货日期</string>
          </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="sell_owed_doubleSpinBox_3">
+        <widget class="QDoubleSpinBox" name="stock_owed_doubleSpinBox">
          <property name="geometry">
           <rect>
            <x>430</x>
@@ -1594,7 +1594,7 @@
           <double>9999999999.989999771118164</double>
          </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="sell_price_doubleSpinBox_3">
+        <widget class="QDoubleSpinBox" name="stock_price_doubleSpinBox">
          <property name="geometry">
           <rect>
            <x>430</x>
@@ -1620,7 +1620,7 @@
           <string>销售单价</string>
          </property>
         </widget>
-        <widget class="QSpinBox" name="sell_cnt_spinBox_3">
+        <widget class="QSpinBox" name="stock_cnt_spinBox">
          <property name="geometry">
           <rect>
            <x>430</x>
@@ -1646,7 +1646,7 @@
           <string>进货数量</string>
          </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="sell_payed_doubleSpinBox_3">
+        <widget class="QDoubleSpinBox" name="stock_payed_doubleSpinBox">
          <property name="geometry">
           <rect>
            <x>430</x>
@@ -1659,7 +1659,7 @@
           <double>9999999999.989999771118164</double>
          </property>
         </widget>
-        <widget class="QLabel" name="sell_payed_label_3">
+        <widget class="QLabel" name="stock_payed_label">
          <property name="geometry">
           <rect>
            <x>370</x>
@@ -1672,7 +1672,7 @@
           <string>已付金额</string>
          </property>
         </widget>
-        <widget class="QLabel" name="sell_owed_label_3">
+        <widget class="QLabel" name="stock_owed_label">
          <property name="geometry">
           <rect>
            <x>370</x>
@@ -1685,7 +1685,7 @@
           <string>欠款金额</string>
          </property>
         </widget>
-        <widget class="QLabel" name="sell_selltotalprice_label_3">
+        <widget class="QLabel" name="stock_selltotalprice_label">
          <property name="geometry">
           <rect>
            <x>370</x>
@@ -1698,7 +1698,7 @@
           <string>合    计</string>
          </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="sell_totalprice_doubleSpinBox_3">
+        <widget class="QDoubleSpinBox" name="stock_totalprice_doubleSpinBox">
          <property name="geometry">
           <rect>
            <x>430</x>
@@ -1758,14 +1758,14 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
-           <widget class="QPushButton" name="sell_addBtn_3">
+           <widget class="QPushButton" name="stock_addBtn">
             <property name="text">
              <string>增加</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="sell_searchBtn_3">
+           <widget class="QPushButton" name="stock_searchBtn">
             <property name="text">
              <string>查询</string>
             </property>
@@ -1775,28 +1775,28 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="sell_showallBtn_3">
+           <widget class="QPushButton" name="stock_showallBtn">
             <property name="text">
              <string>全部记录</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="sell_importBtn_3">
+           <widget class="QPushButton" name="stock_importBtn">
             <property name="text">
              <string>导入</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="sell_exportBtn_3">
+           <widget class="QPushButton" name="stock_exportBtn">
             <property name="text">
              <string>导出 </string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="sell_printBtn_3">
+           <widget class="QPushButton" name="stock_printBtn">
             <property name="text">
              <string>打印</string>
             </property>
@@ -1804,7 +1804,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QLabel" name="sell_customer_label_3">
+        <widget class="QLabel" name="stock_customer_label">
          <property name="geometry">
           <rect>
            <x>580</x>
@@ -1817,7 +1817,7 @@
           <string>供应商</string>
          </property>
         </widget>
-        <widget class="QComboBox" name="sell_customer_comboBox_3">
+        <widget class="QComboBox" name="stock_customer_comboBox">
          <property name="geometry">
           <rect>
            <x>640</x>
@@ -1827,7 +1827,7 @@
           </rect>
          </property>
         </widget>
-        <widget class="QCheckBox" name="sell_date_checkBox_3">
+        <widget class="QCheckBox" name="stock_date_checkBox">
          <property name="geometry">
           <rect>
            <x>640</x>
@@ -1910,7 +1910,7 @@
           <string/>
          </property>
         </widget>
-        <widget class="QRadioButton" name="radioButton">
+        <widget class="QRadioButton" name="stock_invoice_radioButton_yes">
          <property name="geometry">
           <rect>
            <x>640</x>
@@ -1923,7 +1923,7 @@
           <string>是</string>
          </property>
         </widget>
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="stock_invoice_label">
          <property name="geometry">
           <rect>
            <x>580</x>
@@ -1988,7 +1988,7 @@
           <string>商品大类</string>
          </property>
         </widget>
-        <widget class="QRadioButton" name="radioButton_2">
+        <widget class="QRadioButton" name="stock_invoice_radioButton_no">
          <property name="geometry">
           <rect>
            <x>680</x>
@@ -2001,7 +2001,7 @@
           <string>否</string>
          </property>
         </widget>
-        <widget class="QCheckBox" name="invoice_checkBox_2">
+        <widget class="QCheckBox" name="stock_invoice_checkBox">
          <property name="geometry">
           <rect>
            <x>730</x>
