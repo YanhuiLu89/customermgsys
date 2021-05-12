@@ -15,7 +15,10 @@ databasemg::databasemg()
 
 bool databasemg::createConnection()
 {
-    m_db=QSqlDatabase::addDatabase("QSQLITE");
+    if(QSqlDatabase::contains("qt_sql_default_connection"))
+      m_db = QSqlDatabase::database("qt_sql_default_connection");
+    else
+      m_db=QSqlDatabase::addDatabase("QSQLITE");
     m_db.setDatabaseName("my.db");
     if(!m_db.open())
     {
