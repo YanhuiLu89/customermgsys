@@ -101,6 +101,12 @@ private slots:
 
     void on_stock_payed_spinBox_valueChanged(int arg1);
 
+    void on_stock_showallBtn_clicked();
+
+    void on_stock_importBtn_clicked();
+
+    void on_stock_delBtn_clicked();
+
 private:
     void setCusHeaders();
     void setSupHeaders();

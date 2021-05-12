@@ -349,6 +349,19 @@ bool databasemg::importSellRecsFromExcel(QString path)
     }
 }
 
+bool databasemg::importStockRecsFromExcel(QString path)
+{
+    QList<QStringList> data;//所有记录
+    if(getStockRecsFromExcel(path,data))
+    {
+        return saveStockRecs(data);
+    }
+    else
+    {
+        return false;
+    }
+}
+
 
 bool databasemg::getCustomersFromExcel(QString path, QList<QStringList> &data)
 {
@@ -625,6 +638,88 @@ bool databasemg::saveSellRecs(QList<QStringList> &data)
                    <<slist;
             qDebug()<<query.lastError();
             QMessageBox::information(0,nullptr,QString::fromLocal8Bit("导入销货表失败"));
+            return false;
+        }
+
+    }
+    return true;
+}
+
+bool databasemg::getStockRecsFromExcel(QString path, QList<QStringList> &data)
+{
+    QSqlDatabase dbexcel = QSqlDatabase::addDatabase("QODBC", "excelexport");
+    if(!dbexcel.isValid())
+    {
+         qDebug()<<"打开Excel失败";
+         return false;
+    }
+    QString dsn = QString("DRIVER={Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb)};DSN='';FIRSTROWHASNAMES=1;READONLY=FALSE;CREATE_DB=\"%1\";DBQ=%2").
+                  arg(path).arg(path);
+    dbexcel.setDatabaseName(dsn);
+
+    if(!dbexcel.open())
+    {
+        qDebug()<<"打开Excel失败";
+        return false;
+    }
+
+    QSqlQuery query(dbexcel);
+    QStringList tables=dbexcel.tables();
+    query.exec("select * from [Sheet1$]");
+
+    QStringList list;//一条记录
+    while(query.next())
+    {
+        list.clear();
+        QString category = query.value(1).toString();
+        QString name = query.value(2).toString();
+        QString spec = query.value(3).toString();
+        QString productno = query.value(4).toString();
+        QString stockdate = query.value(5).toString();
+        QString cnt = query.value(6).toString();
+        QString price = query.value(7).toString();
+        QString totalprice = query.value(8).toString();
+        QString payed = query.value(9).toString();
+        QString owned = query.value(10).toString();
+        QString supplier = query.value(11).toString();
+        QString invoice=query.value(12).toString();
+        list<<category<<name<<spec<<productno<<stockdate<<cnt<<price<<totalprice
+           <<payed<<owned<<supplier<<invoice;
+        data<<list;
+    }
+    dbexcel.close();
+    return true;
+}
+
+bool databasemg::saveStockRecs(QList<QStringList> &data)
+{
+    QSqlQuery query(m_db);
+    foreach(QStringList slist, data)
+    {
+        query.prepare("insert into stock (category,name,spec,productno,stockdate,cnt,price,totalprice,payed,owned,supplier,invoice) values (?,?,?,?,?,?,?,?,?,?,?,?)");
+        for(int i=0,n=slist.size();i<n;i++)
+        {
+            if(i<4)
+                query.addBindValue(slist.at(i));
+            else if(i==4)
+            {
+               QString str=slist.at(i).mid(0,10);
+               QDate date=QDate::fromString(str,"yyyy-MM-dd");
+               query.addBindValue(date);
+            }
+            else if(i==5)
+                query.addBindValue(slist.at(i).toInt());
+            else if(i<10)
+                query.addBindValue(slist.at(i).toInt());
+            else
+                query.addBindValue(slist.at(i));
+        }
+        if(!query.exec()) {
+            qDebug()<<"insert slist failed!"
+                   <<"slist="
+                   <<slist;
+            qDebug()<<query.lastError();
+            QMessageBox::information(0,nullptr,QString::fromLocal8Bit("导入进货表失败"));
             return false;
         }
 

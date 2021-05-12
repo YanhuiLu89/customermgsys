@@ -110,6 +110,7 @@ MainWindow::~MainWindow()
     delete m_supmodel;
     delete m_promodel;
     delete m_sellmodel;
+    delete m_stockmodel;
     delete m_databaseMg;
 }
 
@@ -1010,4 +1011,56 @@ void MainWindow::on_stock_totalprice_spinBox_valueChanged(int arg1)
 void MainWindow::on_stock_payed_spinBox_valueChanged(int arg1)
 {
     ui->stock_owed_spinBox->setValue(ui->stock_totalprice_spinBox->value()-arg1);
+}
+
+void MainWindow::on_stock_showallBtn_clicked()
+{
+    m_stockmodel->setTable("stock");
+    setStockHeaders();
+    m_stockmodel->setRelation(4,QSqlRelation("product","number","number"));
+    m_stockmodel->setRelation(11,QSqlRelation("supplier","name","name"));
+    m_stockmodel->select();
+}
+
+void MainWindow::on_stock_importBtn_clicked()
+{
+    QString file=QFileDialog::getOpenFileName(this,QString::fromLocal8Bit("打开"),QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),QString::fromLocal8Bit("表格文件(*.xls)"));
+    if(m_databaseMg->importStockRecsFromExcel(file))
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("导入数据成功。"));
+        m_stockmodel->setTable("stock");
+        m_stockmodel->setRelation(4,QSqlRelation("product","number","number"));
+        m_stockmodel->setRelation(11,QSqlRelation("supplier","name","name"));
+        setStockHeaders();
+        m_stockmodel->select();
+    }
+    else
+    {
+        QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("导入数据失败！"));
+    }
+}
+
+void MainWindow::on_stock_delBtn_clicked()
+{
+    QModelIndexList indexes=ui->tableViewStock->selectionModel()->selectedIndexes();
+    QMap<int,int> rowMap;
+    foreach(QModelIndex index,indexes)
+        rowMap.insert(index.row(),index.row());
+    if(rowMap.size()<=0)
+    {
+         QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("没有行被选中！"));
+         return;
+    }
+    int ok=QMessageBox::warning(this,QString::fromLocal8Bit("删除选中行！"),QString::fromLocal8Bit("你确定删除选中行吗？"),QMessageBox::Yes,QMessageBox::No);
+    if(ok==QMessageBox::Yes)
+    {
+       QMap<int, int>::const_iterator i;
+       for (i = rowMap.constBegin(); i != rowMap.constEnd(); ++i)
+          m_stockmodel->removeRow(i.value());
+        m_stockmodel->setTable("sell");
+        setStockHeaders();
+        m_stockmodel->setRelation(4,QSqlRelation("product","number","number"));
+        m_stockmodel->setRelation(11,QSqlRelation("supplier","name","name"));
+        m_stockmodel->select();
+    }
 }

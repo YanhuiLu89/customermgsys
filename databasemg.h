@@ -30,6 +30,7 @@ public:
     bool importSuppliersFromExcel(QString path);
     bool importProductsFromExcel(QString path);
     bool importSellRecsFromExcel(QString path);
+    bool importStockRecsFromExcel(QString path);
 private:
     bool getCustomersFromExcel(QString path,QList<QStringList>& data);
     bool saveCustomers(QList<QStringList>& data);
@@ -42,6 +43,10 @@ private:
 
     bool getSellRecsFromExcel(QString path,QList<QStringList>& data);
     bool saveSellRecs(QList<QStringList>& data);
+
+    bool getStockRecsFromExcel(QString path,QList<QStringList>& data);
+    bool saveStockRecs(QList<QStringList>& data);
+
 
 private:
     QSqlDatabase m_db;
