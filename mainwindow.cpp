@@ -947,3 +947,67 @@ void MainWindow::on_stock_addBtn_clicked()
     }
     return;
 }
+
+void MainWindow::on_stock_searchBtn_clicked()
+{
+    QString filter="";
+    if(!ui->stock_prono_lineEdit->text().isEmpty())
+        filter+=QString("productno like'%%1%'").arg(ui->stock_prono_lineEdit->text());
+    if(ui->stock_date_checkBox->checkState()==Qt::Unchecked)
+        if(filter.isEmpty())
+            filter+=QString("stockdate is'%1'").arg(ui->stock_date_dateEdit->text());
+        else
+            filter+=QString(" and stockdate is'%1'").arg(ui->stock_date_dateEdit->text());
+    if(ui->stock_price_doubleSpinBox->value()>0)
+        if(filter.isEmpty())
+            filter+=QString("price is '%1'").arg(ui->stock_price_doubleSpinBox->value());
+        else
+            filter+=QString(" and price is '%1'").arg(ui->stock_price_doubleSpinBox->value());
+    if(ui->stock_cnt_spinBox->value()>0)
+        if(filter.isEmpty())
+            filter+=QString("cnt is '%1'").arg(ui->stock_cnt_spinBox->value());
+        else
+            filter+=QString(" and cnt is '%1'").arg(ui->stock_cnt_spinBox->value());
+    if(ui->stock_totalprice_doubleSpinBox->value()>0)
+        if(filter.isEmpty())
+            filter+=QString("totalprice is '%1'").arg(ui->stock_totalprice_doubleSpinBox->value());
+        else
+            filter+=QString(" and totalprice is '%1'").arg(ui->stock_totalprice_doubleSpinBox->value());
+     if(ui->stock_payed_doubleSpinBox->value()>0)
+         if(filter.isEmpty())
+             filter+=QString("payed is '%1'").arg(ui->stock_payed_doubleSpinBox->value());
+         else
+             filter+=QString(" and payed is '%1'").arg(ui->stock_payed_doubleSpinBox->value());
+     if(ui->stock_owed_doubleSpinBox->value()>0)
+          if(filter.isEmpty())
+              filter+=QString("owned is '%1'").arg(ui->stock_owed_doubleSpinBox->value());
+          else
+              filter+=QString(" and owned like '%1'").arg(ui->stock_owed_doubleSpinBox->value());
+     if(!ui->stock_supplier_comboBox->currentText().isEmpty())
+          if(filter.isEmpty())
+              filter+=QString("supplier is '%1'").arg(ui->stock_supplier_comboBox->currentText());
+          else
+              filter+=QString(" and supplier like '%1'").arg(ui->stock_supplier_comboBox->currentText());
+     if(ui->stock_invoice_checkBox->checkState()==Qt::Unchecked)
+     {
+         QString invoice=ui->stock_invoice_radioButton_yes->isChecked()?
+                     QString::fromLocal8Bit("是"):QString::fromLocal8Bit("否");
+         if(filter.isEmpty())
+             filter+=QString("invoice is'%1'").arg(invoice);
+         else
+             filter+=QString(" and invoice is'%1'").arg(invoice);
+     }
+     if(filter.isEmpty())
+     {
+         QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("搜索条件不能为空"));
+     }
+     else
+     {
+         m_stockmodel->setTable("stock");
+         m_stockmodel->setFilter(filter);
+         setStockHeaders();
+         m_stockmodel->setRelation(4,QSqlRelation("product","number","number"));
+         m_stockmodel->setRelation(11,QSqlRelation("supplier","name","name"));
+         m_stockmodel->select();
+     }
+}

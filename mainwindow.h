@@ -99,6 +99,8 @@ private slots:
 
     void on_stock_addBtn_clicked();
 
+    void on_stock_searchBtn_clicked();
+
 private:
     void setCusHeaders();
     void setSupHeaders();
