@@ -63,12 +63,6 @@ private slots:
 
     void on_sell_cnt_spinBox_valueChanged(int arg1);
 
-    void on_sell_price_doubleSpinBox_valueChanged(double arg1);
-
-    void on_sell_totalprice_doubleSpinBox_valueChanged(double arg1);
-
-    void on_sell_payed_doubleSpinBox_valueChanged(double arg1);
-
     void on_sell_addBtn_clicked();
 
     void on_sell_importBtn_clicked();
@@ -91,15 +85,21 @@ private slots:
 
     void on_stock_cnt_spinBox_valueChanged(int arg1);
 
-    void on_stock_price_doubleSpinBox_valueChanged(double arg1);
-
-    void on_stock_totalprice_doubleSpinBox_valueChanged(double arg1);
-
-    void on_stock_payed_doubleSpinBox_valueChanged(double arg1);
-
     void on_stock_addBtn_clicked();
 
     void on_stock_searchBtn_clicked();
+
+    void on_sell_price_spinBox_valueChanged(int arg1);
+
+    void on_sell_totalprice_spinBox_valueChanged(int arg1);
+
+    void on_sell_payed_spinBox_valueChanged(int arg1);
+
+    void on_stock_price_spinBox_valueChanged(int arg1);
+
+    void on_stock_totalprice_spinBox_valueChanged(int arg1);
+
+    void on_stock_payed_spinBox_valueChanged(int arg1);
 
 private:
     void setCusHeaders();

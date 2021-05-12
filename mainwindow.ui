@@ -935,7 +935,7 @@
           <string>出货日期</string>
          </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="sell_owed_doubleSpinBox">
+        <widget class="QSpinBox" name="sell_owed_spinBox">
          <property name="geometry">
           <rect>
            <x>430</x>
@@ -945,10 +945,10 @@
           </rect>
          </property>
          <property name="maximum">
-          <double>9999999999.989999771118164</double>
+          <number>999999999</number>
          </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="sell_price_doubleSpinBox">
+        <widget class="QSpinBox" name="sell_price_spinBox">
          <property name="geometry">
           <rect>
            <x>430</x>
@@ -958,7 +958,7 @@
           </rect>
          </property>
          <property name="maximum">
-          <double>99999.990000000005239</double>
+          <number>9999</number>
          </property>
         </widget>
         <widget class="QLabel" name="sell_sellprice_label">
@@ -984,7 +984,7 @@
           </rect>
          </property>
          <property name="maximum">
-          <number>99999</number>
+          <number>9999</number>
          </property>
         </widget>
         <widget class="QLabel" name="sell_sellcnt_label">
@@ -1000,7 +1000,7 @@
           <string>出货数量</string>
          </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="sell_payed_doubleSpinBox">
+        <widget class="QSpinBox" name="sell_payed_spinBox">
          <property name="geometry">
           <rect>
            <x>430</x>
@@ -1010,7 +1010,7 @@
           </rect>
          </property>
          <property name="maximum">
-          <double>9999999999.989999771118164</double>
+          <number>999999999</number>
          </property>
         </widget>
         <widget class="QLabel" name="sell_payed_label">
@@ -1052,7 +1052,7 @@
           <string>合    计</string>
          </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="sell_totalprice_doubleSpinBox">
+        <widget class="QSpinBox" name="sell_totalprice_spinBox">
          <property name="geometry">
           <rect>
            <x>430</x>
@@ -1062,7 +1062,7 @@
           </rect>
          </property>
          <property name="maximum">
-          <double>9999999999.989999771118164</double>
+          <number>999999999</number>
          </property>
         </widget>
         <widget class="QLabel" name="sell_prono_label">
@@ -1422,16 +1422,16 @@
         <zorder>groupBox_11</zorder>
         <zorder>sell_date_dateEdit</zorder>
         <zorder>sell_date_label</zorder>
-        <zorder>sell_owed_doubleSpinBox</zorder>
-        <zorder>sell_price_doubleSpinBox</zorder>
+        <zorder>sell_owed_spinBox</zorder>
+        <zorder>sell_price_spinBox</zorder>
         <zorder>sell_sellprice_label</zorder>
         <zorder>sell_cnt_spinBox</zorder>
         <zorder>sell_sellcnt_label</zorder>
-        <zorder>sell_payed_doubleSpinBox</zorder>
+        <zorder>sell_payed_spinBox</zorder>
         <zorder>sell_payed_label</zorder>
         <zorder>sell_owed_label</zorder>
         <zorder>sell_selltotalprice_label</zorder>
-        <zorder>sell_totalprice_doubleSpinBox</zorder>
+        <zorder>sell_totalprice_spinBox</zorder>
         <zorder>sell_prono_label</zorder>
         <zorder>sell_prono_lineEdit</zorder>
         <zorder>pushButton</zorder>
@@ -1570,7 +1570,7 @@
           <string>进货日期</string>
          </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="stock_owed_doubleSpinBox">
+        <widget class="QSpinBox" name="stock_owed_spinBox">
          <property name="geometry">
           <rect>
            <x>430</x>
@@ -1580,10 +1580,10 @@
           </rect>
          </property>
          <property name="maximum">
-          <double>9999999999.989999771118164</double>
+          <number>999999999</number>
          </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="stock_price_doubleSpinBox">
+        <widget class="QSpinBox" name="stock_price_spinBox">
          <property name="geometry">
           <rect>
            <x>430</x>
@@ -1593,7 +1593,7 @@
           </rect>
          </property>
          <property name="maximum">
-          <double>99999.990000000005239</double>
+          <number>9999</number>
          </property>
         </widget>
         <widget class="QLabel" name="stock_sellprice_label">
@@ -1635,17 +1635,17 @@
           <string>进货数量</string>
          </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="stock_payed_doubleSpinBox">
+        <widget class="QSpinBox" name="stock_payed_spinBox">
          <property name="geometry">
           <rect>
            <x>430</x>
-           <y>120</y>
+           <y>121</y>
            <width>71</width>
-           <height>22</height>
+           <height>21</height>
           </rect>
          </property>
          <property name="maximum">
-          <double>9999999999.989999771118164</double>
+          <number>999999999</number>
          </property>
         </widget>
         <widget class="QLabel" name="stock_payed_label">
@@ -1687,7 +1687,7 @@
           <string>合    计</string>
          </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="stock_totalprice_doubleSpinBox">
+        <widget class="QSpinBox" name="stock_totalprice_spinBox">
          <property name="geometry">
           <rect>
            <x>430</x>
@@ -1697,7 +1697,7 @@
           </rect>
          </property>
          <property name="maximum">
-          <double>9999999999.989999771118164</double>
+          <number>999999999</number>
          </property>
         </widget>
         <widget class="QLabel" name="stock_prono_label">

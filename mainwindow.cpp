@@ -623,22 +623,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_sell_cnt_spinBox_valueChanged(int arg1)
 {
-    ui->sell_totalprice_doubleSpinBox->setValue(arg1*ui->sell_price_doubleSpinBox->value());
-}
-
-void MainWindow::on_sell_price_doubleSpinBox_valueChanged(double arg1)
-{
-    ui->sell_totalprice_doubleSpinBox->setValue(ui->sell_cnt_spinBox->value()*arg1);
-}
-
-void MainWindow::on_sell_totalprice_doubleSpinBox_valueChanged(double arg1)
-{
-    ui->sell_owed_doubleSpinBox->setValue(arg1-ui->sell_payed_doubleSpinBox->value());
-}
-
-void MainWindow::on_sell_payed_doubleSpinBox_valueChanged(double arg1)
-{
-    ui->sell_owed_doubleSpinBox->setValue(ui->sell_totalprice_doubleSpinBox->value()-arg1);
+    ui->sell_totalprice_spinBox->setValue(arg1*ui->sell_price_spinBox->value());
 }
 
 void MainWindow::on_sell_addBtn_clicked()
@@ -656,9 +641,9 @@ void MainWindow::on_sell_addBtn_clicked()
         QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("客户不能为无效值！"));
         return;
     }
-    if(m_databaseMg->addSellRecord(num,ui->sell_cnt_spinBox->value(),ui->sell_price_doubleSpinBox->value(),
-                                   ui->sell_totalprice_doubleSpinBox->value(),ui->sell_payed_doubleSpinBox->value(),
-                                   ui->sell_owed_doubleSpinBox->value(),cusName,ui->sell_date_dateEdit->date(),ui->tax_radioButton_yes->isChecked(),ui->invoice_radioButton_yes->isChecked()))
+    if(m_databaseMg->addSellRecord(num,ui->sell_cnt_spinBox->value(),ui->sell_price_spinBox->value(),
+                                   ui->sell_totalprice_spinBox->value(),ui->sell_payed_spinBox->value(),
+                                   ui->sell_owed_spinBox->value(),cusName,ui->sell_date_dateEdit->date(),ui->tax_radioButton_yes->isChecked(),ui->invoice_radioButton_yes->isChecked()))
     {
         m_sellmodel->setTable("sell");
         m_sellmodel->setRelation(4,QSqlRelation("product","number","number"));
@@ -697,31 +682,31 @@ void MainWindow::on_sell_searchBtn_clicked()
             filter+=QString("selldate is'%1'").arg(ui->sell_date_dateEdit->text());
         else
             filter+=QString("and selldate is'%1'").arg(ui->sell_date_dateEdit->text());
-    if(ui->sell_price_doubleSpinBox->value()>0)
+    if(ui->sell_price_spinBox->value()>0)
         if(filter.isEmpty())
-            filter+=QString("price is '%1'").arg(ui->sell_price_doubleSpinBox->value());
+            filter+=QString("price is '%1'").arg(ui->sell_price_spinBox->value());
         else
-            filter+=QString("and price is '%1'").arg(ui->sell_price_doubleSpinBox->value());
+            filter+=QString("and price is '%1'").arg(ui->sell_price_spinBox->value());
     if(ui->sell_cnt_spinBox->value()>0)
         if(filter.isEmpty())
             filter+=QString("cnt is '%1'").arg(ui->sell_cnt_spinBox->value());
         else
             filter+=QString(" and cnt is '%1'").arg(ui->sell_cnt_spinBox->value());
-    if(ui->sell_totalprice_doubleSpinBox->value()>0)
+    if(ui->sell_totalprice_spinBox->value()>0)
         if(filter.isEmpty())
-            filter+=QString("totalprice is '%1'").arg(ui->sell_totalprice_doubleSpinBox->value());
+            filter+=QString("totalprice is '%1'").arg(ui->sell_totalprice_spinBox->value());
         else
-            filter+=QString(" and totalprice is '%1'").arg(ui->sell_totalprice_doubleSpinBox->value());
-     if(ui->sell_payed_doubleSpinBox->value()>0)
+            filter+=QString(" and totalprice is '%1'").arg(ui->sell_totalprice_spinBox->value());
+     if(ui->sell_payed_spinBox->value()>0)
          if(filter.isEmpty())
-             filter+=QString("payed is '%1'").arg(ui->sell_payed_doubleSpinBox->value());
+             filter+=QString("payed is '%1'").arg(ui->sell_payed_spinBox->value());
          else
-             filter+=QString(" and payed is '%1'").arg(ui->sell_payed_doubleSpinBox->value());
-     if(ui->sell_owed_doubleSpinBox->value()>0)
+             filter+=QString(" and payed is '%1'").arg(ui->sell_payed_spinBox->value());
+     if(ui->sell_owed_spinBox->value()>0)
           if(filter.isEmpty())
-              filter+=QString("owned is '%1'").arg(ui->sell_owed_doubleSpinBox->value());
+              filter+=QString("owned is '%1'").arg(ui->sell_owed_spinBox->value());
           else
-              filter+=QString(" and owned like '%1'").arg(ui->sell_owed_doubleSpinBox->value());
+              filter+=QString(" and owned like '%1'").arg(ui->sell_owed_spinBox->value());
      if(!ui->sell_customer_comboBox->currentText().isEmpty())
           if(filter.isEmpty())
               filter+=QString("customer is '%1'").arg(ui->sell_customer_comboBox->currentText());
@@ -902,22 +887,7 @@ void MainWindow::on_stock_pushButton_clicked()
 
 void MainWindow::on_stock_cnt_spinBox_valueChanged(int arg1)
 {
-    ui->stock_totalprice_doubleSpinBox->setValue(arg1*ui->stock_price_doubleSpinBox->value());
-}
-
-void MainWindow::on_stock_price_doubleSpinBox_valueChanged(double arg1)
-{
-    ui->stock_totalprice_doubleSpinBox->setValue(ui->stock_cnt_spinBox->value()*arg1);
-}
-
-void MainWindow::on_stock_totalprice_doubleSpinBox_valueChanged(double arg1)
-{
-    ui->stock_owed_doubleSpinBox->setValue(arg1-ui->stock_payed_doubleSpinBox->value());
-}
-
-void MainWindow::on_stock_payed_doubleSpinBox_valueChanged(double arg1)
-{
-    ui->stock_owed_doubleSpinBox->setValue(ui->stock_totalprice_doubleSpinBox->value()-arg1);
+    ui->stock_totalprice_spinBox->setValue(arg1*ui->stock_price_spinBox->value());
 }
 
 void MainWindow::on_stock_addBtn_clicked()
@@ -935,9 +905,9 @@ void MainWindow::on_stock_addBtn_clicked()
         QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("供应商不能为无效值！"));
         return;
     }
-    if(m_databaseMg->addStockRecord(num,ui->stock_cnt_spinBox->value(),ui->stock_price_doubleSpinBox->value(),
-                                   ui->stock_totalprice_doubleSpinBox->value(),ui->stock_payed_doubleSpinBox->value(),
-                                   ui->stock_owed_doubleSpinBox->value(),supplierName,ui->stock_date_dateEdit->date(),ui->stock_invoice_radioButton_yes->isChecked()))
+    if(m_databaseMg->addStockRecord(num,ui->stock_cnt_spinBox->value(),ui->stock_price_spinBox->value(),
+                                   ui->stock_totalprice_spinBox->value(),ui->stock_payed_spinBox->value(),
+                                   ui->stock_owed_spinBox->value(),supplierName,ui->stock_date_dateEdit->date(),ui->stock_invoice_radioButton_yes->isChecked()))
     {
         m_stockmodel->setTable("stock");
         m_stockmodel->setRelation(4,QSqlRelation("product","number","number"));
@@ -958,31 +928,31 @@ void MainWindow::on_stock_searchBtn_clicked()
             filter+=QString("stockdate is'%1'").arg(ui->stock_date_dateEdit->text());
         else
             filter+=QString(" and stockdate is'%1'").arg(ui->stock_date_dateEdit->text());
-    if(ui->stock_price_doubleSpinBox->value()>0)
+    if(ui->stock_price_spinBox->value()>0)
         if(filter.isEmpty())
-            filter+=QString("price is '%1'").arg(ui->stock_price_doubleSpinBox->value());
+            filter+=QString("price is '%1'").arg(ui->stock_price_spinBox->value());
         else
-            filter+=QString(" and price is '%1'").arg(ui->stock_price_doubleSpinBox->value());
+            filter+=QString(" and price is '%1'").arg(ui->stock_price_spinBox->value());
     if(ui->stock_cnt_spinBox->value()>0)
         if(filter.isEmpty())
             filter+=QString("cnt is '%1'").arg(ui->stock_cnt_spinBox->value());
         else
             filter+=QString(" and cnt is '%1'").arg(ui->stock_cnt_spinBox->value());
-    if(ui->stock_totalprice_doubleSpinBox->value()>0)
+    if(ui->stock_totalprice_spinBox->value()>0)
         if(filter.isEmpty())
-            filter+=QString("totalprice is '%1'").arg(ui->stock_totalprice_doubleSpinBox->value());
+            filter+=QString("totalprice is '%1'").arg(ui->stock_totalprice_spinBox->value());
         else
-            filter+=QString(" and totalprice is '%1'").arg(ui->stock_totalprice_doubleSpinBox->value());
-     if(ui->stock_payed_doubleSpinBox->value()>0)
+            filter+=QString(" and totalprice is '%1'").arg(ui->stock_totalprice_spinBox->value());
+     if(ui->stock_payed_spinBox->value()>0)
          if(filter.isEmpty())
-             filter+=QString("payed is '%1'").arg(ui->stock_payed_doubleSpinBox->value());
+             filter+=QString("payed is '%1'").arg(ui->stock_payed_spinBox->value());
          else
-             filter+=QString(" and payed is '%1'").arg(ui->stock_payed_doubleSpinBox->value());
-     if(ui->stock_owed_doubleSpinBox->value()>0)
+             filter+=QString(" and payed is '%1'").arg(ui->stock_payed_spinBox->value());
+     if(ui->stock_owed_spinBox->value()>0)
           if(filter.isEmpty())
-              filter+=QString("owned is '%1'").arg(ui->stock_owed_doubleSpinBox->value());
+              filter+=QString("owned is '%1'").arg(ui->stock_owed_spinBox->value());
           else
-              filter+=QString(" and owned like '%1'").arg(ui->stock_owed_doubleSpinBox->value());
+              filter+=QString(" and owned like '%1'").arg(ui->stock_owed_spinBox->value());
      if(!ui->stock_supplier_comboBox->currentText().isEmpty())
           if(filter.isEmpty())
               filter+=QString("supplier is '%1'").arg(ui->stock_supplier_comboBox->currentText());
@@ -1010,4 +980,34 @@ void MainWindow::on_stock_searchBtn_clicked()
          m_stockmodel->setRelation(11,QSqlRelation("supplier","name","name"));
          m_stockmodel->select();
      }
+}
+
+void MainWindow::on_sell_price_spinBox_valueChanged(int arg1)
+{
+    ui->sell_totalprice_spinBox->setValue(ui->sell_cnt_spinBox->value()*arg1);
+}
+
+void MainWindow::on_sell_totalprice_spinBox_valueChanged(int arg1)
+{
+    ui->sell_owed_spinBox->setValue(arg1-ui->sell_payed_spinBox->value());
+}
+
+void MainWindow::on_sell_payed_spinBox_valueChanged(int arg1)
+{
+    ui->sell_owed_spinBox->setValue(ui->sell_totalprice_spinBox->value()-arg1);
+}
+
+void MainWindow::on_stock_price_spinBox_valueChanged(int arg1)
+{
+    ui->stock_totalprice_spinBox->setValue(ui->stock_cnt_spinBox->value()*arg1);
+}
+
+void MainWindow::on_stock_totalprice_spinBox_valueChanged(int arg1)
+{
+    ui->stock_owed_spinBox->setValue(arg1-ui->stock_payed_spinBox->value());
+}
+
+void MainWindow::on_stock_payed_spinBox_valueChanged(int arg1)
+{
+    ui->stock_owed_spinBox->setValue(ui->stock_totalprice_spinBox->value()-arg1);
 }

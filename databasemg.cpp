@@ -153,7 +153,7 @@ bool databasemg::createSellTable()
 
     bool ret= query.exec("create table if not exists sell("
                          "id integer primary key autoincrement,category varchar(32),name varchar(32),spec varchar(32),productno varchar(16),"
-                         "selldate date,cnt int,price double,totalprice double,payed double,owned double,customer varchar(250),tax varchar(4),invoice varchar(4),"
+                         "selldate date,cnt int,price int,totalprice int,payed int,owned int,customer varchar(250),tax varchar(4),invoice varchar(4),"
                          "foreign key(customer) references customer(name),foreign key(productno) references product(number)"
                          ")");
     if(!ret)
@@ -165,7 +165,7 @@ bool databasemg::createSellTable()
     return true;
 }
 
-bool databasemg::addSellRecord(QString pronum, int cnt, double price, double totalprice, double payed, double owned, QString customerName, QDate date,bool tax,bool invoice)
+bool databasemg::addSellRecord(QString pronum, int cnt, int price, int totalprice, int payed, int owned, QString customerName, QDate date,bool tax,bool invoice)
 {
     QSqlQuery queryPro(m_db);
     if(queryPro.exec(QString("select * from product where number is '%1'").arg(pronum)))
@@ -225,7 +225,7 @@ bool databasemg::createStockTable()
 
     bool ret= query.exec("create table if not exists stock("
                          "id integer primary key autoincrement,category varchar(32),name varchar(32),spec varchar(32),productno varchar(16),"
-                         "stockdate date,cnt int,price double,totalprice double,payed double,owned double,supplier varchar(250),invoice varchar(4),"
+                         "stockdate date,cnt int,price int,totalprice int,payed int,owned int,supplier varchar(250),invoice varchar(4),"
                          "foreign key(supplier) references supplier(name),foreign key(productno) references product(number)"
                          ")");
     if(!ret)
@@ -236,7 +236,7 @@ bool databasemg::createStockTable()
     }
 }
 
-bool databasemg::addStockRecord(QString pronum, int cnt, double price, double totalprice, double payed, double owned, QString supplierName, QDate date, bool invoice)
+bool databasemg::addStockRecord(QString pronum, int cnt, int price, int totalprice, int payed, int owned, QString supplierName, QDate date, bool invoice)
 {
     QSqlQuery queryPro(m_db);
     if(queryPro.exec(QString("select * from product where number is '%1'").arg(pronum)))
@@ -612,7 +612,7 @@ bool databasemg::saveSellRecs(QList<QStringList> &data)
             else if(i==5)
                 query.addBindValue(slist.at(i).toInt());
             else if(i<10)
-                query.addBindValue(slist.at(i).toDouble());
+                query.addBindValue(slist.at(i).toInt());
             else
                 query.addBindValue(slist.at(i));
         }

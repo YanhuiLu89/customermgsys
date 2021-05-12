@@ -19,10 +19,10 @@ public:
     bool addProduct(QStringList list);
 
     bool createSellTable();
-    bool addSellRecord(QString pronum,int cnt,double price,double totalprice,double payed,double owned,QString customerName,QDate date,bool tax,bool invoice);
+    bool addSellRecord(QString pronum,int cnt,int price,int totalprice,int payed,int owned,QString customerName,QDate date,bool tax,bool invoice);
 
     bool createStockTable();
-    bool addStockRecord(QString pronum,int cnt,double price,double totalprice,double payed,double owned,QString supplierName,QDate date,bool invoice);
+    bool addStockRecord(QString pronum,int cnt,int price,int totalprice,int payed,int owned,QString supplierName,QDate date,bool invoice);
 
     void createTables();
 
