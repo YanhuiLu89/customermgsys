@@ -84,7 +84,7 @@ void SearchProDialog::accept()
         return;
     }
      QSqlRecord selected=m_promodel->record(rowMap.first());
-    ((MainWindow*)parent())->setSellSelectedNum(selected.value(0).toString());
+    ((MainWindow*)parent())->setSrchProSelectedNum(selected.value(0).toString());
     return QDialog::accept();
 }
 

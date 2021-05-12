@@ -69,7 +69,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableViewPro->setModel(m_promodel);
 
     /*********4、销货管理界面*******************/
-    m_sellSelectedNum.clear();
+    m_srchProSelectedNum.clear();
     ui->sell_date_dateEdit->setDate(QDate::currentDate());
     ui->sell_date_dateEdit->setDisplayFormat("yyyy-MM-dd");
     ui->sell_date_dateEdit->setCalendarPopup(true);
@@ -561,12 +561,13 @@ void MainWindow::on_sell_prono_lineEdit_textChanged(const QString &arg1)
 
 void MainWindow::on_pushButton_clicked()
 {
+    m_srchProSelectedNum.clear();
     SearchProDialog* dlg=new SearchProDialog(this);
     dlg->setModal(true);
     if(dlg->exec()==QDialog::Accepted)
     {
-        if(!m_sellSelectedNum.isEmpty())
-           ui->sell_prono_lineEdit->setText(m_sellSelectedNum);
+        if(!m_srchProSelectedNum.isEmpty())
+           ui->sell_prono_lineEdit->setText(m_srchProSelectedNum);
     }
 }
 
@@ -822,4 +823,29 @@ bool MainWindow::selectCustomer(QString name)
     m_cusmodel->setFilter(QString("name is '%1'").arg(name));
     m_cusmodel->select();
     return true;
+}
+
+void MainWindow::on_stock_prono_lineEdit_textChanged(const QString &arg1)
+{
+    QSqlQuery query(m_databaseMg->database());
+    if(query.exec(QString("select * from product where number is '%1'").arg(arg1)))
+    {
+        query.next();
+        ui->stock_procat_showlabel->setText(query.value(1).toString());
+        ui->stock_proname_showlabel->setText(query.value(2).toString());
+        ui->stock_prospec_showlabel->setText(query.value(3).toString());
+        ui->stock_prostock_showlabel->setText(query.value(10).toString());
+    }
+}
+
+void MainWindow::on_stock_pushButton_clicked()
+{
+    m_srchProSelectedNum.clear();
+    SearchProDialog* dlg=new SearchProDialog(this);
+    dlg->setModal(true);
+    if(dlg->exec()==QDialog::Accepted)
+    {
+        if(!m_srchProSelectedNum.isEmpty())
+           ui->stock_prono_lineEdit->setText(m_srchProSelectedNum);
+    }
 }

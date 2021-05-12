@@ -17,8 +17,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-   void setSellSelectedNum(QString num){m_sellSelectedNum=num;}
-   QString sellSelectedRow(){return m_sellSelectedNum;}
+   void setSrchProSelectedNum(QString num){m_srchProSelectedNum=num;}
+   QString srchProSelectedNum(){return m_srchProSelectedNum;}
 
 private slots:
     void on_groupBox_clicked();
@@ -85,6 +85,10 @@ private slots:
 
     void on_tableViewSell_clicked(const QModelIndex &index);
 
+    void on_stock_prono_lineEdit_textChanged(const QString &arg1);
+
+    void on_stock_pushButton_clicked();
+
 private:
     void setCusHeaders();
     void setSupHeaders();
@@ -103,7 +107,7 @@ private:
     QSqlTableModel* m_cusmodel;
     QSqlTableModel* m_supmodel;
     QSqlTableModel* m_promodel;
-    QString m_sellSelectedNum;
+    QString m_srchProSelectedNum;
     MySqlRelationTableModel* m_sellmodel;
 };
 #endif // MAINWINDOW_H
