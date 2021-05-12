@@ -109,6 +109,8 @@ private slots:
 
     void on_stock_exportBtn_clicked();
 
+    void on_stock_printBtn_clicked();
+
 private:
     void setCusHeaders();
     void setSupHeaders();

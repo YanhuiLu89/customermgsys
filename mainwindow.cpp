@@ -1091,3 +1091,36 @@ void MainWindow::on_stock_exportBtn_clicked()
     if(!file.isEmpty())
         exportTable(m_stockmodel,file,heads);
 }
+
+void MainWindow::on_stock_printBtn_clicked()
+{
+    int rowNum=m_sellmodel->rowCount();
+    QStringList columnList;//columnList为各列名
+    std::vector<QStringList> dataLists;//dataLists为各行数据
+    columnList<<QString::fromLocal8Bit("序号")<<QString::fromLocal8Bit("货品大类")<<QString::fromLocal8Bit("货品名称")
+             <<QString::fromLocal8Bit("货品规格")<<QString::fromLocal8Bit("商品编码")<<QString::fromLocal8Bit("进货日期")
+             <<QString::fromLocal8Bit("进货数量")<<QString::fromLocal8Bit("进货单价")<<QString::fromLocal8Bit("合计")
+             <<QString::fromLocal8Bit("已付金额")<<QString::fromLocal8Bit("欠款")<<QString::fromLocal8Bit("供应商")
+             <<QString::fromLocal8Bit("是否开票");
+
+    for(int i=0;i<rowNum;i++)
+    {
+        QStringList data;
+        for(int j=0;j<13;j++)
+        {
+            data<<m_stockmodel->record(i).value(j).toString();
+        }
+        dataLists.push_back(data);
+    }
+    MyPrint myprint;
+    myprint.dataBegin();
+    myprint.tableBegin(columnList);
+    for(int row=0;row<rowNum;row++)
+    {
+        myprint.insert2TableRow(dataLists[row]);
+    }
+
+    myprint.tableEnd();
+    myprint.dataEnd();
+    myprint.printWithPreview();
+}
