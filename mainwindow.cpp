@@ -288,12 +288,12 @@ void MainWindow::updateStockSupComBox()
     }
 }
 
-void MainWindow::exportSellTable(const QString &path)
+void MainWindow::exportTable(const QSqlTableModel* sqlModel,const QString &path,const QStringList heads)
 {
    QStringList vList;
-   for(int row=0;row<m_sellmodel->rowCount();row++)
+   for(int row=0;row<sqlModel->rowCount();row++)
    {
-          QSqlRecord record=m_sellmodel->record(row);
+          QSqlRecord record=sqlModel->record(row);
           QString suffix=""; // 记录属性值
           // 遍历属性字段
           for(int i=0;i<record.count();i++)
@@ -333,7 +333,13 @@ void MainWindow::exportSellTable(const QString &path)
       // 写入文件
       QTextStream out(&file);
       //写表头
-      out<<QString::fromLocal8Bit("序号\t货品大类\t货品名称\t货品规格\t商品编码\t出货日期\t出货数量\t出货单价\t合计\t已付金额\t欠款\t客户\t是否含税\t是否欠发票")+"\n";
+      foreach(QString head,heads)
+      {
+        out<<head;
+        out<<"\t";
+      }
+      out<<"\n";
+      //out<<QString::fromLocal8Bit("序号\t货品大类\t货品名称\t货品规格\t商品编码\t出货日期\t出货数量\t出货单价\t合计\t已付金额\t欠款\t客户\t是否含税\t是否欠发票")+"\n";
       //写内容
       foreach(QString line,vList)
       {
@@ -760,8 +766,14 @@ void MainWindow::on_sell_exportBtn_clicked()
     QTime time =QTime::currentTime();
     QString file=QFileDialog::getSaveFileName(this,QString::fromLocal8Bit("选择导出文件路径"),QString::fromLocal8Bit("sell_%1 %2-%3-%4.xls")
                                               .arg(QDate::currentDate().toString()).arg(time.hour()).arg(time.minute()).arg(time.second()),QString::fromLocal8Bit("表格文件(*.xls)"));
+    QStringList heads;
+    heads<<QString::fromLocal8Bit("序号")<<QString::fromLocal8Bit("货品大类")<<QString::fromLocal8Bit("货品名称")
+         <<QString::fromLocal8Bit("货品规格")<<QString::fromLocal8Bit("商品编码")<<QString::fromLocal8Bit("出货日期")
+          <<QString::fromLocal8Bit("出货数量")<<QString::fromLocal8Bit("出货单价")<<QString::fromLocal8Bit("合计")
+        <<QString::fromLocal8Bit("已付金额")<<QString::fromLocal8Bit("欠款")<<QString::fromLocal8Bit("客户")
+        <<QString::fromLocal8Bit("是否含税")<<QString::fromLocal8Bit("是否欠发票");
     if(!file.isEmpty())
-        exportSellTable(file);
+        exportTable(m_sellmodel,file,heads);
 }
 
 void MainWindow::on_sell_printBtn_clicked()
@@ -1063,4 +1075,19 @@ void MainWindow::on_stock_delBtn_clicked()
         m_stockmodel->setRelation(11,QSqlRelation("supplier","name","name"));
         m_stockmodel->select();
     }
+}
+
+void MainWindow::on_stock_exportBtn_clicked()
+{
+    QTime time =QTime::currentTime();
+    QString file=QFileDialog::getSaveFileName(this,QString::fromLocal8Bit("选择导出文件路径"),QString::fromLocal8Bit("stock_%1 %2-%3-%4.xls")
+                                              .arg(QDate::currentDate().toString()).arg(time.hour()).arg(time.minute()).arg(time.second()),QString::fromLocal8Bit("表格文件(*.xls)"));
+    QStringList heads;
+    heads<<QString::fromLocal8Bit("序号")<<QString::fromLocal8Bit("货品大类")<<QString::fromLocal8Bit("货品名称")
+         <<QString::fromLocal8Bit("货品规格")<<QString::fromLocal8Bit("商品编码")<<QString::fromLocal8Bit("进货日期")
+          <<QString::fromLocal8Bit("进货数量")<<QString::fromLocal8Bit("进货单价")<<QString::fromLocal8Bit("合计")
+        <<QString::fromLocal8Bit("已付金额")<<QString::fromLocal8Bit("欠款")<<QString::fromLocal8Bit("供应商")
+        <<QString::fromLocal8Bit("是否开票");
+    if(!file.isEmpty())
+        exportTable(m_stockmodel,file,heads);
 }

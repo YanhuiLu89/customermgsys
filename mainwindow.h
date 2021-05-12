@@ -107,6 +107,8 @@ private slots:
 
     void on_stock_delBtn_clicked();
 
+    void on_stock_exportBtn_clicked();
+
 private:
     void setCusHeaders();
     void setSupHeaders();
@@ -115,7 +117,7 @@ private:
     void setStockHeaders();
     void updateSellCusComBox();
     void updateStockSupComBox();
-    void exportSellTable(const QString &path);
+    void exportTable(const QSqlTableModel* sqlMode,const QString &path,const QStringList heads);
     bool selectProduct(QString pronum);
     bool selectCustomer(QString name);
 
