@@ -111,6 +111,8 @@ private slots:
 
     void on_stock_printBtn_clicked();
 
+    void on_tableViewStock_clicked(const QModelIndex &index);
+
 private:
     void setCusHeaders();
     void setSupHeaders();
@@ -122,7 +124,7 @@ private:
     void exportTable(const QSqlTableModel* sqlMode,const QString &path,const QStringList heads);
     bool selectProduct(QString pronum);
     bool selectCustomer(QString name);
-
+    bool selectSupplier(QString name);
     //print相关
 
 private:

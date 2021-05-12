@@ -873,6 +873,15 @@ bool MainWindow::selectCustomer(QString name)
     return true;
 }
 
+bool MainWindow::selectSupplier(QString name)
+{
+    m_supmodel->setTable("supplier");
+    setSupHeaders();
+    m_supmodel->setFilter(QString("name is '%1'").arg(name));
+    m_supmodel->select();
+    return true;
+}
+
 void MainWindow::on_stock_prono_lineEdit_textChanged(const QString &arg1)
 {
     QSqlQuery query(m_databaseMg->database());
@@ -1124,3 +1133,24 @@ void MainWindow::on_stock_printBtn_clicked()
     myprint.dataEnd();
     myprint.printWithPreview();
 }
+
+void MainWindow::on_tableViewStock_clicked(const QModelIndex &index)
+{
+    int column=index.column();
+    if(column==4)//点击商品编号外键
+    {
+        QSqlRecord rec=m_stockmodel->record(index.row());
+        QString pronumber=rec.value(4).toString();
+        ui->tabWidget->setCurrentIndex(2);
+        selectProduct(pronumber);
+
+    }
+    else if(column==11)//点击客户外键
+    {
+        QSqlRecord rec=m_stockmodel->record(index.row());
+        QString name=rec.value(11).toString();
+        ui->tabWidget->setCurrentIndex(1);
+        selectSupplier(name);
+    }
+}
+
