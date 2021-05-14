@@ -27,3 +27,15 @@ QVariant MySqlRelationTableModel::data(const QModelIndex &idx, int role) const
     }
     return value;
 }
+
+Qt::ItemFlags MySqlRelationTableModel::flags(const QModelIndex &index) const
+{
+    if(index.column()<4)
+    {
+        return Qt::ItemIsUserCheckable | Qt::ItemIsEnabled | Qt::ItemIsSelectable ;
+    }
+    else
+    {
+       return Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsEnabled;
+    }
+}
