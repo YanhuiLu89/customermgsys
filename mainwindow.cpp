@@ -16,6 +16,7 @@
 #include <QtPrintSupport/QPrintDialog>
 #include <QtPrintSupport/QPrintPreviewDialog>
 #include "myprint.h"
+#include <QTimer>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -102,6 +103,12 @@ MainWindow::MainWindow(QWidget *parent)
     updateStockSupComBox();
     ui->tableViewStock->setModel(m_stockmodel);
     ui->tableViewStock->setItemDelegate(new QSqlRelationalDelegate(ui->tableViewSell));
+
+    /****************定时器初始化**********************/
+    m_sellClickTimer=new QTimer();
+    connect(m_sellClickTimer,SIGNAL(timeout()),this,SLOT(sellTimerFunc()));
+    m_stockClickTimer=new QTimer();
+    connect(m_stockClickTimer,SIGNAL(timeout()),this,SLOT(stockTimerFunc()));
 }
 
 MainWindow::~MainWindow()
@@ -113,6 +120,8 @@ MainWindow::~MainWindow()
     delete m_sellmodel;
     delete m_stockmodel;
     delete m_databaseMg;
+    delete m_sellClickTimer;
+    delete m_stockClickTimer;
 }
 
 
@@ -852,22 +861,8 @@ void MainWindow::on_sell_delBtn_clicked()
 
 void MainWindow::on_tableViewSell_clicked(const QModelIndex &index)
 {
-    int column=index.column();
-    if(column==4)//点击商品编号外键
-    {
-        QSqlRecord rec=m_sellmodel->record(index.row());
-        QString pronumber=rec.value(4).toString();
-        ui->tabWidget->setCurrentIndex(2);
-        selectProduct(pronumber);
-
-    }
-    else if(column==11)//点击客户外键
-    {
-        QSqlRecord rec=m_sellmodel->record(index.row());
-        QString name=rec.value(11).toString();
-        ui->tabWidget->setCurrentIndex(0);
-        selectCustomer(name);
-    }
+    m_sellModelIndex=index;
+    m_sellClickTimer->start(1000);
 }
 
 bool MainWindow::selectProduct(QString pronum)
@@ -1151,10 +1146,17 @@ void MainWindow::on_stock_printBtn_clicked()
 
 void MainWindow::on_tableViewStock_clicked(const QModelIndex &index)
 {
-    int column=index.column();
+    m_stockModelIndex=index;
+    m_stockClickTimer->start(1000);
+}
+
+void MainWindow::sellTimerFunc()
+{
+    m_sellClickTimer->stop();
+    int column=m_sellModelIndex.column();
     if(column==4)//点击商品编号外键
     {
-        QSqlRecord rec=m_stockmodel->record(index.row());
+        QSqlRecord rec=m_sellmodel->record(m_sellModelIndex.row());
         QString pronumber=rec.value(4).toString();
         ui->tabWidget->setCurrentIndex(2);
         selectProduct(pronumber);
@@ -1162,10 +1164,43 @@ void MainWindow::on_tableViewStock_clicked(const QModelIndex &index)
     }
     else if(column==11)//点击客户外键
     {
-        QSqlRecord rec=m_stockmodel->record(index.row());
+        QSqlRecord rec=m_sellmodel->record(m_sellModelIndex.row());
+        QString name=rec.value(11).toString();
+        ui->tabWidget->setCurrentIndex(0);
+        selectCustomer(name);
+    }
+}
+
+void MainWindow::stockTimerFunc()
+{
+    m_stockClickTimer->stop();
+    int column=m_stockModelIndex.column();
+    if(column==4)//点击商品编号外键
+    {
+        QSqlRecord rec=m_stockmodel->record(m_stockModelIndex.row());
+        QString pronumber=rec.value(4).toString();
+        ui->tabWidget->setCurrentIndex(2);
+        selectProduct(pronumber);
+
+    }
+    else if(column==11)//点击供应商外键
+    {
+        QSqlRecord rec=m_stockmodel->record(m_stockModelIndex.row());
         QString name=rec.value(11).toString();
         ui->tabWidget->setCurrentIndex(1);
         selectSupplier(name);
     }
 }
 
+
+void MainWindow::on_tableViewSell_doubleClicked(const QModelIndex &index)
+{
+    m_sellClickTimer->stop();
+    m_sellModelIndex=index;
+}
+
+void MainWindow::on_tableViewStock_doubleClicked(const QModelIndex &index)
+{
+    m_stockClickTimer->stop();
+    m_stockModelIndex=index;
+}

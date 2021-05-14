@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QModelIndex>
 #include "databasemg.h"
 
 QT_BEGIN_NAMESPACE
@@ -10,6 +11,8 @@ QT_END_NAMESPACE
 
 class QSqlTableModel;
 class MySqlRelationTableModel;
+class QTimer;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -113,6 +116,12 @@ private slots:
 
     void on_tableViewStock_clicked(const QModelIndex &index);
 
+    void sellTimerFunc();
+    void stockTimerFunc();
+    void on_tableViewSell_doubleClicked(const QModelIndex &index);
+
+    void on_tableViewStock_doubleClicked(const QModelIndex &index);
+
 private:
     void setCusHeaders();
     void setSupHeaders();
@@ -136,5 +145,9 @@ private:
     QString m_srchProSelectedNum;
     MySqlRelationTableModel* m_sellmodel;
     MySqlRelationTableModel* m_stockmodel;
+    QTimer* m_sellClickTimer;
+    QTimer* m_stockClickTimer;
+    QModelIndex m_sellModelIndex;
+    QModelIndex m_stockModelIndex;
 };
 #endif // MAINWINDOW_H
