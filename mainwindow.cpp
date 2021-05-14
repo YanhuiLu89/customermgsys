@@ -58,7 +58,8 @@ MainWindow::MainWindow(QWidget *parent)
     m_stockmodel->select();
 
     /*********ui布局初始化*******************/
-
+     setWindowFlags(Qt::Dialog);//去掉最大化最小化按钮
+     //setFixedSize(1024, 800);
     /*********1、客户管理界面*******************/
     ui->setupUi(this);
     //客户类型
