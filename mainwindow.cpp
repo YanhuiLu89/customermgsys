@@ -631,7 +631,19 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_sell_cnt_spinBox_valueChanged(int arg1)
 {
-    ui->sell_totalprice_spinBox->setValue(arg1*ui->sell_price_spinBox->value());
+    if(!ui->sell_prostock_showlabel->text().isEmpty())
+    {
+        int stock=ui->sell_prostock_showlabel->text().toInt();
+        if(arg1>stock)
+        {
+            QMessageBox::warning(0,nullptr,QString::fromLocal8Bit("出货数量不能大于库存数！"));
+            ui->sell_cnt_spinBox->setValue(0);
+        }
+    }
+    else
+    {
+         ui->sell_totalprice_spinBox->setValue(arg1*ui->sell_price_spinBox->value());
+    }
 }
 
 void MainWindow::on_sell_addBtn_clicked()

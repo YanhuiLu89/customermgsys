@@ -177,6 +177,7 @@ bool databasemg::addSellRecord(QString pronum, int cnt, int price, int totalpric
         QString category=queryPro.value(1).toString();
         QString name=queryPro.value(2).toString();
         QString spec=queryPro.value(3).toString();
+        int stock=queryPro.value(10).toInt();
         QSqlQuery query(m_db);
         query.prepare("insert into sell (category,name,spec,productno,selldate,cnt,price,totalprice,payed,owned,customer,tax,invoice) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
         query.addBindValue(category);
@@ -202,6 +203,8 @@ bool databasemg::addSellRecord(QString pronum, int cnt, int price, int totalpric
         if(ret)
          {
             QMessageBox::information(0,nullptr,QString::fromLocal8Bit("新建销货记录成功"));
+            //更新库存
+            queryPro.exec(QString("update product set stock=%1 where number is '%2'").arg(stock-cnt).arg(pronum));
             return true;
         }
         else
@@ -248,6 +251,7 @@ bool databasemg::addStockRecord(QString pronum, int cnt, int price, int totalpri
         QString category=queryPro.value(1).toString();
         QString name=queryPro.value(2).toString();
         QString spec=queryPro.value(3).toString();
+        int stock=queryPro.value(10).toInt();
         QSqlQuery query(m_db);
         query.prepare("insert into stock (category,name,spec,productno,stockdate,cnt,price,totalprice,payed,owned,supplier,invoice) values (?,?,?,?,?,?,?,?,?,?,?,?)");
         query.addBindValue(category);
@@ -269,6 +273,8 @@ bool databasemg::addStockRecord(QString pronum, int cnt, int price, int totalpri
         if(ret)
          {
             QMessageBox::information(0,nullptr,QString::fromLocal8Bit("新建销货记录成功"));
+            //更新库存
+            queryPro.exec(QString("update product set stock=%1 where number is '%2'").arg(stock+cnt).arg(pronum));
             return true;
         }
         else
@@ -638,6 +644,12 @@ bool databasemg::saveSellRecs(QList<QStringList> &data)
             QMessageBox::information(0,nullptr,QString::fromLocal8Bit("导入销货表失败"));
             return false;
         }
+        //更新库存
+        QSqlQuery queryPro(m_db);
+        queryPro.exec(QString("select * from product where number is '%1'").arg(slist.at(3)));
+        queryPro.next();
+        int stock=queryPro.value(10).toInt();
+        queryPro.exec(QString("update product set stock=%1 where number is '%2'").arg(stock-slist.at(5).toInt()).arg(slist.at(3)));
 
     }
     return true;
@@ -720,6 +732,12 @@ bool databasemg::saveStockRecs(QList<QStringList> &data)
             QMessageBox::information(0,nullptr,QString::fromLocal8Bit("导入进货表失败"));
             return false;
         }
+        //更新库存
+        QSqlQuery queryPro(m_db);
+        queryPro.exec(QString("select * from product where number is '%1'").arg(slist.at(3)));
+        queryPro.next();
+        int stock=queryPro.value(10).toInt();
+        queryPro.exec(QString("update product set stock=%1 where number is '%2'").arg(stock+slist.at(5).toInt()).arg(slist.at(3)));
 
     }
     return true;
