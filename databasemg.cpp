@@ -625,8 +625,6 @@ bool databasemg::saveSellRecs(QList<QStringList> &data)
                QDate date=QDate::fromString(str,"yyyy-MM-dd");
                query.addBindValue(date);
             }
-            else if(i==5)
-                query.addBindValue(slist.at(i).toInt());
             else if(i<10)
                 query.addBindValue(slist.at(i).toInt());
             else

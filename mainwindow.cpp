@@ -682,6 +682,8 @@ void MainWindow::on_sell_importBtn_clicked()
 
 void MainWindow::on_sell_searchBtn_clicked()
 {
+    QSqlQuery query(m_databaseMg->database());
+
     QString filter="";
     if(!ui->sell_prono_lineEdit->text().isEmpty())
         filter+=QString("productno like'%%1%'").arg(ui->sell_prono_lineEdit->text());
@@ -692,34 +694,34 @@ void MainWindow::on_sell_searchBtn_clicked()
             filter+=QString("and selldate is'%1'").arg(ui->sell_date_dateEdit->text());
     if(ui->sell_price_spinBox->value()>0)
         if(filter.isEmpty())
-            filter+=QString("price is '%1'").arg(ui->sell_price_spinBox->value());
+            filter+=QString("price=%1").arg(ui->sell_price_spinBox->value());
         else
-            filter+=QString("and price is '%1'").arg(ui->sell_price_spinBox->value());
+            filter+=QString("and price=%1").arg(ui->sell_price_spinBox->value());
     if(ui->sell_cnt_spinBox->value()>0)
         if(filter.isEmpty())
-            filter+=QString("cnt is '%1'").arg(ui->sell_cnt_spinBox->value());
+            filter+=QString("cnt=%1").arg(ui->sell_cnt_spinBox->value());
         else
-            filter+=QString(" and cnt is '%1'").arg(ui->sell_cnt_spinBox->value());
+            filter+=QString(" and cnt=%1").arg(ui->sell_cnt_spinBox->value());
     if(ui->sell_totalprice_spinBox->value()>0)
         if(filter.isEmpty())
-            filter+=QString("totalprice is '%1'").arg(ui->sell_totalprice_spinBox->value());
+            filter+=QString("totalprice=%1").arg(ui->sell_totalprice_spinBox->value());
         else
-            filter+=QString(" and totalprice is '%1'").arg(ui->sell_totalprice_spinBox->value());
+            filter+=QString(" and totalprice=%1").arg(ui->sell_totalprice_spinBox->value());
      if(ui->sell_payed_spinBox->value()>0)
          if(filter.isEmpty())
-             filter+=QString("payed is '%1'").arg(ui->sell_payed_spinBox->value());
+             filter+=QString("payed=%1").arg(ui->sell_payed_spinBox->value());
          else
-             filter+=QString(" and payed is '%1'").arg(ui->sell_payed_spinBox->value());
+             filter+=QString(" and payed=%1").arg(ui->sell_payed_spinBox->value());
      if(ui->sell_owed_spinBox->value()>0)
           if(filter.isEmpty())
-              filter+=QString("owned is '%1'").arg(ui->sell_owed_spinBox->value());
+              filter+=QString("owned=%1").arg(ui->sell_owed_spinBox->value());
           else
-              filter+=QString(" and owned like '%1'").arg(ui->sell_owed_spinBox->value());
+              filter+=QString(" and owned=%1").arg(ui->sell_owed_spinBox->value());
      if(!ui->sell_customer_comboBox->currentText().isEmpty())
           if(filter.isEmpty())
               filter+=QString("customer is '%1'").arg(ui->sell_customer_comboBox->currentText());
           else
-              filter+=QString(" and customer like '%1'").arg(ui->sell_customer_comboBox->currentText());
+              filter+=QString(" and customer is '%1'").arg(ui->sell_customer_comboBox->currentText());
      if(ui->tax_checkBox->checkState()==Qt::Unchecked)
      {
          QString tax=ui->tax_radioButton_yes->isChecked()?
@@ -953,34 +955,34 @@ void MainWindow::on_stock_searchBtn_clicked()
             filter+=QString(" and stockdate is'%1'").arg(ui->stock_date_dateEdit->text());
     if(ui->stock_price_spinBox->value()>0)
         if(filter.isEmpty())
-            filter+=QString("price is '%1'").arg(ui->stock_price_spinBox->value());
+            filter+=QString("price =%1").arg(ui->stock_price_spinBox->value());
         else
-            filter+=QString(" and price is '%1'").arg(ui->stock_price_spinBox->value());
+            filter+=QString(" and price=%1").arg(ui->stock_price_spinBox->value());
     if(ui->stock_cnt_spinBox->value()>0)
         if(filter.isEmpty())
-            filter+=QString("cnt is '%1'").arg(ui->stock_cnt_spinBox->value());
+            filter+=QString("cnt=%1").arg(ui->stock_cnt_spinBox->value());
         else
-            filter+=QString(" and cnt is '%1'").arg(ui->stock_cnt_spinBox->value());
+            filter+=QString(" and cnt=%1").arg(ui->stock_cnt_spinBox->value());
     if(ui->stock_totalprice_spinBox->value()>0)
         if(filter.isEmpty())
-            filter+=QString("totalprice is '%1'").arg(ui->stock_totalprice_spinBox->value());
+            filter+=QString("totalprice=%1").arg(ui->stock_totalprice_spinBox->value());
         else
-            filter+=QString(" and totalprice is '%1'").arg(ui->stock_totalprice_spinBox->value());
+            filter+=QString(" and totalprice=%1").arg(ui->stock_totalprice_spinBox->value());
      if(ui->stock_payed_spinBox->value()>0)
          if(filter.isEmpty())
-             filter+=QString("payed is '%1'").arg(ui->stock_payed_spinBox->value());
+             filter+=QString("payed=%1").arg(ui->stock_payed_spinBox->value());
          else
-             filter+=QString(" and payed is '%1'").arg(ui->stock_payed_spinBox->value());
+             filter+=QString(" and payed=%1").arg(ui->stock_payed_spinBox->value());
      if(ui->stock_owed_spinBox->value()>0)
           if(filter.isEmpty())
-              filter+=QString("owned is '%1'").arg(ui->stock_owed_spinBox->value());
+              filter+=QString("owned=%1").arg(ui->stock_owed_spinBox->value());
           else
-              filter+=QString(" and owned like '%1'").arg(ui->stock_owed_spinBox->value());
+              filter+=QString(" and owned=%1").arg(ui->stock_owed_spinBox->value());
      if(!ui->stock_supplier_comboBox->currentText().isEmpty())
           if(filter.isEmpty())
               filter+=QString("supplier is '%1'").arg(ui->stock_supplier_comboBox->currentText());
           else
-              filter+=QString(" and supplier like '%1'").arg(ui->stock_supplier_comboBox->currentText());
+              filter+=QString(" and supplier is '%1'").arg(ui->stock_supplier_comboBox->currentText());
      if(ui->stock_invoice_checkBox->checkState()==Qt::Unchecked)
      {
          QString invoice=ui->stock_invoice_radioButton_yes->isChecked()?
