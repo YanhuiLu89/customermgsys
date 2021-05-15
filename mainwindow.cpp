@@ -61,6 +61,8 @@ MainWindow::MainWindow(QWidget *parent)
     /*********ui布局初始化*******************/
     // setWindowFlags(Qt::Dialog);//去掉最大化最小化按钮
      //setFixedSize(1920, 1057);
+    QFont font=QFont();
+    font.setPointSize(12);
     /*********1、客户管理界面*******************/
     ui->setupUi(this);
     //客户类型
@@ -68,15 +70,41 @@ MainWindow::MainWindow(QWidget *parent)
     ui->comboBox_ctype->addItem(QString::fromLocal8Bit("企业"));
     ui->comboBox_ctype->addItem(QString::fromLocal8Bit("个人"));
     ui->tableViewCus->setModel(m_cusmodel);
+    //ui->tableViewCus->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableViewCus->setFont(font);
+    ui->tableViewCus->setColumnWidth(0,50);
+    ui->tableViewCus->setColumnWidth(1,150);
+    ui->tableViewCus->setColumnWidth(2,150);
+    ui->tableViewCus->setColumnWidth(3,250);
+    ui->tableViewCus->setColumnWidth(4,ui->tableViewCus->width()-600);
 
     /*********2、供应商管理界面*******************/
     ui->comboBox_stype->addItem(QString::fromLocal8Bit(""));
     ui->comboBox_stype->addItem(QString::fromLocal8Bit("企业"));
     ui->comboBox_stype->addItem(QString::fromLocal8Bit("个人"));
     ui->tableViewSup->setModel(m_supmodel);
+    ui->tableViewSup->setFont(font);
+    ui->tableViewSup->setColumnWidth(0,50);
+    ui->tableViewSup->setColumnWidth(1,150);
+    ui->tableViewSup->setColumnWidth(2,150);
+    ui->tableViewSup->setColumnWidth(3,250);
+    ui->tableViewSup->setColumnWidth(4,ui->tableViewSup->width()-600);
 
     /*********3、商品管理界面*******************/
     ui->tableViewPro->setModel(m_promodel);
+    ui->tableViewPro->setFont(font);
+    ui->tableViewPro->setColumnWidth(0,200);
+    ui->tableViewPro->setColumnWidth(1,200);
+    ui->tableViewPro->setColumnWidth(2,200);
+    ui->tableViewPro->setColumnWidth(3,200);
+    ui->tableViewPro->setColumnWidth(4,200);
+    ui->tableViewPro->setColumnWidth(5,200);
+    ui->tableViewPro->setColumnWidth(6,100);
+    ui->tableViewPro->setColumnWidth(7,100);
+    ui->tableViewPro->setColumnWidth(8,100);
+    ui->tableViewPro->setColumnWidth(9,100);
+    ui->tableViewPro->setColumnWidth(10,100);
+    ui->tableViewPro->setColumnWidth(11,ui->tableViewPro->width()-1700);
 
     /*********4、销货管理界面*******************/
     m_srchProSelectedNum.clear();
@@ -94,6 +122,21 @@ MainWindow::MainWindow(QWidget *parent)
     updateSellCusComBox();
     ui->tableViewSell->setModel(m_sellmodel);
     ui->tableViewSell->setItemDelegate(new QSqlRelationalDelegate(ui->tableViewSell));
+    ui->tableViewSell->setFont(font);
+    ui->tableViewSell->setColumnWidth(0,100);
+    ui->tableViewSell->setColumnWidth(1,200);
+    ui->tableViewSell->setColumnWidth(2,200);
+    ui->tableViewSell->setColumnWidth(3,150);
+    ui->tableViewSell->setColumnWidth(4,150);
+    ui->tableViewSell->setColumnWidth(5,150);
+    ui->tableViewSell->setColumnWidth(6,150);
+    ui->tableViewSell->setColumnWidth(7,100);
+    ui->tableViewSell->setColumnWidth(8,100);
+    ui->tableViewSell->setColumnWidth(9,100);
+    ui->tableViewSell->setColumnWidth(10,100);
+    ui->tableViewSell->setColumnWidth(11,100);
+    ui->tableViewSell->setColumnWidth(12,100);
+    ui->tableViewSell->setColumnWidth(13,ui->tableViewSell->width()-1700);
 
     /*********5、进货管理界面*******************/
     m_srchProSelectedNum.clear();
@@ -103,6 +146,20 @@ MainWindow::MainWindow(QWidget *parent)
     updateStockSupComBox();
     ui->tableViewStock->setModel(m_stockmodel);
     ui->tableViewStock->setItemDelegate(new QSqlRelationalDelegate(ui->tableViewSell));
+    ui->tableViewStock->setFont(font);
+    ui->tableViewStock->setColumnWidth(0,100);
+    ui->tableViewStock->setColumnWidth(1,200);
+    ui->tableViewStock->setColumnWidth(2,200);
+    ui->tableViewStock->setColumnWidth(3,200);
+    ui->tableViewStock->setColumnWidth(4,200);
+    ui->tableViewStock->setColumnWidth(5,150);
+    ui->tableViewStock->setColumnWidth(6,150);
+    ui->tableViewStock->setColumnWidth(7,100);
+    ui->tableViewStock->setColumnWidth(8,100);
+    ui->tableViewStock->setColumnWidth(9,100);
+    ui->tableViewStock->setColumnWidth(10,100);
+    ui->tableViewStock->setColumnWidth(11,100);
+    ui->tableViewStock->setColumnWidth(12,ui->tableViewStock->width()-1700);
 
     /****************定时器初始化**********************/
     m_sellClickTimer=new QTimer();
