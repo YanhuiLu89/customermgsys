@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
-    <height>800</height>
+    <width>1920</width>
+    <height>1057</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,13 @@
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -35,8 +40,8 @@
          <rect>
           <x>20</x>
           <y>30</y>
-          <width>70</width>
-          <height>20</height>
+          <width>90</width>
+          <height>30</height>
          </rect>
         </property>
         <property name="text">
@@ -48,88 +53,12 @@
          <rect>
           <x>20</x>
           <y>70</y>
-          <width>70</width>
-          <height>20</height>
+          <width>90</width>
+          <height>30</height>
          </rect>
         </property>
         <property name="text">
          <string> 客户类型：</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="cthone_label">
-        <property name="geometry">
-         <rect>
-          <x>300</x>
-          <y>30</y>
-          <width>50</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>电话：</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="address_label">
-        <property name="geometry">
-         <rect>
-          <x>300</x>
-          <y>60</y>
-          <width>50</width>
-          <height>12</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string> 地址：</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="lineEdit_cname">
-        <property name="geometry">
-         <rect>
-          <x>85</x>
-          <y>30</y>
-          <width>200</width>
-          <height>20</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="lineEdit_cpthone">
-        <property name="geometry">
-         <rect>
-          <x>340</x>
-          <y>30</y>
-          <width>300</width>
-          <height>20</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QTextEdit" name="textEdit_caddress">
-        <property name="geometry">
-         <rect>
-          <x>340</x>
-          <y>60</y>
-          <width>300</width>
-          <height>60</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="comboBox_ctype">
-        <property name="geometry">
-         <rect>
-          <x>85</x>
-          <y>70</y>
-          <width>200</width>
-          <height>20</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QTableView" name="tableViewCus">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>230</y>
-          <width>751</width>
-          <height>301</height>
-         </rect>
         </property>
        </widget>
        <widget class="QGroupBox" name="groupBox">
@@ -137,8 +66,8 @@
          <rect>
           <x>9</x>
           <y>9</y>
-          <width>761</width>
-          <height>181</height>
+          <width>1871</width>
+          <height>261</height>
          </rect>
         </property>
         <property name="title">
@@ -147,10 +76,10 @@
         <widget class="QPushButton" name="showCusBtn">
          <property name="geometry">
           <rect>
-           <x>430</x>
-           <y>140</y>
-           <width>75</width>
-           <height>23</height>
+           <x>1025</x>
+           <y>210</y>
+           <width>90</width>
+           <height>36</height>
           </rect>
          </property>
          <property name="text">
@@ -160,10 +89,10 @@
         <widget class="QPushButton" name="inportCusBtn">
          <property name="geometry">
           <rect>
-           <x>268</x>
-           <y>140</y>
-           <width>75</width>
-           <height>23</height>
+           <x>825</x>
+           <y>210</y>
+           <width>90</width>
+           <height>36</height>
           </rect>
          </property>
          <property name="text">
@@ -173,10 +102,10 @@
         <widget class="QPushButton" name="searchCusBtn">
          <property name="geometry">
           <rect>
-           <x>349</x>
-           <y>140</y>
-           <width>75</width>
-           <height>23</height>
+           <x>925</x>
+           <y>210</y>
+           <width>90</width>
+           <height>36</height>
           </rect>
          </property>
          <property name="text">
@@ -186,14 +115,80 @@
         <widget class="QPushButton" name="createcusBtn">
          <property name="geometry">
           <rect>
-           <x>177</x>
-           <y>139</y>
-           <width>75</width>
-           <height>23</height>
+           <x>725</x>
+           <y>210</y>
+           <width>90</width>
+           <height>36</height>
           </rect>
          </property>
          <property name="text">
           <string> 新建客户</string>
+         </property>
+        </widget>
+        <widget class="QTextEdit" name="textEdit_caddress">
+         <property name="geometry">
+          <rect>
+           <x>100</x>
+           <y>120</y>
+           <width>1411</width>
+           <height>71</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="address_label">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>120</y>
+           <width>90</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string> 地址：</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEdit_cpthone">
+         <property name="geometry">
+          <rect>
+           <x>910</x>
+           <y>20</y>
+           <width>600</width>
+           <height>40</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="cthone_label">
+         <property name="geometry">
+          <rect>
+           <x>800</x>
+           <y>20</y>
+           <width>90</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>电话：</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEdit_cname">
+         <property name="geometry">
+          <rect>
+           <x>100</x>
+           <y>10</y>
+           <width>600</width>
+           <height>40</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="comboBox_ctype">
+         <property name="geometry">
+          <rect>
+           <x>100</x>
+           <y>60</y>
+           <width>600</width>
+           <height>40</height>
+          </rect>
          </property>
         </widget>
        </widget>
@@ -201,72 +196,54 @@
         <property name="geometry">
          <rect>
           <x>9</x>
-          <y>209</y>
-          <width>851</width>
-          <height>330</height>
+          <y>289</y>
+          <width>1871</width>
+          <height>671</height>
          </rect>
         </property>
         <property name="title">
          <string> 客户显示---（温馨提示：双击单元格即可编辑）</string>
         </property>
-       </widget>
-       <widget class="QPushButton" name="delCusBtn">
-        <property name="geometry">
-         <rect>
-          <x>780</x>
-          <y>280</y>
-          <width>75</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>删除选中行</string>
-        </property>
+        <widget class="QPushButton" name="delCusBtn">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>131</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>删除选中行</string>
+         </property>
+        </widget>
+        <widget class="QTableView" name="tableViewCus">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>80</y>
+           <width>1841</width>
+           <height>661</height>
+          </rect>
+         </property>
+        </widget>
        </widget>
        <zorder>groupBox</zorder>
        <zorder>groupBox_2</zorder>
        <zorder>cname_label</zorder>
        <zorder>ctype_label</zorder>
-       <zorder>cthone_label</zorder>
-       <zorder>address_label</zorder>
-       <zorder>lineEdit_cname</zorder>
-       <zorder>lineEdit_cpthone</zorder>
-       <zorder>textEdit_caddress</zorder>
-       <zorder>comboBox_ctype</zorder>
-       <zorder>tableViewCus</zorder>
-       <zorder>delCusBtn</zorder>
       </widget>
       <widget class="QWidget" name="tabSupplier">
        <attribute name="title">
         <string> 供应商管理</string>
        </attribute>
-       <widget class="QComboBox" name="comboBox_stype">
-        <property name="geometry">
-         <rect>
-          <x>75</x>
-          <y>70</y>
-          <width>200</width>
-          <height>20</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QTextEdit" name="textEdit_saddress">
-        <property name="geometry">
-         <rect>
-          <x>330</x>
-          <y>60</y>
-          <width>300</width>
-          <height>60</height>
-         </rect>
-        </property>
-       </widget>
        <widget class="QGroupBox" name="groupBox_3">
         <property name="geometry">
          <rect>
-          <x>-1</x>
-          <y>209</y>
-          <width>871</width>
-          <height>330</height>
+          <x>9</x>
+          <y>279</y>
+          <width>1871</width>
+          <height>681</height>
          </rect>
         </property>
         <property name="title">
@@ -275,20 +252,20 @@
         <widget class="QTableView" name="tableViewSup">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>20</y>
-           <width>751</width>
-           <height>301</height>
+           <x>20</x>
+           <y>100</y>
+           <width>1841</width>
+           <height>641</height>
           </rect>
          </property>
         </widget>
         <widget class="QPushButton" name="delSupBtn">
          <property name="geometry">
           <rect>
-           <x>780</x>
-           <y>100</y>
-           <width>75</width>
-           <height>23</height>
+           <x>30</x>
+           <y>40</y>
+           <width>90</width>
+           <height>36</height>
           </rect>
          </property>
          <property name="text">
@@ -296,39 +273,13 @@
          </property>
         </widget>
        </widget>
-       <widget class="QLabel" name="stype_label">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>70</y>
-          <width>70</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string> 客户类型：</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="saddress_label">
-        <property name="geometry">
-         <rect>
-          <x>290</x>
-          <y>60</y>
-          <width>50</width>
-          <height>12</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string> 地址：</string>
-        </property>
-       </widget>
        <widget class="QGroupBox" name="groupBox_4">
         <property name="geometry">
          <rect>
           <x>-1</x>
           <y>9</y>
-          <width>761</width>
-          <height>181</height>
+          <width>1881</width>
+          <height>251</height>
          </rect>
         </property>
         <property name="title">
@@ -337,10 +288,10 @@
         <widget class="QPushButton" name="showSupBtn">
          <property name="geometry">
           <rect>
-           <x>420</x>
-           <y>140</y>
-           <width>77</width>
-           <height>23</height>
+           <x>1095</x>
+           <y>200</y>
+           <width>90</width>
+           <height>36</height>
           </rect>
          </property>
          <property name="text">
@@ -350,10 +301,10 @@
         <widget class="QPushButton" name="inportSupBtn">
          <property name="geometry">
           <rect>
-           <x>255</x>
-           <y>140</y>
-           <width>77</width>
-           <height>23</height>
+           <x>835</x>
+           <y>200</y>
+           <width>121</width>
+           <height>36</height>
           </rect>
          </property>
          <property name="text">
@@ -363,10 +314,10 @@
         <widget class="QPushButton" name="searchSupBtn">
          <property name="geometry">
           <rect>
-           <x>338</x>
-           <y>140</y>
-           <width>76</width>
-           <height>23</height>
+           <x>975</x>
+           <y>200</y>
+           <width>90</width>
+           <height>36</height>
           </rect>
          </property>
          <property name="text">
@@ -376,24 +327,93 @@
         <widget class="QLineEdit" name="lineEdit_sname">
          <property name="geometry">
           <rect>
-           <x>90</x>
+           <x>120</x>
            <y>20</y>
-           <width>181</width>
-           <height>20</height>
+           <width>600</width>
+           <height>40</height>
           </rect>
          </property>
         </widget>
         <widget class="QPushButton" name="createsupBtn">
          <property name="geometry">
           <rect>
-           <x>174</x>
-           <y>139</y>
-           <width>75</width>
-           <height>23</height>
+           <x>725</x>
+           <y>200</y>
+           <width>90</width>
+           <height>36</height>
           </rect>
          </property>
          <property name="text">
           <string> 新建供应商</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEdit_sphone">
+         <property name="geometry">
+          <rect>
+           <x>1150</x>
+           <y>20</y>
+           <width>600</width>
+           <height>40</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sphone_label">
+         <property name="geometry">
+          <rect>
+           <x>1040</x>
+           <y>20</y>
+           <width>90</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>电  话：</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="comboBox_stype">
+         <property name="geometry">
+          <rect>
+           <x>120</x>
+           <y>70</y>
+           <width>600</width>
+           <height>40</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="stype_label">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>70</y>
+           <width>90</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string> 客户类型：</string>
+         </property>
+        </widget>
+        <widget class="QTextEdit" name="textEdit_saddress">
+         <property name="geometry">
+          <rect>
+           <x>120</x>
+           <y>120</y>
+           <width>1631</width>
+           <height>60</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="saddress_label">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>130</y>
+           <width>90</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string> 地    址：</string>
          </property>
         </widget>
        </widget>
@@ -402,46 +422,17 @@
          <rect>
           <x>10</x>
           <y>30</y>
-          <width>70</width>
-          <height>20</height>
+          <width>90</width>
+          <height>30</height>
          </rect>
         </property>
         <property name="text">
          <string> 供应商名称：</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="lineEdit_sphone">
-        <property name="geometry">
-         <rect>
-          <x>330</x>
-          <y>30</y>
-          <width>300</width>
-          <height>20</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="sphone_label">
-        <property name="geometry">
-         <rect>
-          <x>290</x>
-          <y>30</y>
-          <width>50</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>电话：</string>
-        </property>
-       </widget>
        <zorder>groupBox_4</zorder>
-       <zorder>comboBox_stype</zorder>
-       <zorder>textEdit_saddress</zorder>
        <zorder>groupBox_3</zorder>
-       <zorder>stype_label</zorder>
-       <zorder>saddress_label</zorder>
        <zorder>sname_label</zorder>
-       <zorder>lineEdit_sphone</zorder>
-       <zorder>sphone_label</zorder>
       </widget>
       <widget class="QWidget" name="tabGood">
        <attribute name="title">
@@ -465,8 +456,8 @@
          <rect>
           <x>10</x>
           <y>10</y>
-          <width>871</width>
-          <height>211</height>
+          <width>1861</width>
+          <height>271</height>
          </rect>
         </property>
         <property name="title">
@@ -477,48 +468,19 @@
           <rect>
            <x>250</x>
            <y>170</y>
-           <width>336</width>
-           <height>25</height>
+           <width>404</width>
+           <height>31</height>
           </rect>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <widget class="QPushButton" name="createpro_Btn">
-            <property name="text">
-             <string> 新建货品</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="inportProBtn">
-            <property name="text">
-             <string> 导入货品</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="searchProBtn">
-            <property name="text">
-             <string> 搜索</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="showProBtn">
-            <property name="text">
-             <string> 显示全部</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <layout class="QHBoxLayout" name="horizontalLayout"/>
         </widget>
         <widget class="QLabel" name="prostack_label">
          <property name="geometry">
           <rect>
-           <x>430</x>
-           <y>110</y>
-           <width>66</width>
-           <height>12</height>
+           <x>990</x>
+           <y>120</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -528,10 +490,10 @@
         <widget class="QLabel" name="prototalprice_label">
          <property name="geometry">
           <rect>
-           <x>222</x>
-           <y>110</y>
-           <width>66</width>
-           <height>16</height>
+           <x>500</x>
+           <y>120</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -541,10 +503,10 @@
         <widget class="QSpinBox" name="prototalprice_spinBox">
          <property name="geometry">
           <rect>
-           <x>294</x>
-           <y>110</y>
-           <width>130</width>
-           <height>22</height>
+           <x>590</x>
+           <y>120</y>
+           <width>300</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="maximum">
@@ -554,10 +516,10 @@
         <widget class="QSpinBox" name="prostack_spinBox">
          <property name="geometry">
           <rect>
-           <x>502</x>
-           <y>110</y>
-           <width>130</width>
-           <height>22</height>
+           <x>1070</x>
+           <y>120</y>
+           <width>300</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="maximum">
@@ -567,10 +529,10 @@
         <widget class="QLabel" name="prolack_label">
          <property name="geometry">
           <rect>
-           <x>638</x>
-           <y>110</y>
-           <width>66</width>
-           <height>16</height>
+           <x>1470</x>
+           <y>120</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -580,10 +542,10 @@
         <widget class="QSpinBox" name="prolack_spinBox">
          <property name="geometry">
           <rect>
-           <x>710</x>
-           <y>110</y>
-           <width>130</width>
-           <height>22</height>
+           <x>1550</x>
+           <y>120</y>
+           <width>300</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="maximum">
@@ -594,9 +556,9 @@
          <property name="geometry">
           <rect>
            <x>20</x>
-           <y>110</y>
-           <width>54</width>
-           <height>12</height>
+           <y>120</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -606,10 +568,10 @@
         <widget class="QSpinBox" name="proprice_spinBox">
          <property name="geometry">
           <rect>
-           <x>80</x>
-           <y>110</y>
-           <width>130</width>
-           <height>22</height>
+           <x>100</x>
+           <y>120</y>
+           <width>300</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="maximum">
@@ -619,10 +581,10 @@
         <widget class="QSpinBox" name="procount_spinBox">
          <property name="geometry">
           <rect>
-           <x>710</x>
+           <x>1550</x>
            <y>70</y>
-           <width>130</width>
-           <height>22</height>
+           <width>300</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="maximum">
@@ -632,10 +594,10 @@
         <widget class="QLabel" name="probatno_label">
          <property name="geometry">
           <rect>
-           <x>222</x>
+           <x>500</x>
            <y>70</y>
-           <width>66</width>
-           <height>16</height>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -645,10 +607,10 @@
         <widget class="QLabel" name="prounit_label">
          <property name="geometry">
           <rect>
-           <x>430</x>
+           <x>990</x>
            <y>70</y>
-           <width>66</width>
-           <height>16</height>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -658,20 +620,20 @@
         <widget class="QLineEdit" name="prouint_lineEdit">
          <property name="geometry">
           <rect>
-           <x>502</x>
+           <x>1070</x>
            <y>70</y>
-           <width>130</width>
-           <height>20</height>
+           <width>300</width>
+           <height>40</height>
           </rect>
          </property>
         </widget>
         <widget class="QLabel" name="procount_label">
          <property name="geometry">
           <rect>
-           <x>638</x>
+           <x>1470</x>
            <y>70</y>
-           <width>66</width>
-           <height>12</height>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -681,20 +643,20 @@
         <widget class="QLineEdit" name="probatno_lineEdit">
          <property name="geometry">
           <rect>
-           <x>294</x>
+           <x>590</x>
            <y>70</y>
-           <width>130</width>
-           <height>20</height>
+           <width>300</width>
+           <height>40</height>
           </rect>
          </property>
         </widget>
         <widget class="QLabel" name="probarcode_label">
          <property name="geometry">
           <rect>
-           <x>10</x>
+           <x>8</x>
            <y>70</y>
-           <width>54</width>
-           <height>16</height>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -704,30 +666,30 @@
         <widget class="QLineEdit" name="probarcode_lineEdit">
          <property name="geometry">
           <rect>
-           <x>70</x>
+           <x>100</x>
            <y>70</y>
-           <width>130</width>
-           <height>20</height>
+           <width>300</width>
+           <height>40</height>
           </rect>
          </property>
         </widget>
         <widget class="QLineEdit" name="prospec_lineEdit">
          <property name="geometry">
           <rect>
-           <x>710</x>
-           <y>20</y>
-           <width>130</width>
-           <height>20</height>
+           <x>1550</x>
+           <y>10</y>
+           <width>300</width>
+           <height>40</height>
           </rect>
          </property>
         </widget>
         <widget class="QLabel" name="proname_label">
          <property name="geometry">
           <rect>
-           <x>420</x>
+           <x>990</x>
            <y>20</y>
-           <width>66</width>
-           <height>16</height>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -737,10 +699,10 @@
         <widget class="QLabel" name="prospec_label">
          <property name="geometry">
           <rect>
-           <x>628</x>
+           <x>1470</x>
            <y>20</y>
-           <width>66</width>
-           <height>16</height>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -750,20 +712,20 @@
         <widget class="QLineEdit" name="proname_lineEdit">
          <property name="geometry">
           <rect>
-           <x>492</x>
+           <x>1070</x>
            <y>20</y>
-           <width>130</width>
-           <height>20</height>
+           <width>300</width>
+           <height>40</height>
           </rect>
          </property>
         </widget>
         <widget class="QLineEdit" name="pronum_lineEdit">
          <property name="geometry">
           <rect>
-           <x>80</x>
+           <x>100</x>
            <y>20</y>
-           <width>130</width>
-           <height>20</height>
+           <width>300</width>
+           <height>40</height>
           </rect>
          </property>
         </widget>
@@ -772,8 +734,8 @@
           <rect>
            <x>8</x>
            <y>20</y>
-           <width>66</width>
-           <height>16</height>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -783,24 +745,76 @@
         <widget class="QLineEdit" name="procategory_lineEdit">
          <property name="geometry">
           <rect>
-           <x>292</x>
+           <x>590</x>
            <y>20</y>
-           <width>130</width>
-           <height>20</height>
+           <width>300</width>
+           <height>40</height>
           </rect>
          </property>
         </widget>
         <widget class="QLabel" name="procategory_label">
          <property name="geometry">
           <rect>
-           <x>220</x>
+           <x>500</x>
            <y>20</y>
-           <width>66</width>
-           <height>16</height>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
           <string> 货品大类：</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="showProBtn">
+         <property name="geometry">
+          <rect>
+           <x>1031</x>
+           <y>210</y>
+           <width>90</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string> 显示全部</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="inportProBtn">
+         <property name="geometry">
+          <rect>
+           <x>827</x>
+           <y>210</y>
+           <width>90</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string> 导入货品</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="createpro_Btn">
+         <property name="geometry">
+          <rect>
+           <x>725</x>
+           <y>210</y>
+           <width>90</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string> 新建货品</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="searchProBtn">
+         <property name="geometry">
+          <rect>
+           <x>929</x>
+           <y>210</y>
+           <width>90</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string> 搜索</string>
          </property>
         </widget>
        </widget>
@@ -808,9 +822,9 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>230</y>
-          <width>871</width>
-          <height>330</height>
+          <y>300</y>
+          <width>1861</width>
+          <height>651</height>
          </rect>
         </property>
         <property name="title">
@@ -820,19 +834,19 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>20</y>
-           <width>751</width>
-           <height>301</height>
+           <y>80</y>
+           <width>1841</width>
+           <height>641</height>
           </rect>
          </property>
         </widget>
         <widget class="QPushButton" name="delProBtn">
          <property name="geometry">
           <rect>
-           <x>780</x>
-           <y>100</y>
-           <width>75</width>
-           <height>23</height>
+           <x>20</x>
+           <y>40</y>
+           <width>90</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
@@ -848,65 +862,13 @@
        <attribute name="title">
         <string>销货管理</string>
        </attribute>
-       <widget class="QLabel" name="sell_proncat_label">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>70</y>
-          <width>54</width>
-          <height>12</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>商品大类</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="sell_proname_label">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>100</y>
-          <width>54</width>
-          <height>12</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>商品名称</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="sell_prospec_label">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>130</y>
-          <width>54</width>
-          <height>12</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>商品规格</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="sell_prostock_label">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>160</y>
-          <width>54</width>
-          <height>12</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>库存数量</string>
-        </property>
-       </widget>
        <widget class="QGroupBox" name="groupBox_7">
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>10</y>
-          <width>851</width>
-          <height>231</height>
+          <y>20</y>
+          <width>1871</width>
+          <height>371</height>
          </rect>
         </property>
         <property name="title">
@@ -915,20 +877,20 @@
         <widget class="QDateEdit" name="sell_date_dateEdit">
          <property name="geometry">
           <rect>
-           <x>640</x>
+           <x>1420</x>
            <y>70</y>
-           <width>126</width>
-           <height>22</height>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
         </widget>
         <widget class="QLabel" name="sell_date_label">
          <property name="geometry">
           <rect>
-           <x>580</x>
+           <x>1320</x>
            <y>70</y>
-           <width>54</width>
-           <height>12</height>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -938,10 +900,10 @@
         <widget class="QSpinBox" name="sell_owed_spinBox">
          <property name="geometry">
           <rect>
-           <x>430</x>
-           <y>150</y>
-           <width>71</width>
-           <height>22</height>
+           <x>730</x>
+           <y>220</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="maximum">
@@ -951,10 +913,10 @@
         <widget class="QSpinBox" name="sell_price_spinBox">
          <property name="geometry">
           <rect>
-           <x>430</x>
-           <y>60</y>
-           <width>71</width>
-           <height>22</height>
+           <x>730</x>
+           <y>70</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="maximum">
@@ -964,10 +926,10 @@
         <widget class="QLabel" name="sell_sellprice_label">
          <property name="geometry">
           <rect>
-           <x>370</x>
-           <y>60</y>
-           <width>54</width>
-           <height>12</height>
+           <x>650</x>
+           <y>70</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -977,10 +939,10 @@
         <widget class="QSpinBox" name="sell_cnt_spinBox">
          <property name="geometry">
           <rect>
-           <x>430</x>
-           <y>30</y>
-           <width>71</width>
-           <height>22</height>
+           <x>730</x>
+           <y>15</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="maximum">
@@ -990,10 +952,10 @@
         <widget class="QLabel" name="sell_sellcnt_label">
          <property name="geometry">
           <rect>
-           <x>370</x>
-           <y>30</y>
-           <width>54</width>
-           <height>12</height>
+           <x>650</x>
+           <y>20</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1003,10 +965,10 @@
         <widget class="QSpinBox" name="sell_payed_spinBox">
          <property name="geometry">
           <rect>
-           <x>430</x>
-           <y>120</y>
-           <width>71</width>
-           <height>22</height>
+           <x>730</x>
+           <y>170</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="maximum">
@@ -1016,10 +978,10 @@
         <widget class="QLabel" name="sell_payed_label">
          <property name="geometry">
           <rect>
-           <x>370</x>
-           <y>120</y>
-           <width>54</width>
-           <height>12</height>
+           <x>650</x>
+           <y>170</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1029,10 +991,10 @@
         <widget class="QLabel" name="sell_owed_label">
          <property name="geometry">
           <rect>
-           <x>370</x>
-           <y>150</y>
-           <width>54</width>
-           <height>12</height>
+           <x>650</x>
+           <y>220</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1042,10 +1004,10 @@
         <widget class="QLabel" name="sell_selltotalprice_label">
          <property name="geometry">
           <rect>
-           <x>370</x>
-           <y>90</y>
-           <width>54</width>
-           <height>12</height>
+           <x>650</x>
+           <y>120</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1055,10 +1017,10 @@
         <widget class="QSpinBox" name="sell_totalprice_spinBox">
          <property name="geometry">
           <rect>
-           <x>430</x>
-           <y>90</y>
-           <width>71</width>
-           <height>22</height>
+           <x>730</x>
+           <y>120</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="maximum">
@@ -1069,9 +1031,9 @@
          <property name="geometry">
           <rect>
            <x>30</x>
-           <y>30</y>
-           <width>54</width>
-           <height>12</height>
+           <y>20</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1081,90 +1043,33 @@
         <widget class="QLineEdit" name="sell_prono_lineEdit">
          <property name="geometry">
           <rect>
-           <x>90</x>
-           <y>30</y>
-           <width>113</width>
-           <height>20</height>
+           <x>110</x>
+           <y>15</y>
+           <width>201</width>
+           <height>40</height>
           </rect>
          </property>
         </widget>
         <widget class="QPushButton" name="pushButton">
          <property name="geometry">
           <rect>
-           <x>210</x>
-           <y>30</y>
-           <width>75</width>
-           <height>23</height>
+           <x>330</x>
+           <y>15</y>
+           <width>180</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
           <string>查找商品</string>
          </property>
         </widget>
-        <widget class="QWidget" name="layoutWidget">
-         <property name="geometry">
-          <rect>
-           <x>180</x>
-           <y>190</y>
-           <width>482</width>
-           <height>25</height>
-          </rect>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <widget class="QPushButton" name="sell_addBtn">
-            <property name="text">
-             <string>增加</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="sell_searchBtn">
-            <property name="text">
-             <string>查询</string>
-            </property>
-            <property name="default">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="sell_showallBtn">
-            <property name="text">
-             <string>全部记录</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="sell_importBtn">
-            <property name="text">
-             <string>导入</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="sell_exportBtn">
-            <property name="text">
-             <string>导出 </string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="sell_printBtn">
-            <property name="text">
-             <string>打印</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
         <widget class="QLabel" name="sell_customer_label">
          <property name="geometry">
           <rect>
-           <x>580</x>
-           <y>30</y>
-           <width>54</width>
-           <height>12</height>
+           <x>1320</x>
+           <y>20</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1174,20 +1079,20 @@
         <widget class="QComboBox" name="sell_customer_comboBox">
          <property name="geometry">
           <rect>
-           <x>640</x>
-           <y>30</y>
-           <width>121</width>
-           <height>22</height>
+           <x>1420</x>
+           <y>15</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
         </widget>
         <widget class="QCheckBox" name="sell_date_checkBox">
          <property name="geometry">
           <rect>
-           <x>640</x>
-           <y>100</y>
-           <width>111</width>
-           <height>16</height>
+           <x>1420</x>
+           <y>120</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
@@ -1200,10 +1105,10 @@
         <widget class="QLabel" name="sell_procat_showlabel">
          <property name="geometry">
           <rect>
-           <x>90</x>
-           <y>60</y>
-           <width>191</width>
-           <height>16</height>
+           <x>110</x>
+           <y>70</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -1219,10 +1124,10 @@
         <widget class="QLabel" name="sell_proname_showlabel">
          <property name="geometry">
           <rect>
-           <x>90</x>
-           <y>90</y>
-           <width>191</width>
-           <height>16</height>
+           <x>110</x>
+           <y>120</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -1235,10 +1140,10 @@
         <widget class="QLabel" name="sell_prospec_showlabel">
          <property name="geometry">
           <rect>
-           <x>90</x>
-           <y>120</y>
-           <width>191</width>
-           <height>16</height>
+           <x>110</x>
+           <y>170</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -1251,10 +1156,10 @@
         <widget class="QLabel" name="sell_prostock_showlabel">
          <property name="geometry">
           <rect>
-           <x>90</x>
-           <y>150</y>
-           <width>191</width>
-           <height>16</height>
+           <x>110</x>
+           <y>220</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -1267,10 +1172,10 @@
         <widget class="QRadioButton" name="tax_radioButton_yes">
          <property name="geometry">
           <rect>
-           <x>640</x>
-           <y>130</y>
-           <width>41</width>
-           <height>16</height>
+           <x>1440</x>
+           <y>170</y>
+           <width>60</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
@@ -1283,10 +1188,10 @@
         <widget class="QRadioButton" name="tax_radioButton_no">
          <property name="geometry">
           <rect>
-           <x>680</x>
-           <y>130</y>
-           <width>31</width>
-           <height>16</height>
+           <x>1500</x>
+           <y>170</y>
+           <width>60</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
@@ -1299,26 +1204,13 @@
           <bool>false</bool>
          </property>
         </widget>
-        <widget class="QLabel" name="tax_label">
-         <property name="geometry">
-          <rect>
-           <x>580</x>
-           <y>130</y>
-           <width>54</width>
-           <height>12</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>是否含税</string>
-         </property>
-        </widget>
         <widget class="QLabel" name="invoice_label">
          <property name="geometry">
           <rect>
-           <x>570</x>
-           <y>160</y>
-           <width>61</width>
-           <height>16</height>
+           <x>1320</x>
+           <y>220</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1328,10 +1220,10 @@
         <widget class="QRadioButton" name="invoice_radioButton_yes">
          <property name="geometry">
           <rect>
-           <x>640</x>
-           <y>160</y>
-           <width>31</width>
-           <height>16</height>
+           <x>1440</x>
+           <y>220</y>
+           <width>60</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
@@ -1344,10 +1236,10 @@
         <widget class="QRadioButton" name="invoice_radioButton_no">
          <property name="geometry">
           <rect>
-           <x>680</x>
-           <y>160</y>
-           <width>31</width>
-           <height>16</height>
+           <x>1500</x>
+           <y>220</y>
+           <width>60</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
@@ -1363,10 +1255,10 @@
         <widget class="QCheckBox" name="tax_checkBox">
          <property name="geometry">
           <rect>
-           <x>720</x>
-           <y>130</y>
-           <width>111</width>
-           <height>16</height>
+           <x>1580</x>
+           <y>170</y>
+           <width>201</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
@@ -1379,10 +1271,10 @@
         <widget class="QCheckBox" name="invoice_checkBox">
          <property name="geometry">
           <rect>
-           <x>720</x>
-           <y>160</y>
-           <width>111</width>
-           <height>16</height>
+           <x>1580</x>
+           <y>220</y>
+           <width>171</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
@@ -1395,10 +1287,10 @@
         <widget class="QGroupBox" name="groupBox_11">
          <property name="geometry">
           <rect>
-           <x>630</x>
-           <y>120</y>
-           <width>201</width>
-           <height>31</height>
+           <x>1420</x>
+           <y>170</y>
+           <width>150</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="title">
@@ -1408,14 +1300,160 @@
         <widget class="QGroupBox" name="groupBox_12">
          <property name="geometry">
           <rect>
-           <x>630</x>
-           <y>150</y>
-           <width>201</width>
-           <height>31</height>
+           <x>1420</x>
+           <y>220</y>
+           <width>150</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="title">
           <string/>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="sell_printBtn">
+         <property name="geometry">
+          <rect>
+           <x>1060</x>
+           <y>310</y>
+           <width>90</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>打印</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="sell_searchBtn">
+         <property name="geometry">
+          <rect>
+           <x>725</x>
+           <y>310</y>
+           <width>90</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>查询</string>
+         </property>
+         <property name="default">
+          <bool>false</bool>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="sell_exportBtn">
+         <property name="geometry">
+          <rect>
+           <x>976</x>
+           <y>310</y>
+           <width>90</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>导出 </string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="sell_showallBtn">
+         <property name="geometry">
+          <rect>
+           <x>809</x>
+           <y>310</y>
+           <width>90</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>全部记录</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="sell_importBtn">
+         <property name="geometry">
+          <rect>
+           <x>892</x>
+           <y>310</y>
+           <width>90</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>导入</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="sell_addBtn">
+         <property name="geometry">
+          <rect>
+           <x>641</x>
+           <y>310</y>
+           <width>90</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>增加</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sell_prostock_label">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>220</y>
+           <width>90</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>库存数量</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sell_prospec_label">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>170</y>
+           <width>90</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>商品规格</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sell_proname_label">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>120</y>
+           <width>90</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>商品名称</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sell_proncat_label">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>70</y>
+           <width>90</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>商品大类</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="tax_label">
+         <property name="geometry">
+          <rect>
+           <x>1320</x>
+           <y>170</y>
+           <width>90</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>是否含税</string>
          </property>
         </widget>
         <zorder>groupBox_12</zorder>
@@ -1435,7 +1473,6 @@
         <zorder>sell_prono_label</zorder>
         <zorder>sell_prono_lineEdit</zorder>
         <zorder>pushButton</zorder>
-        <zorder>layoutWidget</zorder>
         <zorder>sell_customer_label</zorder>
         <zorder>sell_customer_comboBox</zorder>
         <zorder>sell_date_checkBox</zorder>
@@ -1445,20 +1482,30 @@
         <zorder>sell_prostock_showlabel</zorder>
         <zorder>tax_radioButton_yes</zorder>
         <zorder>tax_radioButton_no</zorder>
-        <zorder>tax_label</zorder>
         <zorder>invoice_label</zorder>
         <zorder>invoice_radioButton_yes</zorder>
         <zorder>invoice_radioButton_no</zorder>
         <zorder>tax_checkBox</zorder>
         <zorder>invoice_checkBox</zorder>
+        <zorder>sell_printBtn</zorder>
+        <zorder>sell_searchBtn</zorder>
+        <zorder>sell_exportBtn</zorder>
+        <zorder>sell_showallBtn</zorder>
+        <zorder>sell_importBtn</zorder>
+        <zorder>sell_addBtn</zorder>
+        <zorder>sell_prostock_label</zorder>
+        <zorder>sell_prospec_label</zorder>
+        <zorder>sell_proname_label</zorder>
+        <zorder>sell_proncat_label</zorder>
+        <zorder>tax_label</zorder>
        </widget>
        <widget class="QGroupBox" name="groupBox_8">
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>250</y>
-          <width>861</width>
-          <height>351</height>
+          <y>410</y>
+          <width>1871</width>
+          <height>541</height>
          </rect>
         </property>
         <property name="title">
@@ -1467,10 +1514,10 @@
         <widget class="QPushButton" name="sell_delBtn">
          <property name="geometry">
           <rect>
-           <x>770</x>
-           <y>130</y>
-           <width>75</width>
-           <height>23</height>
+           <x>10</x>
+           <y>30</y>
+           <width>90</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
@@ -1481,19 +1528,15 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>30</y>
-           <width>751</width>
-           <height>301</height>
+           <y>80</y>
+           <width>1841</width>
+           <height>611</height>
           </rect>
          </property>
         </widget>
        </widget>
        <zorder>groupBox_8</zorder>
        <zorder>groupBox_7</zorder>
-       <zorder>sell_proncat_label</zorder>
-       <zorder>sell_proname_label</zorder>
-       <zorder>sell_prospec_label</zorder>
-       <zorder>sell_prostock_label</zorder>
       </widget>
       <widget class="QWidget" name="tabSell">
        <attribute name="title">
@@ -1503,9 +1546,9 @@
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>260</y>
-          <width>861</width>
-          <height>351</height>
+          <y>400</y>
+          <width>1871</width>
+          <height>561</height>
          </rect>
         </property>
         <property name="title">
@@ -1514,10 +1557,10 @@
         <widget class="QPushButton" name="stock_delBtn">
          <property name="geometry">
           <rect>
-           <x>770</x>
-           <y>130</y>
-           <width>75</width>
-           <height>23</height>
+           <x>10</x>
+           <y>30</y>
+           <width>90</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
@@ -1528,9 +1571,9 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>30</y>
-           <width>751</width>
-           <height>301</height>
+           <y>80</y>
+           <width>1841</width>
+           <height>611</height>
           </rect>
          </property>
         </widget>
@@ -1540,8 +1583,8 @@
          <rect>
           <x>10</x>
           <y>20</y>
-          <width>851</width>
-          <height>231</height>
+          <width>1871</width>
+          <height>361</height>
          </rect>
         </property>
         <property name="title">
@@ -1550,20 +1593,20 @@
         <widget class="QDateEdit" name="stock_date_dateEdit">
          <property name="geometry">
           <rect>
-           <x>640</x>
+           <x>1420</x>
            <y>70</y>
-           <width>126</width>
-           <height>22</height>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
         </widget>
         <widget class="QLabel" name="stock_date_label">
          <property name="geometry">
           <rect>
-           <x>580</x>
+           <x>1320</x>
            <y>70</y>
-           <width>54</width>
-           <height>12</height>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1573,10 +1616,10 @@
         <widget class="QSpinBox" name="stock_owed_spinBox">
          <property name="geometry">
           <rect>
-           <x>430</x>
-           <y>150</y>
-           <width>71</width>
-           <height>22</height>
+           <x>730</x>
+           <y>220</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="maximum">
@@ -1586,10 +1629,10 @@
         <widget class="QSpinBox" name="stock_price_spinBox">
          <property name="geometry">
           <rect>
-           <x>430</x>
-           <y>60</y>
-           <width>71</width>
-           <height>22</height>
+           <x>730</x>
+           <y>70</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="maximum">
@@ -1599,10 +1642,10 @@
         <widget class="QLabel" name="stock_sellprice_label">
          <property name="geometry">
           <rect>
-           <x>370</x>
-           <y>60</y>
-           <width>54</width>
-           <height>12</height>
+           <x>650</x>
+           <y>70</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1612,10 +1655,10 @@
         <widget class="QSpinBox" name="stock_cnt_spinBox">
          <property name="geometry">
           <rect>
-           <x>430</x>
-           <y>30</y>
-           <width>71</width>
-           <height>22</height>
+           <x>730</x>
+           <y>15</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="maximum">
@@ -1625,10 +1668,10 @@
         <widget class="QLabel" name="stock_sellcnt_label">
          <property name="geometry">
           <rect>
-           <x>370</x>
-           <y>30</y>
-           <width>54</width>
-           <height>12</height>
+           <x>650</x>
+           <y>20</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1638,10 +1681,10 @@
         <widget class="QSpinBox" name="stock_payed_spinBox">
          <property name="geometry">
           <rect>
-           <x>430</x>
-           <y>121</y>
-           <width>71</width>
-           <height>21</height>
+           <x>730</x>
+           <y>170</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="maximum">
@@ -1651,10 +1694,10 @@
         <widget class="QLabel" name="stock_payed_label">
          <property name="geometry">
           <rect>
-           <x>370</x>
-           <y>120</y>
-           <width>54</width>
-           <height>12</height>
+           <x>650</x>
+           <y>170</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1664,10 +1707,10 @@
         <widget class="QLabel" name="stock_owed_label">
          <property name="geometry">
           <rect>
-           <x>370</x>
-           <y>150</y>
-           <width>54</width>
-           <height>12</height>
+           <x>650</x>
+           <y>220</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1677,10 +1720,10 @@
         <widget class="QLabel" name="stock_selltotalprice_label">
          <property name="geometry">
           <rect>
-           <x>370</x>
-           <y>90</y>
-           <width>54</width>
-           <height>12</height>
+           <x>650</x>
+           <y>120</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1690,10 +1733,10 @@
         <widget class="QSpinBox" name="stock_totalprice_spinBox">
          <property name="geometry">
           <rect>
-           <x>430</x>
-           <y>90</y>
-           <width>71</width>
-           <height>22</height>
+           <x>730</x>
+           <y>120</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="maximum">
@@ -1704,9 +1747,9 @@
          <property name="geometry">
           <rect>
            <x>30</x>
-           <y>30</y>
-           <width>54</width>
-           <height>12</height>
+           <y>20</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1716,90 +1759,33 @@
         <widget class="QLineEdit" name="stock_prono_lineEdit">
          <property name="geometry">
           <rect>
-           <x>90</x>
-           <y>30</y>
-           <width>113</width>
-           <height>20</height>
+           <x>110</x>
+           <y>15</y>
+           <width>200</width>
+           <height>40</height>
           </rect>
          </property>
         </widget>
         <widget class="QPushButton" name="stock_pushButton">
          <property name="geometry">
           <rect>
-           <x>210</x>
-           <y>30</y>
-           <width>75</width>
-           <height>23</height>
+           <x>330</x>
+           <y>15</y>
+           <width>180</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
           <string>查找商品</string>
          </property>
         </widget>
-        <widget class="QWidget" name="layoutWidget_3">
-         <property name="geometry">
-          <rect>
-           <x>180</x>
-           <y>190</y>
-           <width>482</width>
-           <height>25</height>
-          </rect>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_6">
-          <item>
-           <widget class="QPushButton" name="stock_addBtn">
-            <property name="text">
-             <string>增加</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="stock_searchBtn">
-            <property name="text">
-             <string>查询</string>
-            </property>
-            <property name="default">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="stock_showallBtn">
-            <property name="text">
-             <string>全部记录</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="stock_importBtn">
-            <property name="text">
-             <string>导入</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="stock_exportBtn">
-            <property name="text">
-             <string>导出 </string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="stock_printBtn">
-            <property name="text">
-             <string>打印</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
         <widget class="QLabel" name="stock_customer_label">
          <property name="geometry">
           <rect>
-           <x>580</x>
-           <y>30</y>
-           <width>54</width>
-           <height>12</height>
+           <x>1320</x>
+           <y>20</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1809,20 +1795,20 @@
         <widget class="QComboBox" name="stock_supplier_comboBox">
          <property name="geometry">
           <rect>
-           <x>640</x>
-           <y>30</y>
-           <width>121</width>
-           <height>22</height>
+           <x>1420</x>
+           <y>15</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
         </widget>
         <widget class="QCheckBox" name="stock_date_checkBox">
          <property name="geometry">
           <rect>
-           <x>640</x>
-           <y>100</y>
-           <width>111</width>
-           <height>16</height>
+           <x>1420</x>
+           <y>120</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
@@ -1835,10 +1821,10 @@
         <widget class="QLabel" name="stock_procat_showlabel">
          <property name="geometry">
           <rect>
-           <x>90</x>
-           <y>60</y>
-           <width>191</width>
-           <height>16</height>
+           <x>110</x>
+           <y>70</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -1854,10 +1840,10 @@
         <widget class="QLabel" name="stock_proname_showlabel">
          <property name="geometry">
           <rect>
-           <x>90</x>
-           <y>90</y>
-           <width>191</width>
-           <height>16</height>
+           <x>110</x>
+           <y>120</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -1870,10 +1856,10 @@
         <widget class="QLabel" name="stock_prospec_showlabel">
          <property name="geometry">
           <rect>
-           <x>90</x>
-           <y>120</y>
-           <width>191</width>
-           <height>16</height>
+           <x>110</x>
+           <y>170</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -1886,10 +1872,10 @@
         <widget class="QLabel" name="stock_prostock_showlabel">
          <property name="geometry">
           <rect>
-           <x>90</x>
-           <y>150</y>
-           <width>191</width>
-           <height>16</height>
+           <x>110</x>
+           <y>220</y>
+           <width>400</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -1902,10 +1888,10 @@
         <widget class="QRadioButton" name="stock_invoice_radioButton_yes">
          <property name="geometry">
           <rect>
-           <x>640</x>
-           <y>130</y>
-           <width>41</width>
-           <height>16</height>
+           <x>1440</x>
+           <y>170</y>
+           <width>60</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
@@ -1915,10 +1901,10 @@
         <widget class="QLabel" name="stock_invoice_label">
          <property name="geometry">
           <rect>
-           <x>580</x>
-           <y>130</y>
-           <width>54</width>
-           <height>12</height>
+           <x>1320</x>
+           <y>170</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1929,9 +1915,9 @@
          <property name="geometry">
           <rect>
            <x>30</x>
-           <y>150</y>
-           <width>54</width>
-           <height>12</height>
+           <y>220</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1942,9 +1928,9 @@
          <property name="geometry">
           <rect>
            <x>30</x>
-           <y>120</y>
-           <width>54</width>
-           <height>12</height>
+           <y>170</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1955,9 +1941,9 @@
          <property name="geometry">
           <rect>
            <x>30</x>
-           <y>90</y>
-           <width>54</width>
-           <height>12</height>
+           <y>120</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1968,9 +1954,9 @@
          <property name="geometry">
           <rect>
            <x>30</x>
-           <y>60</y>
-           <width>54</width>
-           <height>12</height>
+           <y>70</y>
+           <width>90</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="text">
@@ -1980,10 +1966,10 @@
         <widget class="QRadioButton" name="stock_invoice_radioButton_no">
          <property name="geometry">
           <rect>
-           <x>680</x>
-           <y>130</y>
-           <width>31</width>
-           <height>16</height>
+           <x>1500</x>
+           <y>170</y>
+           <width>60</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
@@ -1996,10 +1982,10 @@
         <widget class="QCheckBox" name="stock_invoice_checkBox">
          <property name="geometry">
           <rect>
-           <x>730</x>
-           <y>130</y>
-           <width>111</width>
-           <height>16</height>
+           <x>1580</x>
+           <y>170</y>
+           <width>200</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
@@ -2007,6 +1993,100 @@
          </property>
          <property name="checked">
           <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="stock_printBtn">
+         <property name="geometry">
+          <rect>
+           <x>1060</x>
+           <y>290</y>
+           <width>90</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>打印</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="stock_exportBtn">
+         <property name="geometry">
+          <rect>
+           <x>976</x>
+           <y>290</y>
+           <width>90</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>导出 </string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="stock_showallBtn">
+         <property name="geometry">
+          <rect>
+           <x>809</x>
+           <y>290</y>
+           <width>90</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>全部记录</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="stock_addBtn">
+         <property name="geometry">
+          <rect>
+           <x>641</x>
+           <y>290</y>
+           <width>90</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>增加</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="stock_searchBtn">
+         <property name="geometry">
+          <rect>
+           <x>725</x>
+           <y>290</y>
+           <width>90</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>查询</string>
+         </property>
+         <property name="default">
+          <bool>false</bool>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="stock_importBtn">
+         <property name="geometry">
+          <rect>
+           <x>892</x>
+           <y>290</y>
+           <width>90</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>导入</string>
+         </property>
+        </widget>
+        <widget class="QGroupBox" name="groupBox_13">
+         <property name="geometry">
+          <rect>
+           <x>1420</x>
+           <y>170</y>
+           <width>150</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="title">
+          <string/>
          </property>
         </widget>
        </widget>
@@ -2020,7 +2100,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1024</width>
+     <width>1920</width>
      <height>22</height>
     </rect>
    </property>
